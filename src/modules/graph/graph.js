@@ -123,6 +123,24 @@ class Node {
       this.nodes.push(node);
       this.update();
     }
+
+    insertEdge(nodeFrom,nodeTo){
+        var edge = new Edge(nodeFrom, nodeTo);
+        this.edges.push(edge);
+        this.update();
+    }
+
+    insertEdgeWithText(nodeFrom,nodeTo,Text){
+      var edge = new Edge(nodeFrom, nodeTo);
+      this.edges.push(edge);
+      edge.setText(Text);
+      this.update();
+    }
+
+    setTextToAdgeIndex(index,Text){
+      this.edges[index].setText(Text);
+      this.update();
+    }
   
     removeNode(node) {
       // Entferne einen Knoten
@@ -144,7 +162,7 @@ class Node {
           }
         }
       }
-      
+    
   
     resetColor() {
       // Setze alle Knoten und Kanten auf die Standardfarbe zurück und aktualisiere den Graphen

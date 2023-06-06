@@ -534,50 +534,85 @@ function getFormattedCharacters(num) {
 }
 
 
-//random generate section
-function randomGenerationArray(array){
-  return array;
-}
-
-function randomGenerationBST(bst){
-  let length=Math.floor(Math.random() * 50) + 1;
+function randomGenerateGraphLength(graph,lenght){
   for (let i = 0; i < length; i++) {
-    bst.insert(Math.floor(Math.random() * 100) + 1);
+    var newNode = new Node(getFormattedCharacters(i));
+    graph.insertNode(newNode);
   }
-  
-  bst.draw();
+  for(let i=0;i< Math.floor(Math.random() * (length + 1));i++){
+    graph.insertEdge( Math.floor(Math.random() * (length + 1)), Math.floor(Math.random() * (length + 1)));
+  }
+}
+function randomGenerateMLLLength(mll,length){
+  for (let i = 0; i < length; i++) {
+    mll.addFirst(Math.floor(Math.random() * 100) + 1);
+  }
+  mll.draw();
+
 }
 
-function randomGenerateSLL(sll){
-  let length=Math.floor(Math.random() * 50) + 1;
+function randomGenerateSLLLength(sll,length){
   for (let i = 0; i < length; i++) {
     sll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   sll.draw();
 }
 
-function randomGenerateMLL(mll){
-  let length=Math.floor(Math.random() * 50) + 1;
-  for (let i = 0; i < length; i++) {
-    mll.addFirst(Math.floor(Math.random() * 100) + 1);
+function randomGenerationArrayLength(array,length){
+  for (var i = 0; i < length; i++) {
+    var randomNumber = Math.floor(Math.random() * 100) + 1;
+    array.insertAtIndex(randomNumber,i);
   }
-  mll.draw();
+  arr.update();
 }
 
-function randomGenerationStack(stack){
-  let length=Math.floor(Math.random() * 50) + 1;
+function randomGenerationBSTLenth(bst,lenght){
+  for (let i = 0; i < length; i++) {
+    bst.insert(Math.floor(Math.random() * 100) + 1);
+  }
+  
+  bst.draw();
+
+}
+
+function randomGenerationStackLength(stack,length){
   for (let i = 0; i < length; i++) {
     stack.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   stack.draw();
 }
 
+//random generate section
+function randomGenerationArray(array){
+  let length=Math.floor(Math.random() * 50) + 1;
+  randomGenerationArrayLength(array,length);
+}
+
+function randomGenerationBST(bst){
+  let length=Math.floor(Math.random() * 50) + 1;
+  randomGenerationBSTLenth(bst,length);
+}
+
+function randomGenerateSLL(sll){
+  let length=Math.floor(Math.random() * 50) + 1;
+  randomGenerateSLLLength(sll,length);
+}
+
+function randomGenerateMLL(mll){
+  let length=Math.floor(Math.random() * 50) + 1;
+  randomGenerateMLLLength(mll,length);
+}
+
+function randomGenerationStack(stack){
+  let length=Math.floor(Math.random() * 50) + 1;
+  randomGenerationStackLength(stack,length);
+  
+}
+
 function randomGenerateGraph(graph){
   let length=Math.floor(Math.random() * 50) + 1;
-  for (let i = 0; i < length; i++) {
-    var newNode = new Node(getFormattedCharacters(i));
-    graph.insertNode(newNode);
-  }
+  randomGenerateGraphLength(graph,length);
+ 
 }
 
 
@@ -606,28 +641,7 @@ function defineGenerateGraph(graph){
   return Graph;
 }
 
-function randomGenerateGraphLength(graph,lenght){
 
-}
-function randomGenerateMLLLength(mll,length){
-
-}
-
-function randomGenerateSLLLength(sll,length){
-
-}
-
-function randomGenerationArrayLength(array,length){
-
-}
-
-function randomGenerationBSTLenth(bst,lenght){
-
-}
-
-function randomGenerationStackLength(stack,length){
-  
-}
 
 //=============================================================
 //            pars section
