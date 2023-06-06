@@ -213,7 +213,7 @@ export default class BinarySearchTree {
       this.addLine(oldLineX, oldLineY, midX + 34, newY, node.getColor());
     }
     this.addNodeColored(node.value, midX, newY, node.getColor());
-   // await Sleep(400);
+   
     this.calculateNodePositions(node.left, level + 1, minX, midX, x - Math.pow(2, level), newY, addNode, midX + 34, newY + 50);
     this.calculateNodePositions(node.right, level + 1, midX, maxX, x + Math.pow(2, level), newY, addNode, midX + 34, newY + 50);
   }
@@ -237,20 +237,20 @@ export default class BinarySearchTree {
       return;
     }
 
-    node.setColor('red'); // Färbe den aktuellen Knoten ein
-    this.draw(); // Aktualisiere den Baum, um die Färbung sichtbar zu machen
-    await Sleep(500); // Warte für eine kurze Zeit
+    node.setColor('red'); 
+    this.draw(); 
+    await Sleep(500); 
 
-    // Führe die Traversierung für den linken Teilbaum durch
+    
     await this.animatePreOrderTraversal(node.left);
 
-    // Führe die Traversierung für den rechten Teilbaum durch
+    
     await this.animatePreOrderTraversal(node.right);
 
-    node.setColor('lightgreen'); // Entfärbe den aktuellen Knoten
+    node.setColor('lightgreen'); 
     console.log(node.value);
-    this.draw(); // Aktualisiere den Baum, um die Entfärbung sichtbar zu machen
-    await Sleep(500); // Warte für eine kurze Zeit
+    this.draw(); 
+    await Sleep(500); 
   }
 
   async animatePostOrderTraversal(node) {
@@ -258,21 +258,21 @@ export default class BinarySearchTree {
       return;
     }
 
-    // Führe die Traversierung für den linken Teilbaum durch
+    
     await this.animatePostOrderTraversal(node.left);
 
-    // Führe die Traversierung für den rechten Teilbaum durch
+    
     await this.animatePostOrderTraversal(node.right);
 
-    node.setColor('red'); // Färbe den aktuellen Knoten ein
+    node.setColor('red'); 
 
-    this.draw(); // Aktualisiere den Baum, um die Färbung sichtbar zu machen
-    await Sleep(500); // Warte für eine kurze Zeit
+    this.draw(); 
+    await Sleep(500); 
 
-    node.setColor('lightblue'); // Entfärbe den aktuellen Knoten
+    node.setColor('lightblue'); 
     console.log(node.value);
-    this.draw(); // Aktualisiere den Baum, um die Entfärbung sichtbar zu machen
-    await Sleep(500); // Warte für eine kurze Zeit
+    this.draw(); 
+    await Sleep(500); 
   }
 
   async animateInOrderTraversal(node) {
@@ -282,9 +282,9 @@ export default class BinarySearchTree {
 
     await this.animateInOrderTraversal(node.left);
 
-    node.setColor('red'); // Färbe den aktuellen Knoten ein
-    this.draw(); // Aktualisiere den Baum, um die Färbung sichtbar zu machen
-    await Sleep(500); // Warte für eine kurze Zeit
+    node.setColor('red'); 
+    this.draw(); 
+    await Sleep(500); 
     console.log(node.value);
     
     await this.animateInOrderTraversal(node.right);
@@ -302,9 +302,9 @@ export default class BinarySearchTree {
     while (queue.length > 0) {
       const node = queue.shift();
 
-      node.setColor('red'); // Färbe den aktuellen Knoten ein
-      this.draw(); // Aktualisiere den Baum, um die Färbung sichtbar zu machen
-      await Sleep(500); // Warte für eine kurze Zeit
+      node.setColor('red'); 
+      this.draw(); 
+      await Sleep(500); 
 
       if (node.left !== null) {
         queue.push(node.left);
@@ -314,9 +314,9 @@ export default class BinarySearchTree {
         queue.push(node.right);
       }
 
-      node.setColor('orange'); // Entfärbe den aktuellen Knoten
-      this.draw(); // Aktualisiere den Baum, um die Entfärbung sichtbar zu machen
-      await Sleep(500); // Warte für eine kurze Zeit
+      node.setColor('orange'); 
+      this.draw(); 
+      await Sleep(500); 
     }
   }
   
@@ -335,15 +335,15 @@ bst.draw();
 
 
 
-// Rufe die animierte Traversierung auf
-// Animiere die Pre-Order-Traversierung
+
+
 bst.animatePreOrderTraversal(bst.root);
 
-// Animiere die Post-Order-Traversierung
-//bst.animatePostOrderTraversal(bst.root);
 
-// Animiere die In-Order-Traversierung
-//bst.animateInOrderTraversal(bst.root);
+
+
+
+
 console.log("==============================");
 console.log('Inorder-Traversierung:');
 bst.inOrderTraversal(node => {
@@ -351,8 +351,7 @@ bst.inOrderTraversal(node => {
 });
 console.log("==============================");
   
-//bst.animateLevelOrderTraversal();
-//await bst.animateBalanceTree();
+
+
 }
 
-//test();
