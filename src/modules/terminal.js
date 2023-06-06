@@ -642,7 +642,6 @@ function defineGenerateGraph(graph){
 }
 
 
-
 //=============================================================
 //            pars section
 //=============================================================
@@ -711,6 +710,102 @@ function pars(command){
       GraphCreate();
       initializeTerminal();
       break;
+    case "Array-insert":
+        // Code for Array-insert function
+        break;
+    case "Array-Create":
+        // Code for Array-Create function
+        break;
+    case "Array-Random-Create":
+        // Code for Array-Random-Create function
+        break;
+    case "Array-Random-Length-Create":
+        // Code for Array-Random-Length-Create function
+        break;
+    case "Array-Bubbelsort":
+        // Code for Array-Bubbelsort function
+        break;
+    case "Array-insertionSort":
+        // Code for Array-insertionSort function
+        break;
+    case "Array-selectionSort":
+        // Code for Array-selectionSort function
+        break;
+    case "BST-Random-Create":
+        // Code for BST-Random-Create function
+        break;
+    case "BST-Insert":
+        // Code for BST-Insert function
+        break;
+    case "BST-Remove":
+        // Code for BST-Remove function
+        break;
+    case "BST-Traverse-Inorder":
+        // Code for BST-Traverse-Inorder function
+        break;
+    case "BST-Traverse-Preorder":
+        // Code for BST-Traverse-Preorder function
+        break;
+    case "BST-Traverse-Postorder":
+        // Code for BST-Traverse-Postorder function
+        break;
+    case "BST-Traverse-Levelorder":
+        // Code for BST-Traverse-Levelorder function
+        break;
+    case "Stack-Push":
+        // Code for Stack-Push function
+        break;
+    case "Stack-pop":
+        // Code for Stack-pop function
+        break;
+    case "Stack-peak":
+        // Code for Stack-peak function
+        break;
+    case "SLL-Insert-End":
+        // Code for SLL-Insert-End function
+        break;
+    case "SLL-Insert-Begining":
+        // Code for SLL-Insert-Begining function
+        break;
+    case "SLL-Remove-Start":
+        // Code for SLL-Remove-Start function
+        break;
+    case "SLL-Remove-End":
+        // Code for SLL-Remove-End function
+        break;
+    case "MLL-Insert-End":
+        // Code for MLL-Insert-End function
+        break;
+    case "MLL-Insert-Begin":
+        // Code for MLL-Insert-Begin function
+        break;
+    case "MLL-Remove-End":
+        // Code for MLL-Remove-End function
+        break;
+    case "MLL-Remove-Begin":
+        // Code for MLL-Remove-Begin function
+        break;
+    case "Graph-Tiefensuche":
+        // Code for Graph-Tiefensuche function
+        break;
+    case "Graph-Breitensuche":
+        // Code for Graph-Breitensuche function
+        break;
+    case "Graph-Insert":
+        // Code for Graph-Insert function
+        break;
+    case "Graph-Remove":
+        // Code for Graph-Remove function
+        break;
+    case "Graph-Random-Create":
+        // Code for Graph-Random-Create function
+        break;
+    case "Graph-Rendom-Lenght-Create":
+        // Code for Graph-Rendom-Lenght-Create function
+        break;
+    case "Graph-ResetColor":
+        // Code for Graph-ResetColor function
+        break;
     default:
       break;
   }
