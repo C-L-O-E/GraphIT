@@ -520,29 +520,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+//helping functions
+function getFormattedCharacters(num) {
+  let output = '';
+
+  for (let i = 0; i < num; i++) {
+    const leadingLetter = String.fromCharCode(65 + (i % 26));
+    const repeatingLetter = String.fromCharCode(65 + (i % 26)).repeat(Math.floor(i / 26) + 1);
+    output += leadingLetter + repeatingLetter + ' ';
+  }
+
+  return output.trim();
+}
+
+
 //random generate section
 function randomGenerationArray(array){
   return array;
 }
 
 function randomGenerationBST(bst){
-  return bst;
+  let length=Math.floor(Math.random() * 50) + 1;
+  for (let i = 0; i < length; i++) {
+    bst.insert(Math.floor(Math.random() * 100) + 1);
+  }
+  
+  bst.draw();
 }
 
 function randomGenerateSLL(sll){
-  return sll;
+  let length=Math.floor(Math.random() * 50) + 1;
+  for (let i = 0; i < length; i++) {
+    sll.addFirst(Math.floor(Math.random() * 100) + 1);
+  }
+  sll.draw();
 }
 
 function randomGenerateMLL(mll){
-  return mll;
+  let length=Math.floor(Math.random() * 50) + 1;
+  for (let i = 0; i < length; i++) {
+    mll.addFirst(Math.floor(Math.random() * 100) + 1);
+  }
+  mll.draw();
 }
 
 function randomGenerationStack(stack){
-  return stack;
+  let length=Math.floor(Math.random() * 50) + 1;
+  for (let i = 0; i < length; i++) {
+    stack.addFirst(Math.floor(Math.random() * 100) + 1);
+  }
+  stack.draw();
 }
 
 function randomGenerateGraph(graph){
-  return Graph;
+  let length=Math.floor(Math.random() * 50) + 1;
+  for (let i = 0; i < length; i++) {
+    var newNode = new Node(getFormattedCharacters(i));
+    graph.insertNode(newNode);
+  }
 }
 
 
