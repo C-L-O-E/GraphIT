@@ -817,4 +817,4 @@ function processCMD(command){
 //             end of comand section
 //=============================================================
 
-window.open("./modules/inputfield/input.html");
+//window.open("./modules/inputfield/input.html");

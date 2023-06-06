@@ -308,4 +308,4 @@ console.log(myList.toArray());
 myList.draw();
 }
 
-test()
+//test()
