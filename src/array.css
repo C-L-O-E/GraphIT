@@ -1,0 +1,24 @@
+.arrayView{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+
+}
+
+.arrayBox{
+    position:absolute;
+    background-color: aliceblue;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+
+}
+
+.arrayBox:hover{
+
+    background-color: rgb(113, 167, 215);
+    
+}

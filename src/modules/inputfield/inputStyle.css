@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .input-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    position:relative;
+    width: 650px;
+    height: 30px;
+    padding: 10px;
+    left: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+  
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .key {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .option {
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  body{
+    background-color: rgb(40, 52, 77);
+  }

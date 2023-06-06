@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphIT-Presenter</title>
+    <link rel="stylesheet" href="./preview.css">
+    <link rel="stylesheet" href="bst.css">
+    <link rel="stylesheet" href="array.css">
+    <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="terminal.css">
+</head>
+<body>
+    <div id="graphView">
+       
+    </div>
+</body>
+<script src="modules/preview.js"></script>
+<script>
+    const {ipcRenderer} =require('electron');
+    var view=document.getElementById('graphView');
+    var zoomLevel = 1;
+    var zoomStep = 0.3;
+
+   setInterval(test,10);
+    function test(){
+        ipcRenderer.send("getUpdate","getUpdate to Preview");
+    }
+    ipcRenderer.on("update",(event,data)=>{
+      //  console.log("From Main: "+data);
+        view.innerHTML=data;
+
+    })
+
+    setInterval(getZoom,10);
+    function getZoom(){
+        ipcRenderer.send("getZoomUpdate","update Preview zoom");
+    }
+    ipcRenderer.on("zoomUpdate",(event,data)=>{
+        if(data=="out"){
+            zoomOut();
+        }else if(data=="in"){
+            zoomIn();
+        }else if(data=="fit"){
+            fitZoom();
+        }
+    })
+
+   function zoomIn(){
+    zoomLevel+=zoomStep;
+    view.style.zoom=zoomLevel;
+}
+
+
+    function zoomOut(){
+    zoomLevel-=zoomStep;
+    view.style.zoom=zoomLevel;
+}
+    function fitZoom(){
+        // Finde alle Div-Elemente innerhalb des "graphView"-Elements
+    const divElements = view.querySelectorAll('div');
+
+    // Ermittle die Position des am weitesten links gelegenen Div-Elements
+    let maxLeftPosition = Infinity;
+    divElements.forEach((div) => {
+        const divPosition = div.getBoundingClientRect().left;
+        maxLeftPosition = Math.min(maxLeftPosition, divPosition);
+    });
+
+    // Passe das Zoom-Level entsprechend an
+    const zoomLevel = (view.offsetWidth - maxLeftPosition) / view.offsetWidth;
+    view.style.zoom = zoomLevel;
+    }
+
+</script>
+</html>

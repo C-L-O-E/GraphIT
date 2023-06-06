@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>GraphIT</title>
+    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="bst.css">
+    <link rel="stylesheet" href="array.css">
+    <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="stack.css">
+    <link rel="stylesheet" href="modules/graph/graph.css">
+  </head>
+  <body>
+    <div id="flexboxV">
+      <div id="sidebar">
+        <div id="top">
+            <a id="dots">...</a>
+        </div>
+        <div id="datastructureView"></div>
+      </div>
+      <div id="graphView">
+       
+      </div>
+    </div>
+    <div id="consoleArea">
+      <div id="topBar">
+        <a id="termLBN" class="custom-label">Terminal</a>
+        <a id="ausgLBN" class="custom-label">Ausgabe</a>
+        <a id="controlLBN" class="custom-label">Contols</a>
+        
+        <div id="zoomOut" class="custom-label">-</div>
+        <a id="zoomIn" class="custom-label">+</a>
+        
+        <img  id="vorlesungs-Icon" src="./img/Volesung white.png" width="25px" height="25px">
+      </div>
+      <div id="downPart">
+        <div id="terminal"></div>
+      </div>
+    </div>
+    <div id="touchzone"><a>C</a><a>O</a><a>N</a><a>T</a><a>R</a><a>O</a><a>L</a><a>S</a></div>
+  </body>
+  
+  <script type="module" src="modules/datastructures/bst.js"></script>
+  <script type="module" src="modules/datastructures/mll.js"></script>
+  <script type="module" src="modules/terminal.js"></script>
+  <script type="module" src="modules/preview.js"></script>
+  <script type="module" src="modules/datastructures/array.js"></script>
+  <script type="module" src="modules/datastructures/sll.js"></script>
+  <script type="module" src="zoomlisteners.js"></script>
+  <script type="module" src="modules/dsSidebarController.js"></script>
+  <script type="module" src="modules/graph/graph.js"></script>
+  <script>
+    const {ipcRenderer} =require('electron');
+    
+    setInterval(test,10);
+    var container=document.getElementById('graphView');
+    function test(){
+        ipcRenderer.send("mainUpdate",container.innerHTML);
+    }
+
+    var vorlesungsIcon= document.getElementById("vorlesungs-Icon");
+
+    vorlesungsIcon.addEventListener('click',event=>{
+      ipcRenderer.send("comand","showVisual");
+  });
+</script>
+</html>

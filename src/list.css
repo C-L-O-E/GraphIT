@@ -1,0 +1,25 @@
+.listyBox{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    border: soli, 1px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    text-align: center;
+
+}
+
+.listyBox:hover{
+    background-color: deepskyblue;
+}
+
+.listHighlight {
+    background-color: yellow;
+    transition: background-color 0.5s;
+  }
+  
+  .listHighlightRemove {
+    background-color: red;
+    transition: background-color 0.5s;
+  }
+  

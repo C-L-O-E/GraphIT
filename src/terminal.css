@@ -1,0 +1,41 @@
+#terminal {
+    top:10%;
+    position: absolute;
+    width: 98%;
+    height: 80%;
+    overflow-y: auto;
+    padding-left: 10px;
+    color: aliceblue;
+
+  }
+
+  #input-line {
+    display: flex;
+    color: aliceblue;
+  }
+
+  #input-line:before {
+    margin-right: 5px;
+    color: aliceblue;
+  }
+
+  #input {
+    flex-grow: 1;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-family: monospace;
+    font-size: 14px;
+    outline: none;
+  }
+
+#outputView{
+  top:10%;
+  position: absolute;
+  width: 98%;
+  height: 80%;
+  overflow-y: auto;
+  padding-left: 10px;
+  color: aliceblue;
+
+}
