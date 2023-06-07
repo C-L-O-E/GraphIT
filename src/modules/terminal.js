@@ -1067,9 +1067,6 @@ function processCMD(command){
 //             end of comand section
 //=============================================================
 
-setInterval(autoSave,10000);
-function autoSave(){
-  DFM.saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
-}
+
 
 
