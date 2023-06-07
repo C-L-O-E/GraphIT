@@ -524,7 +524,7 @@ function getSelectedDatastructure(){
   return activeElements[activeElementIndex];
 }
 
-function getInput(){
+function getInput(type=null){
 
   var a=window.open("./modules/inputfield/input.html",'targetWindow',
                                    `toolbar=no,
@@ -536,8 +536,9 @@ function getInput(){
                                     width=770,
                                     height=420`,"popup");
                                     addEventListener("blur", self.focus());
-  console.log(a);
-  return 
+  a.setType("Array Length");
+
+  return a
 }
 
 //helping functions
@@ -583,7 +584,7 @@ function randomGenerationArrayLength(array,length){
     var randomNumber = Math.floor(Math.random() * 100) + 1;
     array.insertAtIndex(randomNumber,i);
   }
-  arr.update();
+  array.update();
 }
 
 function randomGenerationBSTLenth(bst,lenght){
@@ -742,8 +743,10 @@ function pars(command){
       initializeTerminal();
       break;
     case "Array-insert":
-        // Code for Array-insert function
-        break;
+      if(checkIfSelectedIS("Array")){
+            
+      }
+      break;
     case "Array-Create":
         if(checkIfSelectedIS("Array")){
             
@@ -762,17 +765,17 @@ function pars(command){
         break;
     case "Array-Bubbelsort":
         if(checkIfSelectedIS("Array")){
-          
+          getSelectedDatastructure().bubbleSortArray();
         }
         break;
     case "Array-insertionSort":
         if(checkIfSelectedIS("Array")){
-          
+          getSelectedDatastructure().insertionSortArray();
         }
         break;
     case "Array-selectionSort":
         if(checkIfSelectedIS("Array")){
-            
+          getSelectedDatastructure().selectionSortArray();
         }
         break;
     case "BST-Random-Create":

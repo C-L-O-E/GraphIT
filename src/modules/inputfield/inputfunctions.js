@@ -13,6 +13,9 @@ function ok(){
   self.close();
 }
 
+function setType(type){
+      document.getElementById('inputLBN').textContent=type;
+}
 
 
   

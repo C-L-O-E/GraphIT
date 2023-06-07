@@ -46,12 +46,34 @@ export default class array{
     setIndex(index, value){
         arr[index]=value;
     }
+    //todo bring all functions in the class/clean up unused
+    bubbleSortArray(){
+        setArr(this);
+        bubbleSort(this);
+    }
+
+    selectionSortArray(){
+        setArr(this);
+        selectionSort(this);
+    }
+
+    insertionSortArray(){
+        setArr(this);
+        insertionSort(this);
+    }
 
 }
 
 function Sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
    }
+
+var animationSpeed=10;
+//stupid help function only a work aurond throw out if updates are  made 
+var arr=null;
+function setArr(array){
+    arr=array;
+}
 
   
 async function swap(indexOne, indexTwo){
