@@ -520,6 +520,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+function getSelectedDatastructure(){
+  return activeElements[activeElementIndex];
+}
+
 //helping functions
 function getFormattedCharacters(num) {
   let output = '';
@@ -642,6 +646,15 @@ function defineGenerateGraph(graph){
 }
 
 
+//check for types
+function checkIfSelectedIS(name){
+  if(sidebar.textArray[activeElementIndex]==name){
+       return true;   
+  }
+    return false;
+}
+
+
 //=============================================================
 //            pars section
 //=============================================================
@@ -714,22 +727,34 @@ function pars(command){
         // Code for Array-insert function
         break;
     case "Array-Create":
-        // Code for Array-Create function
+        if(checkIfSelectedIS("Array")){
+            
+        }
         break;
     case "Array-Random-Create":
-        // Code for Array-Random-Create function
+        if(checkIfSelectedIS("Array")){
+          randomGenerationArray(getSelectedDatastructure());
+        }
         break;
     case "Array-Random-Length-Create":
-        // Code for Array-Random-Length-Create function
+        if(checkIfSelectedIS("Array")){
+          
+        }
         break;
     case "Array-Bubbelsort":
-        // Code for Array-Bubbelsort function
+        if(checkIfSelectedIS("Array")){
+          
+        }
         break;
     case "Array-insertionSort":
-        // Code for Array-insertionSort function
+        if(checkIfSelectedIS("Array")){
+          
+        }
         break;
     case "Array-selectionSort":
-        // Code for Array-selectionSort function
+        if(checkIfSelectedIS("Array")){
+            
+        }
         break;
     case "BST-Random-Create":
         // Code for BST-Random-Create function
