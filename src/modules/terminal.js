@@ -524,9 +524,19 @@ function getSelectedDatastructure(){
   return activeElements[activeElementIndex];
 }
 
-function getIntegerInput(){
-  var a=window.open("./modules/inputfield/input.html");
-  console.log("HELLO");
+function getInput(){
+
+  var a=window.open("./modules/inputfield/input.html",'targetWindow',
+                                   `toolbar=no,
+                                    location=no,
+                                    status=no,
+                                    menubar=no,
+                                    scrollbars=no,
+                                    resizable=no,
+                                    width=770,
+                                    height=420`,"popup");
+                                    addEventListener("blur", self.focus());
+  console.log(a);
   return 
 }
 
@@ -747,7 +757,7 @@ function pars(command){
     case "Array-Random-Length-Create":
         console.log("test");
         if(checkIfSelectedIS("Array")){
-          getIntegerInput();
+          getInput();
         }
         break;
     case "Array-Bubbelsort":

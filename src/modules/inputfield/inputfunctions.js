@@ -10,7 +10,9 @@ function appendCharacter(character) {
 
 function ok(){
   window.opener.postMessage(input.value, "*");
+  self.close();
 }
-  
+
+
 
   
