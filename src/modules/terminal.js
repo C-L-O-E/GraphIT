@@ -6,6 +6,7 @@ import DataStructureView  from './dsSidebarController.js';
 import BinarySearchTree from './datastructures/bst.js';
 import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
+import numberInput from './numberinput/numberInputDialog.js'
 
 
 var sidebar = new DataStructureView();
@@ -538,8 +539,6 @@ function getInput(type=null){
                                     resizable=no,
                                     width=770,
                                     height=420`,"popup");
-                                    addEventListener("blur", self.focus());
-  a.setType("Array Length");
 
   return a
 }
@@ -747,12 +746,24 @@ function pars(command){
       break;
     case "Array-insert":
       if(checkIfSelectedIS("Array")){
-            
+            var lbs=['Index','Value'];
+            var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+            console.log("Test:"+numIN);
+            window.addEventListener('message', (event) => {
+           
+                
+                if (Array.isArray(event.data)) {
+                  getSelectedDatastructure().insertAtIndex(event.data[1], event.data[0])
+                }
+              }
+            );
+
       }
       break;
     case "Array-Create":
         if(checkIfSelectedIS("Array")){
             
+            arrayCreate(t,i);
         }
         break;
     case "Array-Random-Create":
