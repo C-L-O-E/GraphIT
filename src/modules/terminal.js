@@ -398,6 +398,15 @@ function arrayCreate(){
   sidebar.addTextToList('Array');
 }
 
+function arrayCreateLength(lenght){
+  var newArray = new array(lenght,'graphView');
+  activeElements.push(newArray);
+  viewState='array';
+  addition="/array";
+  sidebar.addTextToList('Array');
+  return newArray;
+}
+
 function stackCreate(){
   var newStack= new stack();
   activeElements.push(newStack);
@@ -813,7 +822,15 @@ export function pars(command){
     case "Array-Random-Length-Create":
         console.log("test");
         if(checkIfSelectedIS("Array")){
-          getInput();
+          var lbs=['Length'];
+          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+          console.log("Test:"+numIN);
+          window.addEventListener('message', (event) => {     
+              if (Array.isArray(event.data)) {
+                randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);//here
+              }
+            }
+          );
         }
         break;
     case "Array-Bubbelsort":
