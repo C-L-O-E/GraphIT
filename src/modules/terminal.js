@@ -456,6 +456,9 @@ function sendEndPresentation(){
 var touchzone=document.getElementById('touchzone');
   touchzone.addEventListener('click',event=>{
   controllsWindow=window.open("./modules/controles/controls.html");
+  controllsWindow.addEventListener("blur", function() {
+    controllsWindow.close();
+  });
 });
 
 window.addEventListener("message", function(event) {
@@ -1003,4 +1006,3 @@ function processCMD(command){
 //             end of comand section
 //=============================================================
 
-//window.open("./modules/inputfield/input.html");
