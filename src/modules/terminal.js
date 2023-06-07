@@ -848,7 +848,7 @@ export function pars(command){
         break;
     case "BST-Traverse-Inorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
-        // Code for BST-Traverse-Inorder function
+      getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure.root);
         break;
     case "BST-Traverse-Preorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
@@ -856,7 +856,7 @@ export function pars(command){
         break;
     case "BST-Traverse-Postorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
-        // Code for BST-Traverse-Postorder function
+          getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure.root);
         break;
     case "BST-Traverse-Levelorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
