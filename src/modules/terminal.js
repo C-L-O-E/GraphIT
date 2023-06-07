@@ -860,7 +860,7 @@ export function pars(command){
         break;
     case "BST-Traverse-Levelorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
-        // Code for BST-Traverse-Levelorder function
+        getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure.root);
         break;
     case "Stack-Push":
       if(checkIfSelectedIS("Stack")){}
