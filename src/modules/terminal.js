@@ -8,9 +8,11 @@ import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
+import DataFileManager from '../diskControler/diskController.js';
 
 
 var sidebar = new DataStructureView();
+var DFM=new DataFileManager();
 
 var controllsWindow=null;
 
@@ -1064,4 +1066,10 @@ function processCMD(command){
 //=============================================================
 //             end of comand section
 //=============================================================
+
+setInterval(autoSave,10000);
+function autoSave(){
+  DFM.saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+}
+
 
