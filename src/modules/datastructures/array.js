@@ -37,7 +37,7 @@ export default class array{
         this.clearArray();
     }
     clearArray(){
-        this.arr=[];
+        this.arr=[]
         this.length=0;
         this.update()
     }

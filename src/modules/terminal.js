@@ -7,6 +7,7 @@ import BinarySearchTree from './datastructures/bst.js';
 import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
+import { addEventListeners, updateListener } from './terminalTouchControles.js';
 
 
 var sidebar = new DataStructureView();
@@ -195,6 +196,8 @@ function switchView(){
     cons.innerHTML=null;
     //hereweare
     cons.innerHTML='<div id="topBarC"><div class="tobBarElementC" id="i">Datastrutures</div><div class="tobBarElementC"id="ii">Controlles</div><div id="iii" class="tobBarElementC">DataStructure-Operations</div><div id="iiii"class="tobBarElementC">Settings</div></div><div id="controls"></div>';
+    addEventListeners();
+    updateListener();
   }
 }
 
@@ -467,6 +470,7 @@ window.addEventListener("message", function(event) {
   pars(event.data);
 });
 
+
 //=============================================================
 //          end of  touch sectoion 
 //=============================================================
@@ -701,7 +705,7 @@ function reomoveSelectedDS(){
 //            pars section
 //=============================================================
 
-function pars(command){
+export function pars(command){
   switch (command) {
     case 'clear view':
       clearView();
@@ -829,12 +833,12 @@ function pars(command){
         break;
     case "BST-Random-Create":
         if(checkIfSelectedIS("Binary-Search-Tree")){
-          randomGenerationBST();
+          randomGenerationBST(getSelectedDatastructure());
         }
         break;
     case "BST-Insert":
         if(checkIfSelectedIS("Binary-Search-Tree")){
-          
+          getSelectedDatastructure().insert();
         }
         // code for insert 
         break;

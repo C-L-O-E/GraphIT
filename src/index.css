@@ -105,6 +105,10 @@ body {
   padding: 0px;;
 }
 
+#downPart{
+  overflow-y: auto;
+  height: 100%;
+}
 
 #datastructureView{
   width: 100%;
