@@ -1,13 +1,6 @@
 # GraphIT
-GraphIT is a visualisation of algorithms from computer science lessons
+GraphIT is a visualization tool for computer science algorithms taught in lessons. It is currently in an early stage of development and definitely unfinished.
 
+As this is my first time working with React, I kindly ask for your patience. There are numerous tests and portions of code that could be improved and written in a cleaner and more efficient manner.
 
-Its In an Erly Stage and Defenatly unfinshed 
-
-Its The first Time wit React, so please be Patiant. 
-A Lot of Tests and code taht could be written better/cleaner. 
-
-Future Plans:
-Updates and adding functions for visualisation 
-export as pdf/img for presentations or examples to hand out to students 
-make it able to load projects maybe tasks for students. 
+Regarding future plans, I intend to release regular updates that will include additional features. One such feature will be the ability to export visualizations as PDF or image files, which will aid in presentations or serve as examples to distribute to students. Additionally, I aim to implement functionality that allows users to load projects and potentially provide tasks specifically designed for students.
