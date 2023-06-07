@@ -42,6 +42,11 @@ export default class array{
         this.update()
     }
 
+    setLength(lenght){
+        this.length=length;
+        this.update();
+    }
+
     insertAtIndex(value, index){
         this.arr[index]=value;
         console.log("Value:"+value+"at index "+index);

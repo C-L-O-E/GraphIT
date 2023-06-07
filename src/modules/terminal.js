@@ -818,7 +818,7 @@ export function pars(command){
           console.log("Test:"+numIN);
           window.addEventListener('message', (event) => {     
               if (Array.isArray(event.data)) {
-                activeElements[activeElementIndex]=arrayCreateLength(length);
+                getSelectedDatastructure().setLength(length);
                 randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);//here
               }
             }
