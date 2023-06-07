@@ -779,78 +779,122 @@ function pars(command){
         }
         break;
     case "BST-Random-Create":
-        // Code for BST-Random-Create function
+        if(checkIfSelectedIS("Binary-Search-Tree")){
+          randomGenerationBST();
+        }
         break;
     case "BST-Insert":
-        // Code for BST-Insert function
+        if(checkIfSelectedIS("Binary-Search-Tree")){
+          
+        }
+        // code for insert 
         break;
     case "BST-Remove":
+      if(checkIfSelectedIS("Binary-Search-Tree")){}
         // Code for BST-Remove function
         break;
     case "BST-Traverse-Inorder":
+      if(checkIfSelectedIS("Binary-Search-Tree")){}
         // Code for BST-Traverse-Inorder function
         break;
     case "BST-Traverse-Preorder":
+      if(checkIfSelectedIS("Binary-Search-Tree")){}
         // Code for BST-Traverse-Preorder function
         break;
     case "BST-Traverse-Postorder":
+      if(checkIfSelectedIS("Binary-Search-Tree")){}
         // Code for BST-Traverse-Postorder function
         break;
     case "BST-Traverse-Levelorder":
+      if(checkIfSelectedIS("Binary-Search-Tree")){}
         // Code for BST-Traverse-Levelorder function
         break;
     case "Stack-Push":
+      if(checkIfSelectedIS("Stack")){}
         // Code for Stack-Push function
         break;
     case "Stack-pop":
+      if(checkIfSelectedIS("Stack")){}
         // Code for Stack-pop function
         break;
     case "Stack-peak":
+      if(checkIfSelectedIS("Stack")){}
         // Code for Stack-peak function
         break;
+    case "SLL-Random-Create":
+      randomGenerateSLL(getSelectedDatastructure());
+        // Code for SLL-Remove-End function
+        break;
+    case "SLL-Random-Creat-Length":
+      if(checkIfSelectedIS("Singel-linked-List")){}
+        // Code for SLL-Remove-End function
+        break;
     case "SLL-Insert-End":
+      if(checkIfSelectedIS("Singel-linked-List")){}
         // Code for SLL-Insert-End function
         break;
     case "SLL-Insert-Begining":
+      if(checkIfSelectedIS("Singel-linked-List")){}
         // Code for SLL-Insert-Begining function
         break;
     case "SLL-Remove-Start":
+      if(checkIfSelectedIS("Singel-linked-List")){}
         // Code for SLL-Remove-Start function
         break;
     case "SLL-Remove-End":
+      if(checkIfSelectedIS("Singel-linked-List")){}
         // Code for SLL-Remove-End function
         break;
-    case "MLL-Insert-End":
+    case "MLL-Random-Create":
+      if(checkIfSelectedIS("Singel-linked-List")){}
+          randomGenerateMLL(getSelectedDatastructure());
+        break;
+    case "MLL-Random-Creat-Length":
+      if(checkIfSelectedIS("Singel-linked-List")){}
+        // Code for SLL-Remove-End function
+        break;
+    case "MLL-Insert-End"://"MLL-Random-Create","MLL-Random-Creat-Length"
+      if(checkIfSelectedIS("Mulit-Linked-List")){}
         // Code for MLL-Insert-End function
         break;
     case "MLL-Insert-Begin":
+      if(checkIfSelectedIS("Mulit-Linked-List")){}
         // Code for MLL-Insert-Begin function
         break;
     case "MLL-Remove-End":
+      if(checkIfSelectedIS("Mulit-Linked-List")){}
         // Code for MLL-Remove-End function
         break;
     case "MLL-Remove-Begin":
+      if(checkIfSelectedIS("Mulit-Linked-List")){}
         // Code for MLL-Remove-Begin function
         break;
     case "Graph-Tiefensuche":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Tiefensuche function
         break;
     case "Graph-Breitensuche":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Breitensuche function
         break;
     case "Graph-Insert":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Insert function
         break;
     case "Graph-Remove":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Remove function
         break;
     case "Graph-Random-Create":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Random-Create function
         break;
     case "Graph-Rendom-Lenght-Create":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-Rendom-Lenght-Create function
         break;
     case "Graph-ResetColor":
+      if(checkIfSelectedIS("Graph")){}
         // Code for Graph-ResetColor function
         break;
     default:
