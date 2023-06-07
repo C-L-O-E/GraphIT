@@ -6,4 +6,3 @@ Please bear with me as this is my first experience working with React. I kindly 
 
 Looking ahead, my plan is to release regular updates to enhance GraphIT's functionality. One exciting feature on the horizon is the ability to export visualizations as PDF or image files. This functionality will facilitate presentations and allow users to distribute examples to students with ease. Additionally, I am eager to incorporate project loading capabilities, potentially even including dedicated tasks tailored for students' needs.
 
-Rest assured that I will make every effort to ensure flawless English, devoid of any grammar mistakes, typos, or misspellings.
