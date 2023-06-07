@@ -275,6 +275,12 @@ export default class DoublyLinkedList{
           this.listDiv.innerHTML=null;
           this.draw();
         }
+
+        clearDS(){
+          this.head=null;
+          this.tail=null;
+          this.listDiv.innerHTML=null;
+        }
   }
 
  function test(){ 

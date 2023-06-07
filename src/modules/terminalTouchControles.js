@@ -1,9 +1,10 @@
-var view=document.getElementById('view');
+//realy similar to the original controlls only here as a work around TODO: clean that up later
+var view=document.getElementById('controls');
 var btnDatastructureOpperations=document.getElementById('iii');
 var btnSetting=document.getElementById('iiii');
 var btnControles=document.getElementById('ii');
 var btnDatastructures=document.getElementById('i');
-var viewElements = document.querySelectorAll('.viewElement');
+var viewElements = document.querySelectorAll('.viewElementC');
 
 var settings=[];
 var controls=[];
@@ -18,37 +19,37 @@ function load(array){
     view.innerHTML=null;
     array.forEach(element => {
         var temp=document.createElement('div');
-        temp.className="viewElement";
+        temp.className="viewElementC";
         temp.innerHTML=`<a>${element}</a>`;
         view.appendChild(temp);
     });
 }
 
 
+function addEventListeners(){
+    btnControles.addEventListener('click',event=>{
+        load(controls);
+        updateListener();
+    });
 
-btnControles.addEventListener('click',event=>{
-    load(controls);
-    updateListener();
-});
+    btnDatastructures.addEventListener('click',event=>{
+        load(datastructures);
+        updateListener();
+    });
 
-btnDatastructures.addEventListener('click',event=>{
-    load(datastructures);
-    updateListener();
-});
+    btnSetting.addEventListener('click',event=>{
+        load(settings);
+        updateListener();
+    });
 
-btnSetting.addEventListener('click',event=>{
-    load(settings);
-    updateListener();
-});
-
-btnDatastructureOpperations.addEventListener('click',event=>{
-    load(datastructureOperaions);
-    updateListener();
-});
-
+    btnDatastructureOpperations.addEventListener('click',event=>{
+        load(datastructureOperaions);
+        updateListener();
+    });
+}
 
 function updateListener(){
-    viewElements = document.querySelectorAll('.viewElement');
+    viewElements = document.querySelectorAll('.viewElementC');
     viewElements.forEach((element) => {
     element.addEventListener('click', () => {
         const linkElement = element.querySelector('a');

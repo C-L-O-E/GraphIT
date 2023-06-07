@@ -25,6 +25,12 @@ export default class stack{
             return data;
         }
     }
+
+    
+    clearDS(){
+        this.stackDiv.innerHTML=null;
+        this.stack=[];
+      }
     
     peak(){
         return this.items[this.items.length - 1];

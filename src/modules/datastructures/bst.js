@@ -38,6 +38,12 @@ export default class BinarySearchTree {
     this.view.style.zoom = this.zoomLevel;
   }
 
+  
+  clearDS(){
+    this.root=null;
+    this.bstDiv.innerHTML=null;
+  }
+
   addNode(data, x, y) {
     var bstNode = document.createElement('div');
     bstNode.className = 'bstNode';

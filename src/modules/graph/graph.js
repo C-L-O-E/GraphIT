@@ -203,6 +203,12 @@ class Node {
     sleep(time) {
       return new Promise(resolve => setTimeout(resolve, time));
     }
+
+    clearDS(){
+      this.nodes=[];
+      this.edges=[];
+      this.container.innerHTML=null;
+    }
   
     async tiefensuche() {
       const visited = new Set();

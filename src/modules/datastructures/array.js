@@ -33,6 +33,14 @@ export default class array{
         this.arrayDiv.innerHTML=null;
         this.draw();
     }
+    clearDS(){
+        this.clearArray();
+    }
+    clearArray(){
+        this.arr=[];
+        this.length=0;
+        this.update()
+    }
 
     insertAtIndex(value, index){
         this.arr[index]=value;

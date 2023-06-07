@@ -193,7 +193,8 @@ function switchView(){
       initializeTerminal();
   }else if(state==='controls'){
     cons.innerHTML=null;
-    cons.innerHTML='<div id="controls"></div>';
+    //hereweare
+    cons.innerHTML='<div id="topBarC"><div class="tobBarElementC" id="i">Datastrutures</div><div class="tobBarElementC"id="ii">Controlles</div><div id="iii" class="tobBarElementC">DataStructure-Operations</div><div id="iiii"class="tobBarElementC">Settings</div></div><div id="controls"></div>';
   }
 }
 
@@ -392,7 +393,6 @@ function arrayCreate(){
   viewState='array';
   addition="/array";
   sidebar.addTextToList('Array');
-  
 }
 
 function stackCreate(){
@@ -640,8 +640,18 @@ function randomGenerateGraph(graph){
 
 
 //defineed generate section
-function defineGenerationArray(array){
-  return array;
+function defineGenerationArray(array,lenght){
+  for (var i = 0; i < length; i++) {
+    array.insertAtIndex(0,i);
+  }
+  array.update();
+}
+
+function definesimpleArray(array,chrs){
+    for (var i = 0; i < chrs.length; i++) {
+      array.insertAtIndex(chrs[i],i);
+    }
+    array.update();
 }
 
 function defineGenerationBST(bst){
@@ -673,6 +683,17 @@ function checkIfSelectedIS(name){
        return true;   
   }
     return false;
+}
+
+
+function clearSelectedDS(){
+  getSelectedDatastructure().clearDS();
+}
+
+function reomoveSelectedDS(){
+  activeElements.splice(activeElementIndex,activeElementIndex);
+  sidebar.removeTextFromList(activeElementIndex);
+  activeElementIndex=-1;
 }
 
 
@@ -744,16 +765,20 @@ function pars(command){
       GraphCreate();
       initializeTerminal();
       break;
+    case"Clear-Selected":
+    clearSelectedDS();
+      break;
+    case"Remove-Selected":
+      reomoveSelectedDS();
+      break;
     case "Array-insert":
       if(checkIfSelectedIS("Array")){
             var lbs=['Index','Value'];
             var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
             console.log("Test:"+numIN);
-            window.addEventListener('message', (event) => {
-           
-                
+            window.addEventListener('message', (event) => {     
                 if (Array.isArray(event.data)) {
-                  getSelectedDatastructure().insertAtIndex(event.data[1], event.data[0])
+                  getSelectedDatastructure().insertAtIndex(event.data[1], event.data[0]);
                 }
               }
             );
@@ -762,10 +787,20 @@ function pars(command){
       break;
     case "Array-Create":
         if(checkIfSelectedIS("Array")){
-            
-            arrayCreate(t,i);
+          var lbs=['Length'];
+          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+          console.log("Test:"+numIN);
+          window.addEventListener('message', (event) => {     
+              if (Array.isArray(event.data)) {
+                getSelectedDatastructure().arrayCreateLength(event.data[0]);
+              }
+            }
+          );
         }
         break;
+    case "Array-Simple-Creation":
+         definesimpleArray(getSelectedDatastructure(),['a','b','c']);
+      break;
     case "Array-Random-Create":
         if(checkIfSelectedIS("Array")){
           randomGenerationArray(getSelectedDatastructure());
