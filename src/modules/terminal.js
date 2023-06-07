@@ -852,7 +852,7 @@ export function pars(command){
         break;
     case "BST-Traverse-Preorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
-        // Code for BST-Traverse-Preorder function
+        getSelectedDatastructure().animatePreOrderTraversal(getSelectedDatastructure.root);
         break;
     case "BST-Traverse-Postorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
