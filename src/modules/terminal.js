@@ -398,15 +398,6 @@ function arrayCreate(){
   sidebar.addTextToList('Array');
 }
 
-function arrayCreateLength(lenght){
-  var newArray = new array(lenght,'graphView');
-  activeElements.push(newArray);
-  viewState='array';
-  addition="/array";
-  sidebar.addTextToList('Array');
-  return newArray;
-}
-
 function stackCreate(){
   var newStack= new stack();
   activeElements.push(newStack);
@@ -827,6 +818,7 @@ export function pars(command){
           console.log("Test:"+numIN);
           window.addEventListener('message', (event) => {     
               if (Array.isArray(event.data)) {
+                activeElements[activeElementIndex]=arrayCreateLength(length);
                 randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);//here
               }
             }
