@@ -9,11 +9,12 @@ import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import DataFileManager from '../diskControler/diskController.js';
+import {} from'../settings.js';
 
 
 var sidebar = new DataStructureView();
 var DFM=new DataFileManager();
-
+var setings= new settings();
 var controllsWindow=null;
 
 var view = document.getElementById("graphView");
@@ -1066,6 +1067,7 @@ function processCMD(command){
 //=============================================================
 //             end of comand section
 //=============================================================
+
 
 
 

@@ -5,7 +5,7 @@ var user="Default";
 var projektname="Default Projekt";
 var autoSaveOn=true;
 
-var DFM=new DataFileManager();
+
 
 export function getAppVersion(){
     return version
@@ -13,9 +13,11 @@ export function getAppVersion(){
 
 
 
-setInterval(autoSave,10000);
+
 function autoSave(){
-  DFM.saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+    if(autoSaveOn){
+       saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+    }
 }
 
 
