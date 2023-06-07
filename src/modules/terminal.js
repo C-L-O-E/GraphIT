@@ -524,6 +524,12 @@ function getSelectedDatastructure(){
   return activeElements[activeElementIndex];
 }
 
+function getIntegerInput(){
+  var a=window.open("./modules/inputfield/input.html");
+  console.log("HELLO");
+  return 
+}
+
 //helping functions
 function getFormattedCharacters(num) {
   let output = '';
@@ -648,6 +654,8 @@ function defineGenerateGraph(graph){
 
 //check for types
 function checkIfSelectedIS(name){
+  console.log("AchtiveAlementIndex: "+activeElementIndex);
+  console.log("output"+sidebar.textArray[activeElementIndex]);
   if(sidebar.textArray[activeElementIndex]==name){
        return true;   
   }
@@ -737,8 +745,9 @@ function pars(command){
         }
         break;
     case "Array-Random-Length-Create":
+        console.log("test");
         if(checkIfSelectedIS("Array")){
-          
+          getIntegerInput();
         }
         break;
     case "Array-Bubbelsort":
