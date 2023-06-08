@@ -39,3 +39,14 @@
   color: aliceblue;
 
 }
+
+#logs{
+  top:10%;
+  position: absolute;
+  width: 98%;
+  height: 80%;
+  overflow-y: auto;
+  padding-left: 10px;
+  color: aliceblue;
+
+}

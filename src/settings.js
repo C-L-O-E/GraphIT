@@ -1,5 +1,4 @@
-import { saveToLocalFile } from "./modules/terminal.js";
-import { addLog,addError,addWarning } from '../modules/terminal.js';
+import { saveToLocalFile,addLog,addError,addWarning } from "./modules/terminal.js";
 
 var version="0.1 Alpha";
 var user="Default";

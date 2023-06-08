@@ -105,13 +105,21 @@ ipcMain.on('info',(event,data)=>{
 ipcMain.on('comand',(event,data)=>{
   if(data=='showVisualSecondScreen'){
     if(child!=null){
-      var str=moveWindowToSecondScreenAndFullscreen(child);
-      event.sender.send("logChannel",str);
+      var retStrArr=moveWindowToSecondScreenAndFullscreen(child);
+      if(retStrArr[0]=='log'){
+        event.sender.send("logChannel",retStrArr[1]);
+      }else if(retStrArr[0]=='error'){
+        event.sender.send("errorChannel",retStrArr[1]);
+      }
     }
   }else if(data=='showVisualThirdScreen'){
     if(child!=null){
-      var str=moveWindowToTirdScreenAndFullscreen(child);
-      event.sender.send("logChannel",str);
+      var retStrArr=moveWindowToTirdScreenAndFullscreen(child);
+      if(retStrArr[0]=='log'){
+        event.sender.send("logChannel",retStrArr[1]);
+      }else if(retStrArr[0]=='error'){
+        event.sender.send("errorChannel",retStrArr[1]);
+      }
     }
   }else if(data=='showVisual'){
   console.log("Data From Client: "+data);
@@ -148,11 +156,14 @@ function exitSys(){
 function moveWindowToSecondScreenAndFullscreen(window) {
   // Get all available displays
   const displays = screen.getAllDisplays();
-
+  var retStr="";
+  var retStrArr=[];
   // Check if there are at least two displays
   if (displays.length < 2) {
     retStr='There is only one display available.';
-    return;
+    retStrArr.push("error");
+    retStrArr.push(retStr);
+    return retStrArr;
   }
 
   // Get the second display
@@ -166,17 +177,23 @@ function moveWindowToSecondScreenAndFullscreen(window) {
 
   // Set the window to fullscreen
   window.setFullScreen(true);
-  return retStr;
+  retStr="Presentation Window sucsesfully moved to Second Screen."
+  retStrArr.push("log");
+  retStrArr.push(retStr);
+  return retStrArr;
 }
 
 function moveWindowToTirdScreenAndFullscreen(window) {
   // Get all available displays
   const displays = screen.getAllDisplays();
-
+  var retStrArr=[];
+  var retStr="";
   // Check if there are at least two displays
-  if (displays.length < 2) {
-    retStr='There is only one display available.';
-    return;
+  if (displays.length < 3) {
+    retStr='There is no Third display available.';
+    retStrArr.push("error");
+    retStrArr.push(retStr);
+    return retStrArr;
   }
 
   // Get the second display
@@ -190,7 +207,10 @@ function moveWindowToTirdScreenAndFullscreen(window) {
 
   // Set the window to fullscreen
   window.setFullScreen(true);
-  return retStr;
+  retStr="Presentation Window sucsesfully moved to Third Screen."
+  retStrArr.push("log");
+  retStrArr.push(retStr);
+  return retStrArr;
 }
 
 

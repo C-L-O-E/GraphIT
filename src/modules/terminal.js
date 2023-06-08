@@ -56,17 +56,17 @@ export function saveToLocalFile(){
 
 export function addLog(data){
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+">[Log]"+data+",";
+  var str="<"+timestamp+"> [Log] "+data+",";
   terminalLog(str);
 }
 export function addError(data){
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+">[Error]"+data+",";
+  var str="<"+timestamp+"> [Error] "+data+",";
   terminalLog(str);
 }
 export function addWarning(data){
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+">[Warning]"+data+",";
+  var str="<"+timestamp+"> [Warning] "+data+",";
   terminalLog(str);
 }
 
@@ -240,7 +240,6 @@ function switchView(){
       initializeTerminal();
   }else if(state==='controls'){
     cons.innerHTML=null;
-    //hereweare
     cons.innerHTML='<div id="topBarC"><div class="tobBarElementC" id="i">Datastrutures</div><div class="tobBarElementC"id="ii">Controlles</div><div id="iii" class="tobBarElementC">DataStructure-Operations</div><div id="iiii"class="tobBarElementC">Settings</div></div><div id="controls"></div>';
     addEventListeners();
     updateListener();
@@ -1140,6 +1139,7 @@ ipcRenderer.on("warningChannel",(event,data)=>{
   addWarning(data);
 });
 
+addLog("TEST");
 
 
 
