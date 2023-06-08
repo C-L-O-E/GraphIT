@@ -43,7 +43,7 @@ export function loadFromDisk(filePath) {
 
         addLog('Daten erfolgreich geladen und aktualisiert.');
       } catch (error) {
-        addError('Fehler beim Parsen der JSON-Datei:', error);
+        addError('Fehler beim Parsen der JSON-Datei: '+error);
       }
     });
   }
@@ -67,20 +67,19 @@ export function loadFromDisk(filePath) {
   }
   
 
-  export function createFileIfNotExists(filePath, content = '') {
+  export function createFileIfNotExists(filePath, content) {
     if (!fs.existsSync(filePath)) {
       try{
-      fs.writeFileSync(filePath, content);
+        fs.writeFileSync(filePath, content);
         addLog(`File "${filePath}" created successfully.`);
-      return true;
+        return true;
       }catch(error){
-        addError(`File "${filePath}" was not created.`);
+        addError(`File "${filePath}" was not created. Reason:${error}`);
         return false;
       }
-
     } else {
-      console.log(`File "${filePath}" already exists.`);
-      return true;
+        addLog(`File "${filePath}" already exists.`);
+        return true;
     }
   }
 
@@ -90,9 +89,9 @@ export function loadSettings() {
     const data = fs.readFileSync(settingsFilePath, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    addError('Fehler beim Laden der Einstellungen:', error);
+    addError('Fehler beim Laden der Einstellungen: Reason: '+error);
     addLog('Try to Create a Settings File to Fix it automaticly...');
-    createFileIfNotExists(settingsFilePath,generateSettingsObject());
+    createFileIfNotExists(settingsFilePath,JSON.stringify(generateSettingsObject()));
     return{};
   }
 }
