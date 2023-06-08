@@ -854,7 +854,6 @@ export function pars(command){
                 }
               }
             );
-
       }
       break;
     case "Array-Create":
@@ -887,7 +886,7 @@ export function pars(command){
           window.addEventListener('message', (event) => {     
               if (Array.isArray(event.data)) {
                 getSelectedDatastructure().setLength(length);
-                randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);//here
+                randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);
               }
             }
           );
@@ -915,119 +914,236 @@ export function pars(command){
         break;
     case "BST-Insert":
         if(checkIfSelectedIS("Binary-Search-Tree")){
-          getSelectedDatastructure().insert();
+          var lbs=['Value'];
+          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+          window.addEventListener('message', (event) => {     
+              if (Array.isArray(event.data)) {
+                getSelectedDatastructure().insert(event.data[0]);   
+              }
+            }
+          );
         }
         break;
     case "BST-Remove":
-      if(checkIfSelectedIS("Binary-Search-Tree")){}
-        // Code for BST-Remove function
+      if(checkIfSelectedIS("Binary-Search-Tree")){
+        var lbs=['Value'];
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().removeNode(event.data[0]);
+            }
+          }
+        );
+      }
         break;
     case "BST-Traverse-Inorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){}
+      if(checkIfSelectedIS("Binary-Search-Tree")){
         getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure.root);
+      }
         break;
     case "BST-Traverse-Preorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){}
+      if(checkIfSelectedIS("Binary-Search-Tree")){
         getSelectedDatastructure().animatePreOrderTraversal(getSelectedDatastructure.root);
+      }
         break;
     case "BST-Traverse-Postorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){}
+      if(checkIfSelectedIS("Binary-Search-Tree")){
           getSelectedDatastructure().animatePostOrderTraversal(getSelectedDatastructure.root);
         break;
+      }
     case "BST-Traverse-Levelorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){}
+      if(checkIfSelectedIS("Binary-Search-Tree")){
         getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure.root);
+      }
         break;
     case "Stack-Push":
-      if(checkIfSelectedIS("Stack")){}
-        getSelectedDatastructure().pus();
+      if(checkIfSelectedIS("Stack")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().push(event.data[0]);   
+            }
+          }
+        );
+      }    
         break;
     case "Stack-pop":
-      if(checkIfSelectedIS("Stack")){}
-        getSelectedDatastructure.prototype();
+      if(checkIfSelectedIS("Stack")){
+        getSelectedDatastructure().prototype();
+      }
         break;
     case "Stack-peak":
-      if(checkIfSelectedIS("Stack")){}
-        getSelectedDatastructure.peak();
+      if(checkIfSelectedIS("Stack")){
+        getSelectedDatastructure().peak();
+      }
         break;
     case "SLL-Random-Create":
-      randomGenerateSLL(getSelectedDatastructure());
+      if(checkIfSelectedIS("Stack")){
         randomGenerateSLL(getSelectedDatastructure());
+      }
         break;
     case "SLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-linked-List")){}
-        randomGenerateSLLLength(getSelectedDatastructure());
+      if(checkIfSelectedIS("Singel-linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              randomGenerateSLLLength(getSelectedDatastructure(),event.data[0]);   
+            }
+          }
+        );
+      }
         break;
     case "SLL-Insert-End":
-      if(checkIfSelectedIS("Singel-linked-List")){}
-        getSelectedDatastructure().addLast();
+      if(checkIfSelectedIS("Singel-linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().addLast(event.data[0]);   
+            }
+          }
+        );
+      } 
         break;
     case "SLL-Insert-Begining":
-      if(checkIfSelectedIS("Singel-linked-List")){}
-        getSelectedDatastructure().addFirst();
+      if(checkIfSelectedIS("Singel-linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().addFirst(event.data[0]);   
+            }
+          }
+        );
+      }
         break;
     case"SLL-Inser-At-Index":
-      if(checkIfSelectedIS("Singel-linked-List")){}
+      if(checkIfSelectedIS("Singel-linked-List")){
+        var lbs=['index','Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().insertAtIndex(event.data[0],event.data[1]);
+            }
+          }
+        );
+      }
         break;
     case "SLL-Remove-Start":
-      if(checkIfSelectedIS("Singel-linked-List")){}
+      if(checkIfSelectedIS("Singel-linked-List")){
         getSelectedDatastructure().removeFirst();
+      }
         break;
     case "SLL-Remove-End":
-      if(checkIfSelectedIS("Singel-linked-List")){}
+      if(checkIfSelectedIS("Singel-linked-List")){
         getSelectedDatastructure().removeLast();
+      }
         break;
     case "MLL-Random-Create":
-      if(checkIfSelectedIS("Singel-linked-List")){}
+      if(checkIfSelectedIS("Singel-linked-List")){
           randomGenerateMLL(getSelectedDatastructure());
+      }
         break;
     case "MLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Remove-End function
+      if(checkIfSelectedIS("Singel-linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              randomGenerateMLLLength(getSelectedDatastructure(),event.data[0]);             
+            }
+          }
+        );
+      }
         break;
-    case "MLL-Insert-End"://"MLL-Random-Create","MLL-Random-Creat-Length"
-      if(checkIfSelectedIS("Mulit-Linked-List")){}
-        // Code for MLL-Insert-End function
+    case "MLL-Insert-End":
+      if(checkIfSelectedIS("Mulit-Linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().addLast(event.data[0]);   
+            }
+          }
+        );
+      }
         break;
     case "MLL-Insert-Begin":
-      if(checkIfSelectedIS("Mulit-Linked-List")){}
-        // Code for MLL-Insert-Begin function
+      if(checkIfSelectedIS("Mulit-Linked-List")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().addFirst(event.data);      
+            }
+          }
+        );
+      }
         break;
     case "MLL-Remove-End":
       if(checkIfSelectedIS("Mulit-Linked-List")){}
-        // Code for MLL-Remove-End function
+        getSelectedDatastructure().removeLast();
         break;
     case "MLL-Remove-Begin":
       if(checkIfSelectedIS("Mulit-Linked-List")){}
-        // Code for MLL-Remove-Begin function
+        getSelectedDatastructure().removeFirst();
         break;
     case "Graph-Tiefensuche":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Tiefensuche function
+      if(checkIfSelectedIS("Graph")){
+        getSelectedDatastructure().tiefensuche();
+      }
         break;
     case "Graph-Breitensuche":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Breitensuche function
+      if(checkIfSelectedIS("Graph")){
+        getSelectedDatastructure().breitensuche();
+      }
         break;
     case "Graph-Insert":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Insert function
+      if(checkIfSelectedIS("Graph")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().insertNode(event.data[0]);   
+            }
+          }
+        );
+      }
         break;
     case "Graph-Remove":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Remove function
+      if(checkIfSelectedIS("Graph")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              getSelectedDatastructure().removeNode(event.data[0]);
+            }
+          }
+        );
+      }
         break;
     case "Graph-Random-Create":
       if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Random-Create function
+        randomGenerateGraph(getSelectedDatastructure());
         break;
     case "Graph-Rendom-Lenght-Create":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-Rendom-Lenght-Create function
+      if(checkIfSelectedIS("Graph")){
+        var lbs=['Value'];
+        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              randomGenerateGraphLength(getSelectedDatastructure(),event.data[0]);
+            }
+          }
+        );
+      }
         break;
     case "Graph-ResetColor":
-      if(checkIfSelectedIS("Graph")){}
-        // Code for Graph-ResetColor function
+      if(checkIfSelectedIS("Graph")){
+        getSelectedDatastructure().resetColor();
+      }
         break;
     default:
       break;
