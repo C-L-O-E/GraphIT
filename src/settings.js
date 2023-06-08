@@ -1,47 +1,44 @@
 import DataFileManager from './diskControler/diskController.js';
 
-var version="0.1 Alpha";
-var user="Default";
-var projektname="Default Projekt";
-var autoSaveOn=true;
+class settings{
+    constructor(){
+    this.version="0.1 Alpha";
+    this.user="Default";
+    this.projektname="Default Projekt";
+    this.autoSaveOn=true;
+    }
+
+    getAppVersion(){
+        return version
+    }
 
 
 
-export function getAppVersion(){
-    return version
-}
+    autoSave(){
+        if(autoSaveOn){
+        saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+        }
+    }
 
 
-
-
-function autoSave(){
-    if(autoSaveOn){
-       saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+    getUser() {
+        return user;
+    }
+    setUser(newUser) {
+        user = newUser;
+    }
+    getProjektname() {
+        return projektname;
+    }
+    setProjektname(newProjektname) {
+        projektname = newProjektname;
+    }
+    
+    getAutoSaveOn() {
+        return autoSaveOn;
+    }
+    
+    setAutoSaveOn(newAutoSaveOn) {
+        autoSaveOn = newAutoSaveOn;
     }
 }
-
-
-
-export function getUser() {
-    return user;
-  }
-  
-  export function setUser(newUser) {
-    user = newUser;
-  }
-  
-  export function getProjektname() {
-    return projektname;
-  }
-  
-  export function setProjektname(newProjektname) {
-    projektname = newProjektname;
-  }
-  
-  export function getAutoSaveOn() {
-    return autoSaveOn;
-  }
-  
-  export function setAutoSaveOn(newAutoSaveOn) {
-    autoSaveOn = newAutoSaveOn;
-  }
