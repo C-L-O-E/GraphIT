@@ -11,9 +11,41 @@
     <link rel="stylesheet" href="css/stack.css">
     <link rel="stylesheet" href="modules/graph/graph.css">
     <link rel="stylesheet" href="modules/terminalTouchControles.css">
+    <link rel="stylesheet" href="navbar/nav.css">
   </head>
   <body>
-    <div id="navbar"></div>
+    <div id="navbar">
+      <ul>
+        <li><a href="#">File</a>
+          <ul class="dropdown">
+            <li><a href="#">Open</a></li>
+            <li><a href="#">Save</a></li>
+            <li><a href="#">Exit</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Edit</a>
+          <ul class="dropdown">
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </li>
+        <li><a href="#">View</a>
+          <ul class="dropdown">
+            <li><a href="#">Zoom In</a></li>
+            <li><a href="#">Zoom Out</a></li>
+            <li><a href="#">Zoom Preview In</a></li>
+            <li><a href="#">Zoom Preview Out</a></li>
+            <li><a href="#">To Second Screen</a></li>
+            <li><a href="#">To Third Screen</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Window</a>
+          <ul class="dropdown">
+            <li><a href="#">Close</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
     <div id="flexboxV">
       <div id="sidebar">
         <div id="top">
@@ -54,6 +86,7 @@
   <script type="module" src="modules/dsSidebarController.js"></script>
   <script type="module" src="modules/graph/graph.js"></script>
   <script type="module" src="modules/terminalTouchControles.js"></script>
+  <script type="module" src="navbar/nav.js"></script>
   <script>
     const {ipcRenderer} =require('electron');
     
