@@ -1,6 +1,12 @@
 import { getAppVersion } from '../settings.js';
 import { addLog,addError,addWarning } from '../modules/terminal.js';
 const fs = require('fs');
+const { app } = require('electron');
+const path = require('path');
+const fs = require('fs');
+
+const userDataPath = app.getPath('userData');
+const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
 
 
 export function saveToDisk(path, filename, ...data) {
@@ -59,10 +65,24 @@ export function loadFromDisk(filePath) {
     }
   }
   
+// Lade Einstellungen
+export function loadSettings() {
+  try {
+    const data = fs.readFileSync(settingsFilePath, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.log('Fehler beim Laden der Einstellungen:', error);
+    return {};
+  }
+}
 
-/*
-// Beispielverwendung
-const manager = new DataFileManager();
-manager.saveToDisk('./data', 'example', [1, 2, 3], { name: 'John Doe' });
-manager.loadFromDisk('./data/example.json');
-*/
+// Speichere Einstellungen
+export function saveSettings(settings) {
+  try {
+    fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2), 'utf-8');
+    console.log('Einstellungen erfolgreich gespeichert.');
+  } catch (error) {
+    console.log('Fehler beim Speichern der Einstellungen:', error);
+  }
+}
+

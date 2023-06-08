@@ -5,6 +5,8 @@ var user="Default";
 var projektname="Default Projekt";
 var autoSaveOn=true;
 var globalWorkspacePath=null;
+var updateNumber=0;
+var settings={version,user,projektname,autoSave,globalWorkspacePath,updateNumber};
 
 export function getAppVersion(){
     return version

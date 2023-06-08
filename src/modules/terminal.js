@@ -9,7 +9,7 @@ import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import {saveToDisk} from '../diskControler/diskController.js';
-import { getAppVersion,setAutoSaveOn } from '../settings.js';
+import { getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname } from '../settings.js';
 
 
 var sidebar = new DataStructureView();
@@ -51,7 +51,7 @@ var terminal = document.getElementById('terminal');
 
 //File Section
 export function saveToLocalFile(){
-  saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElements);
+  saveToDisk(getGlobalWorkspace, getProjektname, activeElementIndex, activeElements);
 }
 
 export function addLog(data){
