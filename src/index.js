@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, dialog,Menu } = require('electron');
+const { app, BrowserWindow, screen, dialog, Menu } = require('electron');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -35,7 +35,7 @@ mainWindow.maximize();
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
- // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
 
  const template = [

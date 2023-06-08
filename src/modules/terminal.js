@@ -10,7 +10,6 @@ import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import {saveToDisk,createDirectoryIfNotExists,selectFile} from '../diskControler/diskController.js';
 import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
-import { ipcRenderer } from 'electron';
 
 
 var sidebar = new DataStructureView();
@@ -942,27 +941,27 @@ export function pars(command){
         break;
     case "Stack-Push":
       if(checkIfSelectedIS("Stack")){}
-        // Code for Stack-Push function
+        getSelectedDatastructure().pus();
         break;
     case "Stack-pop":
       if(checkIfSelectedIS("Stack")){}
-        // Code for Stack-pop function
+        getSelectedDatastructure.prototype();
         break;
     case "Stack-peak":
       if(checkIfSelectedIS("Stack")){}
-        // Code for Stack-peak function
+        getSelectedDatastructure.peak();
         break;
     case "SLL-Random-Create":
       randomGenerateSLL(getSelectedDatastructure());
-        // Code for SLL-Remove-End function
+        randomGenerateSLL(getSelectedDatastructure());
         break;
     case "SLL-Random-Creat-Length":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Remove-End function
+        randomGenerateSLLLength(getSelectedDatastructure());
         break;
     case "SLL-Insert-End":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Insert-End function
+        
         break;
     case "SLL-Insert-Begining":
       if(checkIfSelectedIS("Singel-linked-List")){}
