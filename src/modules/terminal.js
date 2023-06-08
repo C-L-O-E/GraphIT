@@ -655,14 +655,14 @@ function randomGenerationArrayLength(array,length){
     var randomNumber = Math.floor(Math.random() * 100) + 1;
     array.insertAtIndex(randomNumber,i);
   }
-  array.update();
+  array.draw();
 }
 
 function randomGenerationBSTLenth(bst,lenght){
   for (let i = 0; i < length; i++) {
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
-  
+  console.log("HERE");
   bst.draw();
 
 }
@@ -912,6 +912,18 @@ export function pars(command){
           randomGenerationBST(getSelectedDatastructure());
         }
         break;
+    case "BST-Random-Create-Length":
+      if(checkIfSelectedIS("Binary-Search-Tree")){
+        var lbs=['Value'];
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              randomGenerationBST(getSelectedDatastructure(),event.data[0]);  
+            }
+          }
+        );
+      }
+      break;
     case "BST-Insert":
         if(checkIfSelectedIS("Binary-Search-Tree")){
           var lbs=['Value'];

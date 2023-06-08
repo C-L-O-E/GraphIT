@@ -29,6 +29,7 @@ export default class BinarySearchTree {
     this.view = document.getElementById('graphView');
     this.bstDiv = null;
     this.zoomLevel = 1.0;
+    this.init();
   }
 
   init() {
