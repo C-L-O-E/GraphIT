@@ -9,7 +9,7 @@ import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import DataFileManager from '../diskControler/diskController.js';
-import { autoSave } from'../settings.js';
+import settings from'../settings.js'
 
 
 var sidebar = new DataStructureView();

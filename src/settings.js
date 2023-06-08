@@ -1,6 +1,6 @@
-import DataFileManager from './diskControler/diskController.js';
+import DataFileManager from './diskControler/diskController.js'
 
-class settings{
+export default class settings{
     constructor(){
     this.version="0.1 Alpha";
     this.user="Default";
@@ -16,7 +16,7 @@ class settings{
 
     autoSave(){
         if(autoSaveOn){
-        saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,DFM.version);
+        saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,this.version);
         }
     }
 

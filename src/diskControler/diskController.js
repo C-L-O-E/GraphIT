@@ -1,9 +1,9 @@
 const fs = require('fs');
-import {getAppVersion} from '../settings.js';
+import settings from '../settings';
 
 export default class DataFileManager {
   constructor() {
-    this.version = getAppVersion();
+    this.version = settings.getAppVersion();
   }
 
   saveToDisk(path, filename, ...data) {
@@ -52,7 +52,7 @@ export default class DataFileManager {
   }
 
   autoSaver(){
-      
+
   }
 }
 /*
