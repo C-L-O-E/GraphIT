@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, dialog } = require('electron');
+const { app, BrowserWindow, screen, dialog,Menu } = require('electron');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -20,7 +20,7 @@ const createWindow = () => {
    mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    
+   
       //fullscreen:true
 
      webPreferences: {
@@ -36,6 +36,41 @@ mainWindow.maximize();
 
 
  // mainWindow.webContents.openDevTools();
+
+
+ const template = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open',
+        click: () => {
+          // Aktion für "Open"
+        },
+      },
+      {
+        label: 'Save',
+        click: () => {
+          // Aktion für "Save"
+        },
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: 'Exit',
+        click: () => {
+          // Aktion für "Exit"
+        },
+      },
+    ],
+  },
+  // Weitere Menüpunkte hinzufügen
+];
+
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
+
 };
 
 
