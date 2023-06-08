@@ -39,9 +39,12 @@ var viewState="none";
 //Define buffer to save comands and outputs
 var comandhistory=[];
 var outputhistory=[];
+var logsHistory=[];
 
 // terminal output
 let output = '';
+
+//startLoging
 
 // Get the terminal element
 var terminal = document.getElementById('terminal');
@@ -51,6 +54,21 @@ export function saveToLocalFile(){
   saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElements);
 }
 
+export function addLog(data){
+  const timestamp = new Date().toISOString();
+  var str="<"+timestamp+">[Log]"+data+",";
+  terminalLog(str);
+}
+export function addError(data){
+  const timestamp = new Date().toISOString();
+  var str="<"+timestamp+">[Error]"+data+",";
+  terminalLog(str);
+}
+export function addWarning(data){
+  const timestamp = new Date().toISOString();
+  var str="<"+timestamp+">[Warning]"+data+",";
+  terminalLog(str);
+}
 
 // Create a function to process the entered command
 function processCommand(command) {
@@ -131,6 +149,10 @@ function clearOutput(){
   outputhistory=[];
 
 }
+
+function clearLog(){
+  logsHistory()
+}
 //==================================================
 //          Start Output section 
 //==================================================
@@ -143,6 +165,16 @@ function writeOutput(data){
     outputView.appendChild(outputLine);
   }
   outputhistory.push(outputLine);
+}
+
+function terminalLog(data){
+  let logView =document.getElementById("logs");
+  const logputLine = document.createElement('div');
+  logputLine.textContent = data;
+  if(logView!=null){
+    logView.appendChild(logputLine);
+  }
+  logsHistory.push(logputLine);
 }
 
 
@@ -158,6 +190,7 @@ function writeOutput(data){
 var term= document.getElementById('termLBN');
 var out= document.getElementById('ausgLBN');
 var controls=document.getElementById('controlLBN');
+var logs=document.getElementById('logsLBN');
 
 term.addEventListener('click', event=>{
   state='term';
@@ -174,6 +207,10 @@ controls.addEventListener('click', event=>{
   switchView();
 });
 
+logs.addEventListener('click',event=>{
+  state="logs";
+  switchView();
+});
 
 //==================================================
 //    End of Event listener section
@@ -208,7 +245,16 @@ function switchView(){
     addEventListeners();
     updateListener();
   }
+  else if(state==='logs'){
+    cons.innerHTML=null;
+    cons.innerHTML='<div id="logs"></div>';
+    logs=document.getElementById("logs");
+     logsHistory.forEach(element => {
+        logs.appendChild(element);
+      });
+  }
 }
+
 
 
 //==================================================

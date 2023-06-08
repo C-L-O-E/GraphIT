@@ -1,4 +1,5 @@
 import { getAppVersion } from '../settings.js';
+import { addLog,addError,addWarning } from '../modules/terminal.js';
 const fs = require('fs');
 
 
@@ -46,6 +47,18 @@ export function loadFromDisk(filePath) {
       }
     });
   }
+
+
+  // Check if the directory exists
+  export function createDirectoryIfNotExists(directoryPath) {
+    if (!fs.existsSync(directoryPath)) {
+      fs.mkdirSync(directoryPath);
+      console.log(`Directory "${directoryPath}" created successfully.`);
+    } else {
+      console.log(`Directory "${directoryPath}" already exists.`);
+    }
+  }
+  
 
 /*
 // Beispielverwendung

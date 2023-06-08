@@ -4,6 +4,7 @@ var version="0.1 Alpha";
 var user="Default";
 var projektname="Default Projekt";
 var autoSaveOn=true;
+var globalWorkspacePath=null;
 
 export function getAppVersion(){
     return version
@@ -13,7 +14,7 @@ export function getAppVersion(){
 
 setInterval(autoSave,10000);
 function autoSave(){
-    if(autoSaveOn){
+    if(autoSaveOn&&globalWorkspacePath!=null){
         saveToLocalFile();
         console.log("Automaticly Saved")
     }
