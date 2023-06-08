@@ -1,6 +1,13 @@
 const { app, BrowserWindow,screen } = require('electron');
-
 const path = require('path');
+
+const userDataPath = app.getPath('userData');
+const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
+const workspacePath = path.join(userDataPath, 'GraphIT');
+process.env.settingsFilePath = settingsFilePath;
+process.env.userDataPath=userDataPath;
+process.env.workspacePath=workspacePath;
+
 var child=null;
 var info=null;
 var mainWindow;

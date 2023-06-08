@@ -8,8 +8,8 @@ import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
-import {saveToDisk} from '../diskControler/diskController.js';
-import { getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname } from '../settings.js';
+import {saveToDisk,createDirectoryIfNotExists} from '../diskControler/diskController.js';
+import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
 
 
 var sidebar = new DataStructureView();
@@ -19,6 +19,7 @@ var controllsWindow=null;
 
 var view = document.getElementById("graphView");
 var cons=document.getElementById('downPart');
+initSettings();
 
 //the array for active elements that are used
 //there to save project data later on
@@ -51,7 +52,8 @@ var terminal = document.getElementById('terminal');
 
 //File Section
 export function saveToLocalFile(){
-  saveToDisk(getGlobalWorkspace, getProjektname, activeElementIndex, activeElements);
+  createDirectoryIfNotExists(process.env.workspacePath);
+  saveToDisk(getGlobalWorkspace(), getProjektname(), activeElementIndex, activeElements);
 }
 
 export function addLog(data){
@@ -1138,8 +1140,6 @@ ipcRenderer.on("errorChannel",(event,data)=>{
 ipcRenderer.on("warningChannel",(event,data)=>{
   addWarning(data);
 });
-
-addLog("TEST");
 
 
 

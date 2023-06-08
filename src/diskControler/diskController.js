@@ -1,13 +1,7 @@
 import { getAppVersion } from '../settings.js';
 import { addLog,addError,addWarning } from '../modules/terminal.js';
 const fs = require('fs');
-const { app } = require('electron');
-const path = require('path');
-const fs = require('fs');
-
-const userDataPath = app.getPath('userData');
-const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
-
+var settingsFilePath=process.env.settingsFilePath;
 
 export function saveToDisk(path, filename, ...data) {
     const timestamp = new Date().toISOString();
@@ -59,9 +53,9 @@ export function loadFromDisk(filePath) {
   export function createDirectoryIfNotExists(directoryPath) {
     if (!fs.existsSync(directoryPath)) {
       fs.mkdirSync(directoryPath);
-      console.log(`Directory "${directoryPath}" created successfully.`);
+      addLog(`Directory "${directoryPath}" created successfully.`);
     } else {
-      console.log(`Directory "${directoryPath}" already exists.`);
+      addLog(`Directory "${directoryPath}" already exists.`);
     }
   }
   
@@ -71,7 +65,7 @@ export function loadSettings() {
     const data = fs.readFileSync(settingsFilePath, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    console.log('Fehler beim Laden der Einstellungen:', error);
+    addError('Fehler beim Laden der Einstellungen:', error);
     return {};
   }
 }
@@ -80,9 +74,9 @@ export function loadSettings() {
 export function saveSettings(settings) {
   try {
     fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2), 'utf-8');
-    console.log('Einstellungen erfolgreich gespeichert.');
+    addLog('Einstellungen erfolgreich gespeichert.');
   } catch (error) {
-    console.log('Fehler beim Speichern der Einstellungen:', error);
+    addError('Fehler beim Speichern der Einstellungen:', error);
   }
 }
 

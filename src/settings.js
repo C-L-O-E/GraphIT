@@ -1,12 +1,20 @@
 import { saveToLocalFile,addLog,addError,addWarning } from "./modules/terminal.js";
+import { loadSettings,saveSettings } from "./diskControler/diskController.js";
 
 var version="0.1 Alpha";
 var user="Default";
 var projektname="Default Projekt";
 var autoSaveOn=true;
-var globalWorkspacePath=null;
+var globalWorkspacePath=process.env.workspacePath;
 var updateNumber=0;
-var settings={version,user,projektname,autoSave,globalWorkspacePath,updateNumber};
+var settings=null;
+const variables = ['version', 'user', 'projektname','autoSaveOn','globalWorkspacePath','updateNumber'];
+export const { updateSettings, setSettings } = generateSettingsFunctions(variables);
+
+export function initSettings(){
+  settings=loadSettings();
+  setSettings(settings);
+}
 
 export function getAppVersion(){
     return version
@@ -20,6 +28,30 @@ function autoSave(){
         saveToLocalFile();
         addLog("Automaticly Saved To Wrokspace")
     }
+}
+
+
+export function generateSettingsFunctions(variables) {
+  const updateSettings = (settings) => {
+    Object.keys(settings).forEach((key) => {
+      if (variables.includes(key)) {
+        eval(`${key} = settings[key]`);
+      }
+    });
+  };
+
+  const setSettings = (settings) => {
+    variables.forEach((variable) => {
+      if (settings.hasOwnProperty(variable)) {
+        eval(`${variable} = settings[variable]`);
+      }
+    });
+  };
+
+  return {
+    updateSettings,
+    setSettings
+  };
 }
 
 
