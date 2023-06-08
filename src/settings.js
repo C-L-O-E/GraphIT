@@ -17,7 +17,7 @@ setInterval(autoSave,10000);
 function autoSave(){
     if(autoSaveOn&&globalWorkspacePath!=null){
         saveToLocalFile();
-        addLog("Automaticly Saved")
+        addLog("Automaticly Saved To Wrokspace")
     }
 }
 

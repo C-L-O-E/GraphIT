@@ -503,6 +503,10 @@ function sendMoveRequestForChild(){
   ipcRenderer.send("comand","showVisualSecondScreen");
 }
 
+function sendMoveRequestForChildThird(){
+  ipcRenderer.send("comand","showVisualThirdScreen");
+}
+
 function sendEndPresentation(){
   ipcRenderer.send("comand","endPresentation");
 }
@@ -796,6 +800,9 @@ export function pars(command){
       exitApp();
     case"Presentation-to-Second-Screen":
       sendMoveRequestForChild();
+      break;
+    case"Presentation-to-Third-Screen":
+      sendMoveRequestForChildThird();
       break;
     case"End-Presentation":
       sendEndPresentation();
@@ -1120,6 +1127,18 @@ function processCMD(command){
 //             end of comand section
 //=============================================================
 
+
+ipcRenderer.on("logChannel",(event,data)=>{
+  addLog(data);
+});
+
+ipcRenderer.on("errorChannel",(event,data)=>{
+  addError(data);
+});
+
+ipcRenderer.on("warningChannel",(event,data)=>{
+  addWarning(data);
+});
 
 
 

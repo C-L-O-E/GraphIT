@@ -105,7 +105,13 @@ ipcMain.on('info',(event,data)=>{
 ipcMain.on('comand',(event,data)=>{
   if(data=='showVisualSecondScreen'){
     if(child!=null){
-      moveWindowToSecondScreenAndFullscreen(child);
+      var str=moveWindowToSecondScreenAndFullscreen(child);
+      event.sender.send("logChannel",str);
+    }
+  }else if(data=='showVisualThirdScreen'){
+    if(child!=null){
+      var str=moveWindowToTirdScreenAndFullscreen(child);
+      event.sender.send("logChannel",str);
     }
   }else if(data=='showVisual'){
   console.log("Data From Client: "+data);
@@ -145,7 +151,7 @@ function moveWindowToSecondScreenAndFullscreen(window) {
 
   // Check if there are at least two displays
   if (displays.length < 2) {
-    console.error('There is only one display available.');
+    retStr='There is only one display available.';
     return;
   }
 
@@ -160,6 +166,31 @@ function moveWindowToSecondScreenAndFullscreen(window) {
 
   // Set the window to fullscreen
   window.setFullScreen(true);
+  return retStr;
+}
+
+function moveWindowToTirdScreenAndFullscreen(window) {
+  // Get all available displays
+  const displays = screen.getAllDisplays();
+
+  // Check if there are at least two displays
+  if (displays.length < 2) {
+    retStr='There is only one display available.';
+    return;
+  }
+
+  // Get the second display
+  const thirdDisplay = displays[2];
+
+  // Get the bounds of the second display
+  const { x, y, width, height } = thirdDisplay.bounds;
+
+  // Move the window to the second display
+  window.setBounds({ x, y, width, height });
+
+  // Set the window to fullscreen
+  window.setFullScreen(true);
+  return retStr;
 }
 
 
