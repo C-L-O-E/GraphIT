@@ -22,19 +22,19 @@ export function getAppVersion(){
 
 export function generateSettingsObject() {
   const settings = {
-    version: "0.1 Alpha",
-    user: "Default",
-    projectName: "Default Projekt",
-    autoSaveOn: true,
+    version: version,
+    user: user,
+    projectName: projektname,
+    autoSaveOn: autoSave,
     globalWorkspacePath: process.env.workspacePath,
-    updateNumber: 0
+    updateNumber: updateNumber
   };
 
   return settings;
 }
 
 
-setInterval(autoSave,10000);
+setInterval(autoSave,60000);
 function autoSave(){
     if(autoSaveOn&&globalWorkspacePath!=null){
         saveToLocalFile();

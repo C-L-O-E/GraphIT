@@ -13,13 +13,13 @@ import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjekt
 
 
 var sidebar = new DataStructureView();
-
+var projectFileExists=false;
 setAutoSaveOn(true);
 var controllsWindow=null;
 
 var view = document.getElementById("graphView");
 var cons=document.getElementById('downPart');
-initSettings();
+
 
 //the array for active elements that are used
 //there to save project data later on
@@ -52,7 +52,12 @@ var terminal = document.getElementById('terminal');
 
 //File Section
 export function saveToLocalFile(){
-  createDirectoryIfNotExists(process.env.workspacePath);
+  if(projectFileExists==false){
+    var check=createDirectoryIfNotExists(process.env.workspacePath);
+    if (check==true){
+      projectFileExists=true;
+    }
+  }
   saveToDisk(getGlobalWorkspace(), getProjektname(), activeElementIndex, activeElements);
 }
 
@@ -1141,5 +1146,5 @@ ipcRenderer.on("warningChannel",(event,data)=>{
   addWarning(data);
 });
 
-
+initSettings();
 

@@ -52,20 +52,35 @@ export function loadFromDisk(filePath) {
   // Check if the directory exists
   export function createDirectoryIfNotExists(directoryPath) {
     if (!fs.existsSync(directoryPath)) {
-      fs.mkdirSync(directoryPath);
-      addLog(`Directory "${directoryPath}" created successfully.`);
+      try{
+        fs.mkdirSync(directoryPath);
+        addLog(`Directory "${directoryPath}" created successfully.`);
+        return true;
+      }catch(error){
+        addError(`Directory "${directoryPath}" was not created.`);
+        return false;
+      }
     } else {
       addLog(`Directory "${directoryPath}" already exists.`);
+      return true;
     }
   }
   
 
   export function createFileIfNotExists(filePath, content = '') {
     if (!fs.existsSync(filePath)) {
+      try{
       fs.writeFileSync(filePath, content);
-      console.log(`File "${filePath}" created successfully.`);
+        addLog(`File "${filePath}" created successfully.`);
+      return true;
+      }catch(error){
+        addError(`File "${filePath}" was not created.`);
+        return false;
+      }
+
     } else {
       console.log(`File "${filePath}" already exists.`);
+      return true;
     }
   }
 
@@ -77,8 +92,8 @@ export function loadSettings() {
   } catch (error) {
     addError('Fehler beim Laden der Einstellungen:', error);
     addLog('Try to Create a Settings File to Fix it automaticly...');
-    createFileIfNotExists(settingsFilePath,)
-    return {};
+    createFileIfNotExists(settingsFilePath,generateSettingsObject());
+    return{};
   }
 }
 
