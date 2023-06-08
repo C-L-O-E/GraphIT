@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen,remote } = require('electron');
+const { app, BrowserWindow, screen, dialog } = require('electron');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -220,8 +220,20 @@ function moveWindowToTirdScreenAndFullscreen(window) {
 }
 
 
+function openFileExplorer() {
+  dialog.showOpenDialog({
+    properties: ['openFile']
+  }).then((result) => {
+    if (!result.canceled) {
+      const filePath = result.filePaths[0];
+      mainWindow.webContents.send('file-selected', filePath);
+    }
+  });
+}
 
-
+ipcMain.on('open-file-explorer', () => {
+  openFileExplorer();
+});
 
 
 

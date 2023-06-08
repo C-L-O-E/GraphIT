@@ -107,3 +107,10 @@ export function saveSettings(settings) {
   }
 }
 
+export function selectFile() {
+  ipcRenderer.send('open-file-explorer');
+}
+
+ipcRenderer.on('file-selected', (_, filePath) => {
+  console.log('Ausgewählter Dateipfad:', filePath);
+});

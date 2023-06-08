@@ -8,7 +8,7 @@ import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
-import {saveToDisk,createDirectoryIfNotExists} from '../diskControler/diskController.js';
+import {saveToDisk,createDirectoryIfNotExists,selectFile} from '../diskControler/diskController.js';
 import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
 
 
