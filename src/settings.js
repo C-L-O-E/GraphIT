@@ -20,6 +20,18 @@ export function getAppVersion(){
     return version
 }
 
+export function generateSettingsObject() {
+  const settings = {
+    version: "0.1 Alpha",
+    user: "Default",
+    projectName: "Default Projekt",
+    autoSaveOn: true,
+    globalWorkspacePath: process.env.workspacePath,
+    updateNumber: 0
+  };
+
+  return settings;
+}
 
 
 setInterval(autoSave,10000);

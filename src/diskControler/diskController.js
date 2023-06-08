@@ -1,4 +1,4 @@
-import { getAppVersion } from '../settings.js';
+import { getAppVersion,generateSettingsObject} from '../settings.js';
 import { addLog,addError,addWarning } from '../modules/terminal.js';
 const fs = require('fs');
 var settingsFilePath=process.env.settingsFilePath;
@@ -59,6 +59,16 @@ export function loadFromDisk(filePath) {
     }
   }
   
+
+  export function createFileIfNotExists(filePath, content = '') {
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, content);
+      console.log(`File "${filePath}" created successfully.`);
+    } else {
+      console.log(`File "${filePath}" already exists.`);
+    }
+  }
+
 // Lade Einstellungen
 export function loadSettings() {
   try {
@@ -66,6 +76,8 @@ export function loadSettings() {
     return JSON.parse(data);
   } catch (error) {
     addError('Fehler beim Laden der Einstellungen:', error);
+    addLog('Try to Create a Settings File to Fix it automaticly...');
+    createFileIfNotExists(settingsFilePath,)
     return {};
   }
 }
