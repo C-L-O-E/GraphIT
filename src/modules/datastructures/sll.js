@@ -25,6 +25,7 @@ export default class LinkedList{
       const newNode = new ListNode(data);
       newNode.next = this.head;
       this.head = newNode;
+      this.update();
     }
   
     // Füge ein Element am Ende der Liste hinzu
@@ -42,6 +43,7 @@ export default class LinkedList{
       }
   
       current.next = newNode;
+      this.update();
     }
   
     // Füge ein Element an einem gegebenen Index hinzu
@@ -69,6 +71,7 @@ export default class LinkedList{
   
       newNode.next = current;
       previous.next = newNode;
+      this.update();
     }
   
     // Entferne das erste Element der Liste
@@ -78,6 +81,7 @@ export default class LinkedList{
       }
   
       this.head = this.head.next;
+      this.update();
     }
   
     // Entferne das letzte Element der Liste
@@ -100,6 +104,7 @@ export default class LinkedList{
       }
   
       previous.next = null;
+      this.update();
     }
   
     // Entferne ein Element an einem gegebenen Index
@@ -125,6 +130,7 @@ export default class LinkedList{
       }
   
       previous.next = current.next;
+      this.update();
     }
   
     // Entferne ein Element mit bestimmten Daten
@@ -150,6 +156,7 @@ export default class LinkedList{
         previous = current;
         current = current.next;
       }
+      this.update();
     }
   
     // Überprüfe, ob die Liste leer ist

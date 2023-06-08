@@ -917,7 +917,6 @@ export function pars(command){
         if(checkIfSelectedIS("Binary-Search-Tree")){
           getSelectedDatastructure().insert();
         }
-        // code for insert 
         break;
     case "BST-Remove":
       if(checkIfSelectedIS("Binary-Search-Tree")){}
@@ -961,19 +960,22 @@ export function pars(command){
         break;
     case "SLL-Insert-End":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        
+        getSelectedDatastructure().addLast();
         break;
     case "SLL-Insert-Begining":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Insert-Begining function
+        getSelectedDatastructure().addFirst();
+        break;
+    case"SLL-Inser-At-Index":
+      if(checkIfSelectedIS("Singel-linked-List")){}
         break;
     case "SLL-Remove-Start":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Remove-Start function
+        getSelectedDatastructure().removeFirst();
         break;
     case "SLL-Remove-End":
       if(checkIfSelectedIS("Singel-linked-List")){}
-        // Code for SLL-Remove-End function
+        getSelectedDatastructure().removeLast();
         break;
     case "MLL-Random-Create":
       if(checkIfSelectedIS("Singel-linked-List")){}
