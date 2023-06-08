@@ -1,15 +1,11 @@
+import { getAppVersion } from '../settings.js';
 const fs = require('fs');
-import settings from '../settings';
 
-export default class DataFileManager {
-  constructor() {
-    this.version = settings.getAppVersion();
-  }
 
-  saveToDisk(path, filename, ...data) {
+export function saveToDisk(path, filename, ...data) {
     const timestamp = new Date().toISOString();
     const jsonData = {
-      version: this.version,
+      version: getAppVersion(),
       timestamp: timestamp,
       data: data
     };
@@ -26,7 +22,7 @@ export default class DataFileManager {
     });
   }
 
-  loadFromDisk(filePath) {
+export function loadFromDisk(filePath) {
     readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         console.error('Fehler beim Laden der Datei:', err);
@@ -51,10 +47,6 @@ export default class DataFileManager {
     });
   }
 
-  autoSaver(){
-
-  }
-}
 /*
 // Beispielverwendung
 const manager = new DataFileManager();

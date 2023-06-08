@@ -1,44 +1,46 @@
-import DataFileManager from './diskControler/diskController.js'
+import { saveToLocalFile } from "./modules/terminal.js";
 
-export default class settings{
-    constructor(){
-    this.version="0.1 Alpha";
-    this.user="Default";
-    this.projektname="Default Projekt";
-    this.autoSaveOn=true;
-    }
+var version="0.1 Alpha";
+var user="Default";
+var projektname="Default Projekt";
+var autoSaveOn=true;
 
-    getAppVersion(){
-        return version
-    }
+export function getAppVersion(){
+    return version
+}
 
 
 
-    autoSave(){
-        if(autoSaveOn){
-        saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElementIndex,this.version);
-        }
-    }
-
-
-    getUser() {
-        return user;
-    }
-    setUser(newUser) {
-        user = newUser;
-    }
-    getProjektname() {
-        return projektname;
-    }
-    setProjektname(newProjektname) {
-        projektname = newProjektname;
-    }
-    
-    getAutoSaveOn() {
-        return autoSaveOn;
-    }
-    
-    setAutoSaveOn(newAutoSaveOn) {
-        autoSaveOn = newAutoSaveOn;
+setInterval(autoSave,10000);
+function autoSave(){
+    if(autoSaveOn){
+        saveToLocalFile();
+        console.log("Automaticly Saved")
     }
 }
+
+
+
+export function getUser() {
+    return user;
+  }
+  
+  export function setUser(newUser) {
+    user = newUser;
+  }
+  
+  export function getProjektname() {
+    return projektname;
+  }
+  
+  export function setProjektname(newProjektname) {
+    projektname = newProjektname;
+  }
+  
+  export function getAutoSaveOn() {
+    return autoSaveOn;
+  }
+  
+  export function setAutoSaveOn(newAutoSaveOn) {
+    autoSaveOn = newAutoSaveOn;
+  }

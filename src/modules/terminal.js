@@ -8,13 +8,13 @@ import { zoomIn,zoomOut } from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
-import DataFileManager from '../diskControler/diskController.js';
-import settings from'../settings.js'
+import {saveToDisk} from '../diskControler/diskController.js';
+import { getAppVersion,setAutoSaveOn } from '../settings.js';
 
 
 var sidebar = new DataStructureView();
-var DFM=new DataFileManager();
-var setings= new settings();
+
+setAutoSaveOn(true);
 var controllsWindow=null;
 
 var view = document.getElementById("graphView");
@@ -45,6 +45,12 @@ let output = '';
 
 // Get the terminal element
 var terminal = document.getElementById('terminal');
+
+//File Section
+export function saveToLocalFile(){
+  saveToDisk('C:/Users/mweis/Desktop','test',activeElementIndex,activeElements);
+}
+
 
 // Create a function to process the entered command
 function processCommand(command) {
@@ -1068,7 +1074,6 @@ function processCMD(command){
 //             end of comand section
 //=============================================================
 
-setInterval(autoSave,1000);
 
 
 
