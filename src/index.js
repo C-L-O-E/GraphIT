@@ -43,15 +43,15 @@ mainWindow.maximize();
     label: 'File',
     submenu: [
       {
-        label: 'Open',
+        label: 'Open File',
         click: () => {
-          // Aktion für "Open"
+          process.env.userDataPath=openFileExplorer();
         },
       },
       {
         label: 'Save',
         click: () => {
-          // Aktion für "Save"
+          writeFile
         },
       },
       {
@@ -60,12 +60,12 @@ mainWindow.maximize();
       {
         label: 'Exit',
         click: () => {
-          // Aktion für "Exit"
+          app.quit();
         },
       },
     ],
   },
-  // Weitere Menüpunkte hinzufügen
+  
 ];
 
 const menu = Menu.buildFromTemplate(template);
@@ -97,6 +97,7 @@ app.on('activate', () => {
 var viewContend=null;
 
 const {ipcMain} =require('electron');
+const { writeFile } = require('fs');
 ipcMain.on('getUpdate',(event,data)=>{
  // console.log("Data From Preview Client: "+data);
   event.sender.send("update",viewContend);

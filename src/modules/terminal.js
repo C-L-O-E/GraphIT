@@ -10,6 +10,7 @@ import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import {saveToDisk,createDirectoryIfNotExists,selectFile} from '../diskControler/diskController.js';
 import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
+import { ipcRenderer } from 'electron';
 
 
 var sidebar = new DataStructureView();
@@ -1148,3 +1149,7 @@ ipcRenderer.on("warningChannel",(event,data)=>{
 
 initSettings();
 
+
+ipcRenderer.on('menueBar',(event,data)=>{
+  
+});
