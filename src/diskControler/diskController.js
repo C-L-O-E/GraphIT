@@ -87,6 +87,7 @@ export function loadFromDisk(filePath) {
 export function loadSettings() {
   try {
     const data = fs.readFileSync(settingsFilePath, 'utf-8');
+    addLog("Succsesfully load settings.");
     return JSON.parse(data);
   } catch (error) {
     addError('Fehler beim Laden der Einstellungen: Reason: '+error);
