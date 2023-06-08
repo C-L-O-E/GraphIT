@@ -1,4 +1,5 @@
 import { saveToLocalFile } from "./modules/terminal.js";
+import { addLog,addError,addWarning } from '../modules/terminal.js';
 
 var version="0.1 Alpha";
 var user="Default";
@@ -16,7 +17,7 @@ setInterval(autoSave,10000);
 function autoSave(){
     if(autoSaveOn&&globalWorkspacePath!=null){
         saveToLocalFile();
-        console.log("Automaticly Saved")
+        addLog("Automaticly Saved")
     }
 }
 
@@ -44,4 +45,12 @@ export function getUser() {
   
   export function setAutoSaveOn(newAutoSaveOn) {
     autoSaveOn = newAutoSaveOn;
+  }
+
+  export function setGlobalWorkspace(newPath){
+    globalWorkspacePath=newPath;
+  }
+
+  export function getGlobalWorkspace(){
+    return globalWorkspacePath;
   }

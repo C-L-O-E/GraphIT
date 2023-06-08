@@ -16,9 +16,9 @@ export function saveToDisk(path, filename, ...data) {
 
     fs.writeFile(filePath, jsonString, 'utf8', (err) => {
       if (err) {
-        console.error('Fehler beim Speichern der Datei:', err);
+        addError('Fehler beim Speichern der Datei:'+err);
       } else {
-        console.log(`Daten erfolgreich in "${filePath}" gespeichert.`);
+        addLog(`Daten erfolgreich in "${filePath}" gespeichert.`);
       }
     });
   }
@@ -26,7 +26,7 @@ export function saveToDisk(path, filename, ...data) {
 export function loadFromDisk(filePath) {
     readFile(filePath, 'utf8', (err, data) => {
       if (err) {
-        console.error('Fehler beim Laden der Datei:', err);
+        addError('Fehler beim Laden der Datei:', err);
         return;
       }
 
@@ -34,16 +34,16 @@ export function loadFromDisk(filePath) {
         const jsonData = JSON.parse(data);
 
         if (jsonData.version !== this.version) {
-          console.warn('Die geladene Datei hat eine andere Version.');
+          addWarning('Die geladene Datei hat eine andere Version.');
         }
 
         // Variablen und Arrays aktualisieren
         const loadedData = jsonData.data;
         // ...
 
-        console.log('Daten erfolgreich geladen und aktualisiert.');
+        addLog('Daten erfolgreich geladen und aktualisiert.');
       } catch (error) {
-        console.error('Fehler beim Parsen der JSON-Datei:', error);
+        addError('Fehler beim Parsen der JSON-Datei:', error);
       }
     });
   }
