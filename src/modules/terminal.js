@@ -979,7 +979,7 @@ export function pars(command){
       }
         break;
     case "SLL-Random-Create":
-      if(checkIfSelectedIS("Stack")){
+      if(checkIfSelectedIS("Singel-linked-List")){
         randomGenerateSLL(getSelectedDatastructure());
       }
         break;
