@@ -193,7 +193,7 @@ export default class LinkedList{
     }
 
     drawArrowRightToLeft(startX,startY,endX,endY){
-      startY=startY-50;
+      startY=startY-30;
       var arrowDiv=document.createElement('div');
       var arrowSVG=`<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><polyline points="${endX},${endY+10},${endX-10},${endY},${endX},${endY-10},${endX-10},${endY}, ${startX},${startY}" fill="none" stroke="white" /></svg>`;
       arrowDiv.className="arrowDiv";
