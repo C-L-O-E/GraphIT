@@ -948,7 +948,7 @@ export function pars(command){
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
-              getSelectedDatastructure().removeNode(event.data[0]);
+              getSelectedDatastructure().remove(event.data[0]);
             }
           }
         );
@@ -956,22 +956,22 @@ export function pars(command){
         break;
     case "BST-Traverse-Inorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){
-        getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure.root);
+        getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure().root);
       }
         break;
     case "BST-Traverse-Preorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){
-        getSelectedDatastructure().animatePreOrderTraversal(getSelectedDatastructure.root);
+        getSelectedDatastructure().animatePreOrderTraversal(getSelectedDatastructure().root);
       }
         break;
     case "BST-Traverse-Postorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){
-          getSelectedDatastructure().animatePostOrderTraversal(getSelectedDatastructure.root);
+          getSelectedDatastructure().animatePostOrderTraversal(getSelectedDatastructure().root);
         break;
       }
     case "BST-Traverse-Levelorder":
       if(checkIfSelectedIS("Binary-Search-Tree")){
-        getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure.root);
+        getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure().root);
       }
         break;
     case"Stack-Random-Generate":

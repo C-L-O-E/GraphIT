@@ -239,8 +239,7 @@ export default class BinarySearchTree {
   }
 
 
-  async animatePreOrderTraversal() {
-    var node=this.root;
+  async animatePreOrderTraversal(node) {
     if (node === null) {
       return;
     }
