@@ -646,7 +646,6 @@ function randomGenerateSLLLength(sll,length){
   for (let i = 0; i < length; i++) {
     sll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
-  console.log("HERE:"+sll);
   sll.draw();
 }
 
