@@ -1058,7 +1058,7 @@ export function pars(command){
       }
         break;
     case "MLL-Random-Create":
-      if(checkIfSelectedIS("Singel-Linked-List")){
+      if(checkIfSelectedIS("Mulit-Linked-List")){
           randomGenerateMLL(getSelectedDatastructure());
       }
         break;
