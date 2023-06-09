@@ -24,9 +24,9 @@ class Node {
 }
 
 export default class BinarySearchTree {
-  constructor() {
+  constructor(viewName) {
     this.root = null;
-    this.view = document.getElementById('graphView');
+    this.view = document.getElementById(viewName);
     this.bstDiv = null;
     this.zoomLevel = 1.0;
     this.init();

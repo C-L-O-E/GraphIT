@@ -12,10 +12,11 @@ export default class stack {
       this.ypos = 100;
     }
   
-    push(data) {
+    async push(data) {
       this.stack.push(data);
       this.update();
-      this.animatePush();   
+      await this.animatePush();   
+      this.update();
     }
   
    async pop() {
@@ -24,8 +25,8 @@ export default class stack {
         return null;
       } else {
         let data = this.stack.pop();
+        await this.animatePop();
         this.update();
-        this.animatePop();
         return data;
       }
     }
@@ -98,6 +99,7 @@ export default class stack {
         await this.sleep(1000);
     
         topBox.style.backgroundColor = this.stackBoxColor;
+        console.log("STACK:"+this.stack);
       }
 
         async moveDivsUp(className) {
@@ -126,6 +128,7 @@ export default class stack {
     
         this.stackDiv.removeChild(topBox);
         topBox.style.transform = 'none';
+        console.log("STACK:"+this.stack);
       }
   
 

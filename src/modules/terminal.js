@@ -468,12 +468,11 @@ function stackCreate(){
 }
 
 function binarySearchTreeCreate(){
-  var newBst = new BinarySearchTree();
+  var newBst = new BinarySearchTree('graphView');
   activeElements.push(newBst);
   addition="/BinarySearchTree";
   viewState='bst';
   sidebar.addTextToList('Binary-Search-Tree');
-  
 }
 
 function SingelLLnkedListCreate(){
@@ -660,6 +659,7 @@ function randomGenerationArrayLength(array,length){
 }
 
 function randomGenerationBSTLenth(bst,lenght){
+  console.log(bst);
   for (let i = 0; i < length; i++) {
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
@@ -669,7 +669,7 @@ function randomGenerationBSTLenth(bst,lenght){
 
 function randomGenerationStackLength(stack,length){
   for (let i = 0; i < length; i++) {
-    stack.addFirst(Math.floor(Math.random() * 100) + 1);
+    stack.push(Math.floor(Math.random() * 100) + 1);
   }
   stack.draw();
 }
@@ -971,10 +971,27 @@ export function pars(command){
         getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure.root);
       }
         break;
+    case"Stack-Random-Generate":
+      if(checkIfSelectedIS("Stack")){
+        randomGenerationStack(getSelectedDatastructure());
+      }
+      break;
+    case"Stack-Random-Generate-Length":
+      if(checkIfSelectedIS("Stack")){
+        var lbs=['Length'];
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+        window.addEventListener('message', (event) => {     
+            if (Array.isArray(event.data)) {
+              randomGenerationStack(getSelectedDatastructure(),event.data[0]);
+            }
+          }
+        );
+      }
+      break;
     case "Stack-Push":
       if(checkIfSelectedIS("Stack")){
         var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               getSelectedDatastructure().push(event.data[0]);   
@@ -985,7 +1002,7 @@ export function pars(command){
         break;
     case "Stack-pop":
       if(checkIfSelectedIS("Stack")){
-        getSelectedDatastructure().prototype();
+        getSelectedDatastructure().pop();
       }
         break;
     case "Stack-peak":
