@@ -1024,7 +1024,6 @@ export function pars(command){
     case "SLL-Random-Create":
       if(checkIfSelectedIS("Singel-Linked-List")){
         randomGenerateSLL(getSelectedDatastructure());
-        console.log("HERERERERE");
       }
         break;
     case "SLL-Random-Creat-Length":
