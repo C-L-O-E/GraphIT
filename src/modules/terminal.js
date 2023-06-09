@@ -661,7 +661,6 @@ function randomGenerationArrayLength(array,length){
 function randomGenerationBSTLenth(bst,length){
   console.log(bst);
   for (let i = 0; i < length; i++) {
-    console.log("I:"+i);
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
   bst.draw();
