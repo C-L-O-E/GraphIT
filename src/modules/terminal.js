@@ -317,7 +317,7 @@ const helpSTR= `Available commands:
 -exit
 -info
 -load <path> <in Planing>
--sll/singel-linked-list 
+-sll/singel-Linked-list 
 -----insertAtEnd   <value>
 -----inserAtStart  <value>
 -----deletAtEnd    <value>
@@ -476,11 +476,11 @@ function binarySearchTreeCreate(){
   
 }
 
-function SingelLinkedListCreate(){
+function SingelLLnkedListCreate(){
   var newSll=new LinkedList('graphView');
   activeElements.push(newSll);
   sidebar.addTextToList('Singel-Linked-List');
-  addition="/SingelLinkedList";
+  addition="/SingelLLnkedList";
   viewState='sll';
 }
 
@@ -647,6 +647,7 @@ function randomGenerateSLLLength(sll,length){
   for (let i = 0; i < length; i++) {
     sll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
+  console.log("HERE:"+sll);
   sll.draw();
 }
 
@@ -662,7 +663,6 @@ function randomGenerationBSTLenth(bst,lenght){
   for (let i = 0; i < length; i++) {
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
-  console.log("HERE");
   bst.draw();
 
 }
@@ -688,6 +688,7 @@ function randomGenerationBST(bst){
 function randomGenerateSLL(sll){
   let length=Math.floor(Math.random() * 50) + 1;
   randomGenerateSLLLength(sll,length);
+  console.log("NOHERERE:"+sll);
 }
 
 function randomGenerateMLL(mll){
@@ -748,7 +749,9 @@ function defineGenerateGraph(graph){
 function checkIfSelectedIS(name){
   console.log("AchtiveAlementIndex: "+activeElementIndex);
   console.log("output"+sidebar.textArray[activeElementIndex]);
+  console.log(sidebar.textArray[activeElementIndex]+"|     |"+name);
   if(sidebar.textArray[activeElementIndex]==name){
+    console.log("LOG:TRUE");
        return true;   
   }
     return false;
@@ -817,8 +820,8 @@ export function pars(command){
       binarySearchTreeCreate();
       initializeTerminal();
       break;
-    case"Singel-linked-List":
-      SingelLinkedListCreate();
+    case"Singel-Linked-List":
+      SingelLLnkedListCreate();
       initializeTerminal();
       break;
     case"Mulit-Linked-List":
@@ -991,12 +994,13 @@ export function pars(command){
       }
         break;
     case "SLL-Random-Create":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         randomGenerateSLL(getSelectedDatastructure());
+        console.log("HERERERERE");
       }
         break;
     case "SLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1008,7 +1012,7 @@ export function pars(command){
       }
         break;
     case "SLL-Insert-End":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1020,7 +1024,7 @@ export function pars(command){
       } 
         break;
     case "SLL-Insert-Begining":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1032,7 +1036,7 @@ export function pars(command){
       }
         break;
     case"SLL-Inser-At-Index":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         var lbs=['index','Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1044,22 +1048,22 @@ export function pars(command){
       }
         break;
     case "SLL-Remove-Start":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         getSelectedDatastructure().removeFirst();
       }
         break;
     case "SLL-Remove-End":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         getSelectedDatastructure().removeLast();
       }
         break;
     case "MLL-Random-Create":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
           randomGenerateMLL(getSelectedDatastructure());
       }
         break;
     case "MLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-linked-List")){
+      if(checkIfSelectedIS("Singel-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1201,9 +1205,9 @@ function processCMD(command){
       output = 'What do you want to create?';
       break;
     case 'sll':
-    case 'singel-linked-list':
-      output = 'Singel-linked-list Spawned';
-      SingelLinkedListCreate();
+    case 'singel-Linked-list':
+      output = 'Singel-Linked-list Spawned';
+      SingelLLnkedListCreate();
       break;
     case'mll':
     case'multi linked list':

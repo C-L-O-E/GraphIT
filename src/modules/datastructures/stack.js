@@ -159,6 +159,6 @@ s.draw();
 s.push(1);
 }
 
-test();
+//test();
 
 
