@@ -1029,8 +1029,8 @@ export function pars(command){
         break;
     case "SLL-Random-Creat-Length":
       if(checkIfSelectedIS("Singel-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        var lbs=['List length'];
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               randomGenerateSLLLength(getSelectedDatastructure(),event.data[0]);   
