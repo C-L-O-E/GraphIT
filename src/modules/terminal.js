@@ -912,6 +912,7 @@ export function pars(command){
         break;
     case "BST-Random-Create":
         if(checkIfSelectedIS("Binary-Search-Tree")){
+          console.log("BSTCREATE RANDOM");
           randomGenerationBST(getSelectedDatastructure());
         }
         break;
@@ -921,7 +922,7 @@ export function pars(command){
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
-              randomGenerationBST(getSelectedDatastructure(),event.data[0]);  
+              randomGenerationBSTLenth(getSelectedDatastructure(),event.data[0]);  
             }
           }
         );
