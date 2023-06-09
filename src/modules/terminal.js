@@ -472,7 +472,7 @@ function binarySearchTreeCreate(){
   activeElements.push(newBst);
   addition="/BinarySearchTree";
   viewState='bst';
-  sidebar.addTextToList('BinarySearchTree');
+  sidebar.addTextToList('Binary-Search-Tree');
   
 }
 
@@ -489,7 +489,7 @@ function MultiLinkedListCreate(){
   activeElements.push(newMLL);
   addition="/MultiLinkedList";
   viewState='mll';
-  sidebar.addTextToList('Multi-linked-List');
+  sidebar.addTextToList('Multi-Linked-List');
 
 }
 
@@ -1063,7 +1063,7 @@ export function pars(command){
       }
         break;
     case "MLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-Linked-List")){
+      if(checkIfSelectedIS("Mulit-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
