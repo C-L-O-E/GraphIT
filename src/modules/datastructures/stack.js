@@ -13,7 +13,9 @@ export default class stack {
     }
   
     async push(data) {
+      console.log("STACK PUSH DATA:"+data);
       this.stack.push(data);
+      console.log("stack-At-Push:"+this.stack);
       this.update();
       await this.animatePush();   
       this.update();

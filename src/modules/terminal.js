@@ -992,9 +992,15 @@ export function pars(command){
       if(checkIfSelectedIS("Stack")){
         var lbs=['Value'];
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+        console.log("PUSHPUSHPUSH");
+        let set=false;
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
-              getSelectedDatastructure().push(event.data[0]);   
+              console.log(event);
+              if(set==false){
+                getSelectedDatastructure().push(event.data[0]);   
+                set=true;
+              }
             }
           }
         );

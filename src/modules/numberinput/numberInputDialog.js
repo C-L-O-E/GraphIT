@@ -98,6 +98,7 @@ export default class numberInput{
             var ret=[];
             var inputs = document.querySelectorAll(".input");
             var selected=null;
+            let messagesSent=false;
 
             inputs.forEach(function(input) {
             input.addEventListener("click", function() {
@@ -118,11 +119,15 @@ export default class numberInput{
             }
 
             function ok() {
+                if (messagesSent) {
+                    return;
+                  }
                 for(let i=0;i<inputs.length;i++){ 
                     ret.push(inputs[i].value);
                 }
                 window.opener.postMessage(ret, "*");
                 self.close();
+                messagesSent=true;
             }
         </script>
         </body>
