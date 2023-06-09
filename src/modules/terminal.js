@@ -683,14 +683,12 @@ function randomGenerationArray(array){
 
 function randomGenerationBST(bst){
   let length=Math.floor(Math.random() * 50) + 1;
-  console.log("this is BST:"+bst);
   randomGenerationBSTLenth(bst,length);
 }
 
 function randomGenerateSLL(sll){
   let length=Math.floor(Math.random() * 50) + 1;
   randomGenerateSLLLength(sll,length);
-  console.log("NOHERERE:"+sll);
 }
 
 function randomGenerateMLL(mll){
