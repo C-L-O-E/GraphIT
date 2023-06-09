@@ -658,9 +658,10 @@ function randomGenerationArrayLength(array,length){
   array.draw();
 }
 
-function randomGenerationBSTLenth(bst,lenght){
+function randomGenerationBSTLenth(bst,length){
   console.log(bst);
   for (let i = 0; i < length; i++) {
+    console.log("I:"+i);
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
   bst.draw();
@@ -682,6 +683,7 @@ function randomGenerationArray(array){
 
 function randomGenerationBST(bst){
   let length=Math.floor(Math.random() * 50) + 1;
+  console.log("this is BST:"+bst);
   randomGenerationBSTLenth(bst,length);
 }
 
