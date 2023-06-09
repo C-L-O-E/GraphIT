@@ -937,6 +937,7 @@ export function pars(command){
           window.addEventListener('message', (event) => {     
               if (Array.isArray(event.data)) {
                 getSelectedDatastructure().insert(event.data[0]);   
+                getSelectedDatastructure().update();
               }
             }
           );
@@ -949,6 +950,7 @@ export function pars(command){
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               getSelectedDatastructure().remove(event.data[0]);
+              getSelectedDatastructure().update();
             }
           }
         );

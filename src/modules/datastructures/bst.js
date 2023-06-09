@@ -100,10 +100,12 @@ export default class BinarySearchTree {
         this.insertNode(node.right, newNode);
       }
     }
+    this.update();
   }
 
   remove(value) {
     this.root = this.removeNode(this.root, value);
+    this.update();
   }
 
   removeNode(node, key) {
@@ -238,6 +240,10 @@ export default class BinarySearchTree {
     });
   }
 
+  update(){
+    this.bstDiv.innerHTML='';
+    this.draw();
+  }
 
   async animatePreOrderTraversal(node) {
     if (node === null) {
@@ -248,13 +254,13 @@ export default class BinarySearchTree {
     this.draw(); 
     await Sleep(500); 
 
+    node.setColor('lightgreen'); 
     
     await this.animatePreOrderTraversal(node.left);
 
     
     await this.animatePreOrderTraversal(node.right);
 
-    node.setColor('lightgreen'); 
     console.log(node.value);
     this.draw(); 
     await Sleep(500); 
