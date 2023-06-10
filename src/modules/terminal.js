@@ -1085,13 +1085,13 @@ export function pars(command){
       }
         break;
     case "MLL-Random-Create":
-      if(checkIfSelectedIS("Mulit-Linked-List")){
+      if(checkIfSelectedIS("Multi-Linked-List")){
         console.log("TEST");
           randomGenerateMLL(getSelectedDatastructure());
       }
         break;
     case "MLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Mulit-Linked-List")){
+      if(checkIfSelectedIS("Multi-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1103,7 +1103,7 @@ export function pars(command){
       }
         break;
     case "MLL-Insert-End":
-      if(checkIfSelectedIS("Mulit-Linked-List")){
+      if(checkIfSelectedIS("Multi-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1115,7 +1115,7 @@ export function pars(command){
       }
         break;
     case "MLL-Insert-Begin":
-      if(checkIfSelectedIS("Mulit-Linked-List")){
+      if(checkIfSelectedIS("Multi-Linked-List")){
         var lbs=['Value'];
         var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
@@ -1127,11 +1127,11 @@ export function pars(command){
       }
         break;
     case "MLL-Remove-End":
-      if(checkIfSelectedIS("Mulit-Linked-List")){}
+      if(checkIfSelectedIS("Multi-Linked-List")){}
         getSelectedDatastructure().removeLast();
         break;
     case "MLL-Remove-Begin":
-      if(checkIfSelectedIS("Mulit-Linked-List")){}
+      if(checkIfSelectedIS("Multi-Linked-List")){}
         getSelectedDatastructure().removeFirst();
         break;
     case "Graph-Tiefensuche":
