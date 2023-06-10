@@ -636,6 +636,7 @@ function randomGenerateGraphLength(graph,length){
   }
 }
 function randomGenerateMLLLength(mll,length){
+    console.log("At random Length create");
   for (let i = 0; i < length; i++) {
     console.log("TATA");
     mll.addFirst(Math.floor(Math.random() * 100) + 1);
@@ -693,6 +694,7 @@ function randomGenerateSLL(sll){
 
 function randomGenerateMLL(mll){
   let length=Math.floor(Math.random() * 50) + 1;
+  console.log("TESTST");
   randomGenerateMLLLength(mll,length);
 }
 
@@ -824,7 +826,7 @@ export function pars(command){
       SingelLLnkedListCreate();
       initializeTerminal();
       break;
-    case"Mulit-Linked-List":
+    case"Multi-Linked-List":
       MultiLinkedListCreate();
       initializeTerminal();
       break;
@@ -1084,6 +1086,7 @@ export function pars(command){
         break;
     case "MLL-Random-Create":
       if(checkIfSelectedIS("Mulit-Linked-List")){
+        console.log("TEST");
           randomGenerateMLL(getSelectedDatastructure());
       }
         break;
