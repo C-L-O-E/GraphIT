@@ -1,10 +1,5 @@
-const {
-  app,
-  BrowserWindow,
-  screen,
-  dialog,
-  Menu
-} = require('electron');
+const {app,BrowserWindow,screen,dialog,Menu} = require('electron');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -78,7 +73,7 @@ const createWindow = () => {
 };
 
 
-app.on('ready', createWindow);
+
 
 
 app.on('window-all-closed', () => {
@@ -297,4 +292,45 @@ function openFileExplorer() {
 
 ipcMain.on('open-file-explorer', () => {
   openFileExplorer();
+});
+
+// Konfiguration der automatischen Updates
+autoUpdater.autoDownload = false; // Deaktiviert das automatische Herunterladen der Updates
+
+// Überprüfung auf Updates beim Start der App
+app.on('ready', () => {
+  createWindow();
+  console.log("Checking for updates");
+  autoUpdater.checkForUpdates();
+});
+
+// GitHub-Repository-URL angeben
+autoUpdater.setFeedURL({
+  owner: 'C-L-O-E',
+  repo: 'GraphIT',
+  branch: 'release' // Optional: Branch angeben, falls abweichend von 'master'
+});
+
+// Eventlistener für den Abschluss des Downloads
+autoUpdater.on('update-downloaded', () => {
+  // Hier kannst du eine Benachrichtigung oder eine Meldung an den Benutzer anzeigen
+
+  // Event an den Renderer-Prozess senden, um das Update durchzuführen
+  mainWindow.webContents.send('app:updateReady');
+});
+
+// Eventlistener für das Aktualisieren der App
+ipcMain.on('app:update', () => {
+  console.log("Downloading update");
+  autoUpdater.downloadUpdate(); // Herunterladen des Updates
+});
+
+// Eventlistener für Fehler während des Update-Prozesses
+autoUpdater.on('error', (err) => {
+  // Hier kannst du Fehlerbehandlung durchführen, z.B. eine Fehlermeldung anzeigen
+});
+
+// Eventlistener für Fortschritt des Downloads
+autoUpdater.on('download-progress', (progress) => {
+  // Hier kannst du den Fortschritt des Downloads anzeigen, z.B. in einer Fortschrittsleiste
 });

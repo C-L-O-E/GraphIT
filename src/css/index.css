@@ -1,9 +1,66 @@
+:root{
+  --base-color-r: 34;
+  --base-color-g: 33;
+  --base-color-b: 37;
+
+  --background-color-sidebar: rgb(
+    calc(var(--base-color-r) - 0),
+    calc(var(--base-color-g) - 0),
+    calc(var(--base-color-b) - 0)
+  );
+  --background-color-console: rgb(
+    calc(var(--base-color-r) + 4),
+    calc(var(--base-color-g) + 4),
+    calc(var(--base-color-b) + 7)
+  );
+  --background-color-graphview: rgb(
+    calc(var(--base-color-r) + 13),
+    calc(var(--base-color-g) + 13),
+    calc(var(--base-color-b) + 16)
+  );
+  --background-color-topbar: rgb(
+    calc(var(--base-color-r) - 1),
+    calc(var(--base-color-g) - 0),
+    calc(var(--base-color-b) - 0)
+  );
+  --background-color-touczone: rgb(
+    calc(var(--base-color-r) + 8),
+    calc(var(--base-color-g) + 8),
+    calc(var(--base-color-b) + 21)
+  );
+  --background-color-body: rgb(
+    calc(var(--base-color-r) - 8),
+    calc(var(--base-color-g) - 8),
+    calc(var(--base-color-b) - 6)
+  );
+  --background-color-top: rgb(
+    calc(var(--base-color-r) + 2),
+    calc(var(--base-color-g) + 3),
+    calc(var(--base-color-b) + 7)
+  );
+  --background-color-textElement: rgb(
+    calc(var(--base-color-r) + 5),
+    calc(var(--base-color-g) + 5),
+    calc(var(--base-color-b) + 10)
+  );
+  --background-color-text-hover: rgb(
+    calc(var(--base-color-r) + 5),
+    calc(var(--base-color-g) + 5),
+    calc(var(--base-color-b) + 10)
+  );
+
+
+  --text-color:rgb(240, 248, 255);
+  
+ 
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   margin: 0px;
   max-width: 38rem;
-  background-color: rgb(26, 25, 31);
+  background-color:  var(--background-color-body);;
 }
 
 #sidebar{
@@ -12,12 +69,12 @@ body {
   height: 100%;
   left: 0px;
   top:0px;
-  background-color:rgb(34, 33, 37);
+  background-color: var(--background-color-sidebar);
 }
 
 #consoleArea{
   position:absolute;
-  background-color:rgb(38, 37, 44);
+  background-color:var(--background-color-console);
   bottom: 0px;
   right: 0px;
   width: 80%;
@@ -30,7 +87,7 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
-  background-color:rgb(47, 46, 53);
+  background-color:var(--background-color-graphview);
   height: 73%;
   width: 80%;
   overflow: auto;
@@ -46,23 +103,23 @@ body {
   position: absolute;
   width: 100%;
   height: 8%;
-  background-color:rgb(33, 32, 37);
-  color: aliceblue;
+  background-color:var(--background-color-topbar);
+  color: var(--text-color);
 }
 
 #topBar a{
   margin-left: 2%;
-  color: rgb(190, 190, 190);
+  color: var(--text-color);
 }
 
 #topBar a:focus{
   margin-left: 2%;
-  color: aliceblue;
+  color: var(--text-color);
 }
 
 #topBar a:hover{
   margin-left: 2%;
-  color: rgb(215, 223, 230);
+  color: var(--text-color);
 }
 
 #vorlesungs-Icon{
@@ -89,14 +146,14 @@ body {
 }
 
 #top{
-  background-color: rgb(36, 37, 44);
+  background-color: var(--background-color-top);
   width: 100%;
   height: 2%;
   margin: 0%;
 }
 
  #dots{
-  color: aliceblue;
+  color: var(--text-color);
   position: absolute;
   font-size:x-large;
   right: 1%;
@@ -122,18 +179,18 @@ body {
 }
 
 .dsTextElement{
-  color:aliceblue;
+  color:var(--text-color);
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-top: 2px solid darkgray;
-  background-color: rgb(39, 39, 47);
+  background-color: var(--background-color-textElement);
   width: 100%;
   
   text-align: center;
 }
 
 .dsTextElement:hover{
-  color:azure;
-  background-color: rgb(41, 47, 58);
+  color:var(--text-color);
+  background-color: var(--background-color-text-hover);
   
 }
 
@@ -144,10 +201,10 @@ body {
   bottom: 0px;
   height: 18.5em;
   width: 100px;
-  background-color: rgb(42, 42, 58);
+  background-color: var(--background-color-touczone);
   text-align: center;
-  text-decoration-color: aliceblue;
-  color: aliceblue;
+  text-decoration-color: var(--text-color);
+  color: var(--text-color);
   text-size-adjust:initial;
   display: grid;
   grid-template-columns: 1em;

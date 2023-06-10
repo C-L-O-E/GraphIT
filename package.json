@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "android": "electron-forge make --platform=android"
   },
   "keywords": [],
   "author": {
@@ -19,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^5.3.0",
     "xterm": "^5.1.0"
   },
   "devDependencies": {
@@ -27,6 +29,54 @@
     "@electron-forge/maker-rpm": "^6.1.1",
     "@electron-forge/maker-squirrel": "^6.1.1",
     "@electron-forge/maker-zip": "^6.1.1",
-    "electron": "24.3.1"
+    "electron": "24.3.1",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.GraphIT.app",
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "appx": {
+      "applicationId": "com.GraphIT.app",
+      "displayName": "GraphIT",
+      "publisher": "CN=OlympiaDevelopments",
+      "identityName": "m.weiss"
+    },
+    "android": {
+      "package": "com.GraphIT.app",
+      "versionCode": 1,
+      "versionName": "1.0.0"
+    }
   }
 }
