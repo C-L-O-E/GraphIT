@@ -1,21 +1,18 @@
 var input = document.getElementById('input');
 
 function appendCharacter(character) {
-    input.value += character;
-  }
+  input.value += character;
+}
 
-  function remove() {
-    input.value=input.value.substring(0, input.value.length - 1);
-  }
+function remove() {
+  input.value = input.value.substring(0, input.value.length - 1);
+}
 
-function ok(){
+function ok() {
   window.opener.postMessage(input.value, "*");
   self.close();
 }
 
-function setType(type){
-      document.getElementById('inputLBN').textContent=type;
+function setType(type) {
+  document.getElementById('inputLBN').textContent = type;
 }
-
-
-  

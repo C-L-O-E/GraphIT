@@ -1,36 +1,36 @@
-export default class numberInput{
-    constructor(numberOfInputFields,title,labels){
-        this.windowTitle=title;
-        this.numberOfInputs=numberOfInputFields;
-        this.labels=labels;
+export default class numberInput {
+    constructor(numberOfInputFields, title, labels) {
+        this.windowTitle = title;
+        this.numberOfInputs = numberOfInputFields;
+        this.labels = labels;
         this.init();
     }
 
-    init(){
-        var frame=window.open("./modules/numberinput/numberInput.html",'targetWindow',
-        `toolbar=no,
+    init() {
+        var frame = window.open("./modules/numberinput/numberInput.html", 'targetWindow',
+            `toolbar=no,
         location=no,
         status=no,
         menubar=no,
         scrollbars=no,
         resizable=no,
         width=500,
-        height=430`,"popup");
-        var html= this.generateHTML(this.windowTitle,this.generateInputFieldsForDialog(this.numberOfInputs));
+        height=430`, "popup");
+        var html = this.generateHTML(this.windowTitle, this.generateInputFieldsForDialog(this.numberOfInputs));
         frame.document.write(html);
         return frame;
     }
 
-    generateInputFieldsForDialog(times){
-        var inputFields="";
-        for(let i=0; i<times;i++){
-            inputFields+=`<a>${this.labels[i]} </a><input class="input" id="input${i}" type="text"></input><br>`;
+    generateInputFieldsForDialog(times) {
+        var inputFields = "";
+        for (let i = 0; i < times; i++) {
+            inputFields += `<a>${this.labels[i]} </a><input class="input" id="input${i}" type="text"></input><br>`;
         }
         return inputFields;
     }
 
-    generateHTML(title,htmlInputFields){
-        var htmlContent=`
+    generateHTML(title, htmlInputFields) {
+        var htmlContent = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -137,6 +137,5 @@ export default class numberInput{
         `;
         return htmlContent;
     }
-    
-}
 
+}

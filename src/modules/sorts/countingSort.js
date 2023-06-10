@@ -26,12 +26,18 @@ function countingSort(arr) {
     count[arr[i]]--;
   }
 
-  return { sorted, swaps };
+  return {
+    sorted,
+    swaps
+  };
 }
 
 function logCountingSort(arr) {
   console.log("Unsortiertes Array:", arr);
-  let { sorted, swaps } = countingSort(arr);
+  let {
+    sorted,
+    swaps
+  } = countingSort(arr);
 
   console.log("Sortierte Reihenfolge:");
 

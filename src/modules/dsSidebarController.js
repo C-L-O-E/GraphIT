@@ -1,4 +1,6 @@
-import { updateActiveSelectedIndex } from './terminal.js';
+import {
+  updateActiveSelectedIndex
+} from './terminal.js';
 
 export default class DataStructureView {
   constructor() {
@@ -30,7 +32,7 @@ export default class DataStructureView {
     Array.from(this.datastructureView.childNodes).forEach((element) => {
       element.style.backgroundColor = 'rgb(39, 39, 47)';
     });
-  
+
     event.target.style.backgroundColor = 'rgb(41, 47, 58)';
   }
 

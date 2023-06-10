@@ -74,15 +74,18 @@ class MaxHeap {
   }
 
   calculatePosition(index, level, maxIndex, nodePositions) {
-    var ofset=100;
+    var ofset = 100;
     if (index > maxIndex) {
       return;
     }
 
-    const x = (Math.pow(2, level) - 1 + index)*10+ofset;
-    const y = level*10;
+    const x = (Math.pow(2, level) - 1 + index) * 10 + ofset;
+    const y = level * 10;
 
-    nodePositions[this.heap[index]] = { x, y };
+    nodePositions[this.heap[index]] = {
+      x,
+      y
+    };
 
     this.calculatePosition(this.leftChild(index), level + 1, maxIndex, nodePositions);
     this.calculatePosition(this.rightChild(index), level + 1, maxIndex, nodePositions);
@@ -90,15 +93,11 @@ class MaxHeap {
 
 }
 
-  var heap = new MaxHeap();
-  heap.insert(1);
-  heap.insert(2);
-  heap.insert(10);
+var heap = new MaxHeap();
+heap.insert(1);
+heap.insert(2);
+heap.insert(10);
 
- console.log(heap.dump());
- var t=heap.calculateNodePositions()
- console.log(t);
-
- 
-
- 
+console.log(heap.dump());
+var t = heap.calculateNodePositions()
+console.log(t);
