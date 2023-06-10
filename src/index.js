@@ -1,5 +1,13 @@
-const {app,BrowserWindow,screen,dialog,Menu} = require('electron');
-const { autoUpdater } = require('electron-updater');
+const {
+  app,
+  BrowserWindow,
+  screen,
+  dialog,
+  Menu
+} = require('electron');
+const {
+  autoUpdater
+} = require('electron-updater');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -297,10 +305,10 @@ ipcMain.on('open-file-explorer', () => {
 
 
 
-// Konfiguration der automatischen Updates
-autoUpdater.autoDownload = false; // Deaktiviert das automatische Herunterladen der Updates
 
-// Überprüfung auf Updates beim Start der App
+autoUpdater.autoDownload = false;
+
+
 app.on('ready', () => {
   createWindow();
   console.log("Checking for updates");
@@ -309,37 +317,37 @@ app.on('ready', () => {
   });
 });
 
-// GitHub-Repository-URL angeben
+
 autoUpdater.setFeedURL({
   provider: 'github',
   owner: 'C-L-O-E',
   repo: 'GraphIT',
-  releaseType: 'release' // Optional: Release-Typ angeben, z.B. 'release', 'prerelease' oder 'draft'
+  releaseType: 'release'
 });
 
-// Eventlistener für den Abschluss des Downloads
-autoUpdater.on('update-downloaded', () => {
-  // Hier kannst du eine Benachrichtigung oder eine Meldung an den Benutzer anzeigen
 
-  // Event an den Renderer-Prozess senden, um das Update durchzuführen
+autoUpdater.on('update-downloaded', () => {
+
+
+
   mainWindow.webContents.send('app:updateReady');
 });
 
-// Eventlistener für das Aktualisieren der App
+
 ipcMain.on('app:update', () => {
   console.log("Downloading update");
   autoUpdater.downloadUpdate().catch(err => {
     console.error("Error downloading update:", err);
-  }); // Herunterladen des Updates
+  });
 });
 
-// Eventlistener für Fehler während des Update-Prozesses
+
 autoUpdater.on('error', (err) => {
   console.error("Update error:", err);
 });
 
-// Eventlistener für Fortschritt des Downloads
+
 autoUpdater.on('download-progress', (progress) => {
-  // Hier kannst du den Fortschritt des Downloads anzeigen, z.B. in einer Fortschrittsleiste
+
   console.log("Download progress:", progress);
 });
