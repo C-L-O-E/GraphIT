@@ -1,5 +1,5 @@
 // Hilfsklasse für den Knoten
-class Node {
+export class Node {
     constructor(text = '') {
       this.text = text;
     }

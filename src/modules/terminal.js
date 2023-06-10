@@ -10,7 +10,7 @@ import numberInput from './numberinput/numberInputDialog.js'
 import { addEventListeners, updateListener } from './terminalTouchControles.js';
 import {saveToDisk,createDirectoryIfNotExists,selectFile} from '../diskControler/diskController.js';
 import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
-
+import { Node } from './graph/graph.js';
 
 var sidebar = new DataStructureView();
 var projectFileExists=false;
@@ -625,9 +625,10 @@ function getFormattedCharacters(num) {
 }
 
 
-function randomGenerateGraphLength(graph,lenght){
+function randomGenerateGraphLength(graph,length){
   for (let i = 0; i < length; i++) {
     var newNode = new Node(getFormattedCharacters(i));
+    console.log("DONE");
     graph.insertNode(newNode);
   }
   for(let i=0;i< Math.floor(Math.random() * (length + 1));i++){
@@ -636,6 +637,7 @@ function randomGenerateGraphLength(graph,lenght){
 }
 function randomGenerateMLLLength(mll,length){
   for (let i = 0; i < length; i++) {
+    console.log("TATA");
     mll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   mll.draw();
@@ -1088,7 +1090,7 @@ export function pars(command){
     case "MLL-Random-Creat-Length":
       if(checkIfSelectedIS("Mulit-Linked-List")){
         var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               randomGenerateMLLLength(getSelectedDatastructure(),event.data[0]);             
@@ -1100,7 +1102,7 @@ export function pars(command){
     case "MLL-Insert-End":
       if(checkIfSelectedIS("Mulit-Linked-List")){
         var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               getSelectedDatastructure().addLast(event.data[0]);   
@@ -1112,7 +1114,7 @@ export function pars(command){
     case "MLL-Insert-Begin":
       if(checkIfSelectedIS("Mulit-Linked-List")){
         var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
+        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
         window.addEventListener('message', (event) => {     
             if (Array.isArray(event.data)) {
               getSelectedDatastructure().addFirst(event.data);      
