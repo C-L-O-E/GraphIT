@@ -2,280 +2,299 @@ import array from './datastructures/array.js';
 import LinkedList from './datastructures/sll.js';
 import DoublyLinkedList from './datastructures/mll.js'
 import stack from './datastructures/stack.js';
-import DataStructureView  from './dsSidebarController.js';
+import DataStructureView from './dsSidebarController.js';
 import BinarySearchTree from './datastructures/bst.js';
-import { zoomIn,zoomOut } from '../zoomlisteners.js';
+import {
+  zoomIn,
+  zoomOut
+} from '../zoomlisteners.js';
 import Graph from './graph/graph.js';
 import numberInput from './numberinput/numberInputDialog.js'
-import { addEventListeners, updateListener } from './terminalTouchControles.js';
-import {saveToDisk,createDirectoryIfNotExists,selectFile} from '../diskControler/diskController.js';
-import { initSettings,getAppVersion,setAutoSaveOn,getGlobalWorkspace, getProjektname, generateSettingsFunctions, setSettings } from '../settings.js';
-import { Node } from './graph/graph.js';
+import {
+  addEventListeners,
+  updateListener
+} from './terminalTouchControles.js';
+import {
+  saveToDisk,
+  createDirectoryIfNotExists,
+  selectFile
+} from '../diskControler/diskController.js';
+import {
+  initSettings,
+  getAppVersion,
+  setAutoSaveOn,
+  getGlobalWorkspace,
+  getProjektname,
+  generateSettingsFunctions,
+  setSettings
+} from '../settings.js';
+import {
+  Node
+} from './graph/graph.js';
 
 var sidebar = new DataStructureView();
-var projectFileExists=false;
+var projectFileExists = false;
 setAutoSaveOn(true);
-var controllsWindow=null;
+var controllsWindow = null;
 
 var view = document.getElementById("graphView");
-var cons=document.getElementById('downPart');
+var cons = document.getElementById('downPart');
 
 
-//the array for active elements that are used
-//there to save project data later on
-var activeElements=[];
 
-//activly selected Element
-var activeElementIndex=-1;
 
-//update the activeselectedindex
+var activeElements = [];
+
+
+var activeElementIndex = -1;
+
+
 export function updateActiveSelectedIndex(index) {
   activeElementIndex = index;
   writeOutput("Load: " + sidebar.textArray[activeElementIndex]);
 }
-//state varible to indicate the current state we are in
-var state='term';
-var addition="";
-var viewState="none";
-//Define buffer to save comands and outputs
-var comandhistory=[];
-var outputhistory=[];
-var logsHistory=[];
 
-// terminal output
+var state = 'term';
+var addition = "";
+var viewState = "none";
+
+var comandhistory = [];
+var outputhistory = [];
+var logsHistory = [];
+
+
 let output = '';
 
-//startLoging
 
-// Get the terminal element
+
+
 var terminal = document.getElementById('terminal');
 
-//File Section
-export function saveToLocalFile(){
-  if(projectFileExists==false){
-    var check=createDirectoryIfNotExists(process.env.workspacePath);
-    if (check==true){
-      projectFileExists=true;
+
+export function saveToLocalFile() {
+  if (projectFileExists == false) {
+    var check = createDirectoryIfNotExists(process.env.workspacePath);
+    if (check == true) {
+      projectFileExists = true;
     }
   }
   saveToDisk(getGlobalWorkspace(), getProjektname(), activeElementIndex, activeElements);
 }
 
-export function addLog(data){
+export function addLog(data) {
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+"> [Log] "+data+",";
+  var str = "<" + timestamp + "> [Log] " + data + ",";
   terminalLog(str);
 }
-export function addError(data){
+export function addError(data) {
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+"> [Error] "+data+",";
+  var str = "<" + timestamp + "> [Error] " + data + ",";
   terminalLog(str);
 }
-export function addWarning(data){
+export function addWarning(data) {
   const timestamp = new Date().toISOString();
-  var str="<"+timestamp+"> [Warning] "+data+",";
+  var str = "<" + timestamp + "> [Warning] " + data + ",";
   terminalLog(str);
 }
 
-// Create a function to process the entered command
+
 function processCommand(command) {
-  
 
-  // Process the command
- output=processCMD(command);
-  
 
-  // Display the command output
+
+  output = processCMD(command);
+
+
+
   const outputLine = document.createElement('div');
   outputLine.textContent = output;
   terminal.appendChild(outputLine);
   comandhistory.push(outputLine);
 
-  // Create a new input line
+
   const inputLine = document.createElement('div');
   inputLine.id = 'input-line';
-  inputLine.innerHTML = '<span>GraphIT'+addition+'></span> <input id="input" autofocus>';
+  inputLine.innerHTML = '<span>GraphIT' + addition + '></span> <input id="input" autofocus>';
 
-  // Replace the current input line with the new one
+
   const input = inputLine.querySelector('#input');
   input.addEventListener('keydown', handleInput);
   terminal.appendChild(inputLine);
   input.focus();
 }
 
-// Handle the Enter key press event
+
 function handleInput(event) {
   if (event.key === 'Enter') {
     const input = event.target;
     const command = input.value.trim();
 
-    // Process the command
+
     processCommand(command);
 
-    // Clear the input field
+
     input.value = '';
     input.disabled = true;
   }
 }
 
-// Initialize the terminal with an input line
+
 function initializeTerminal() {
   const inputLine = document.createElement('div');
 
   inputLine.id = 'input-line';
-  inputLine.innerHTML = '<span>GraphIT'+addition+'></span> <input id="input" autofocus>';
+  inputLine.innerHTML = '<span>GraphIT' + addition + '></span> <input id="input" autofocus>';
 
   const input = inputLine.querySelector('#input');
   input.addEventListener('keydown', handleInput);
   terminal.appendChild(inputLine);
   comandhistory.push(inputLine);
   input.focus();
-  
+
 }
 
 
 
-// Start the terminal
+
 initializeTerminal();
 
-function previewCMD(){
-  ipcRenderer.send("comand","showVisual");
+function previewCMD() {
+  ipcRenderer.send("comand", "showVisual");
 }
 
-function Clear(){
-  terminal.innerHTML=null;
-  comandhistory=[];
-
-}
-
-function clearView(){
-  view.innerHTML=null;
-}
-
-function clearOutput(){
-  outputhistory=[];
+function Clear() {
+  terminal.innerHTML = null;
+  comandhistory = [];
 
 }
 
-function clearLog(){
+function clearView() {
+  view.innerHTML = null;
+}
+
+function clearOutput() {
+  outputhistory = [];
+
+}
+
+function clearLog() {
   logsHistory()
 }
-//==================================================
-//          Start Output section 
-//==================================================
 
-function writeOutput(data){
-  let outputView =document.getElementById("outputView");
+
+
+
+function writeOutput(data) {
+  let outputView = document.getElementById("outputView");
   const outputLine = document.createElement('div');
   outputLine.textContent = data;
-  if(outputView!=null){
+  if (outputView != null) {
     outputView.appendChild(outputLine);
   }
   outputhistory.push(outputLine);
 }
 
-function terminalLog(data){
-  let logView =document.getElementById("logs");
+function terminalLog(data) {
+  let logView = document.getElementById("logs");
   const logputLine = document.createElement('div');
   logputLine.textContent = data;
-  if(logView!=null){
+  if (logView != null) {
     logView.appendChild(logputLine);
   }
   logsHistory.push(logputLine);
 }
 
 
-//==================================================
-//          End Output section
-//==================================================
 
 
-//==================================================
-//    Event listener section
-//==================================================
-//add the elements as vars 
-var term= document.getElementById('termLBN');
-var out= document.getElementById('ausgLBN');
-var controls=document.getElementById('controlLBN');
-var logs=document.getElementById('logsLBN');
 
-term.addEventListener('click', event=>{
-  state='term';
+
+
+
+
+
+
+var term = document.getElementById('termLBN');
+var out = document.getElementById('ausgLBN');
+var controls = document.getElementById('controlLBN');
+var logs = document.getElementById('logsLBN');
+
+term.addEventListener('click', event => {
+  state = 'term';
   switchView();
 });
 
-out.addEventListener('click', event=>{
-  state="out";
+out.addEventListener('click', event => {
+  state = "out";
   switchView();
 });
 
-controls.addEventListener('click', event=>{
-  state="controls";
+controls.addEventListener('click', event => {
+  state = "controls";
   switchView();
 });
 
-logs.addEventListener('click',event=>{
-  state="logs";
+logs.addEventListener('click', event => {
+  state = "logs";
   switchView();
 });
 
-//==================================================
-//    End of Event listener section
-//==================================================
 
 
 
-//==================================================
-//          Switch Section
-//==================================================
 
-function switchView(){
-  if(state==='out'){
-        cons.innerHTML=null;
-        cons.innerHTML='<div id="outputView"></div>';
-        var outWindow=document.getElementById('outputView');
-        outputhistory.forEach(element => {
-          outWindow.appendChild(element);
-        });
-    }else if(state==='term'){
-      cons.innerHTML=null;
-      cons.innerHTML='<div id="terminal"></div>';
-      terminal=document.getElementById("terminal");
-      comandhistory.forEach(element => {
-        terminal.appendChild(element);
-      });
-      initializeTerminal();
-  }else if(state==='controls'){
-    cons.innerHTML=null;
-    cons.innerHTML='<div id="topBarC"><div class="tobBarElementC" id="i">Datastrutures</div><div class="tobBarElementC"id="ii">Controlles</div><div id="iii" class="tobBarElementC">DataStructure-Operations</div><div id="iiii"class="tobBarElementC">Settings</div></div><div id="controls"></div>';
+
+
+
+
+
+
+function switchView() {
+  if (state === 'out') {
+    cons.innerHTML = null;
+    cons.innerHTML = '<div id="outputView"></div>';
+    var outWindow = document.getElementById('outputView');
+    outputhistory.forEach(element => {
+      outWindow.appendChild(element);
+    });
+  } else if (state === 'term') {
+    cons.innerHTML = null;
+    cons.innerHTML = '<div id="terminal"></div>';
+    terminal = document.getElementById("terminal");
+    comandhistory.forEach(element => {
+      terminal.appendChild(element);
+    });
+    initializeTerminal();
+  } else if (state === 'controls') {
+    cons.innerHTML = null;
+    cons.innerHTML = '<div id="topBarC"><div class="tobBarElementC" id="i">Datastrutures</div><div class="tobBarElementC"id="ii">Controlles</div><div id="iii" class="tobBarElementC">DataStructure-Operations</div><div id="iiii"class="tobBarElementC">Settings</div></div><div id="controls"></div>';
     addEventListeners();
     updateListener();
-  }
-  else if(state==='logs'){
-    cons.innerHTML=null;
-    cons.innerHTML='<div id="logs"></div>';
-    logs=document.getElementById("logs");
-     logsHistory.forEach(element => {
-        logs.appendChild(element);
-      });
+  } else if (state === 'logs') {
+    cons.innerHTML = null;
+    cons.innerHTML = '<div id="logs"></div>';
+    logs = document.getElementById("logs");
+    logsHistory.forEach(element => {
+      logs.appendChild(element);
+    });
   }
 }
 
 
 
-//==================================================
-//         End of  Switch Section
-//==================================================
+
+
+
 
 
 function exitApp() {
-  ipcRenderer.send('exit',"exit");
+  ipcRenderer.send('exit', "exit");
 }
 
 writeOutput("GraphIT Output:");
 
-function spawn(){
-  const list =new LinkedList();
+function spawn() {
+  const list = new LinkedList();
   list.addFirst(1);
   list.addFirst(3);
   list.addFirst(4);
@@ -285,28 +304,29 @@ function spawn(){
 
 
 
-  var listDiv=document.createElement('div');
+  var listDiv = document.createElement('div');
   view.appendChild(listDiv);
-  function addBox(x,y,value){
-    var arrBox=document.createElement('div');
-    arrBox.className="listyBox";
-    arrBox.style.left=x+"px";
-    arrBox.style.top=y+"px";
-    arrBox.textContent=value;
+
+  function addBox(x, y, value) {
+    var arrBox = document.createElement('div');
+    arrBox.className = "listyBox";
+    arrBox.style.left = x + "px";
+    arrBox.style.top = y + "px";
+    arrBox.textContent = value;
     listDiv.appendChild(arrBox);
-}
-  var temp=list.head;
-  for(i=0;i<list.toArray().length;i++){
-        console.log(temp.data);  
-        addBox(50+120*i,100,temp.data)
-        temp=temp.next;
+  }
+  var temp = list.head;
+  for (i = 0; i < list.toArray().length; i++) {
+    console.log(temp.data);
+    addBox(50 + 120 * i, 100, temp.data)
+    temp = temp.next;
   }
 }
 
-//=============================================================
-//                       Help section
-//=============================================================
-const helpSTR= `Available commands: 
+
+
+
+const helpSTR = `Available commands: 
 -date
 -greet
 -help
@@ -400,190 +420,190 @@ const helpSTR= `Available commands:
 
 `;
 
-function spawnHelp(){
-  var h=helpSTR.split('\n');
-  for(let i=0; i<h.length;i++){
+function spawnHelp() {
+  var h = helpSTR.split('\n');
+  for (let i = 0; i < h.length; i++) {
     var outputLine = document.createElement('div');
     outputLine.textContent = h[i].toString();
     terminal.appendChild(outputLine);
     comandhistory.push(outputLine);
   }
   initializeTerminal();
-      
+
 }
 
-function back(){
-      addition="";
-      viewState='none';
+function back() {
+  addition = "";
+  viewState = 'none';
 }
 
-//=============================================================
-//             end of help section
-//=============================================================
 
 
-//=============================================================
-//             display info  section
-//=============================================================
 
-function displayInfo(vst){
-  var msg="";
+
+
+
+
+
+
+function displayInfo(vst) {
+  var msg = "";
   switch (vst) {
     case 'array':
-      msg="test array";
+      msg = "test array";
       break;
-  
+
     default:
       writeOutput("No VST INFO FOUND");
       break;
   }
 
-  ipcRenderer.send('info',msg);
-  
+  ipcRenderer.send('info', msg);
+
 }
 
-//=============================================================
-//             end of display info section
-//=============================================================
 
 
 
-//=============================================================
-//             Array controll section
-//=============================================================
-function arrayCreate(){
-  var newArray = new array(10,'graphView');
+
+
+
+
+
+
+function arrayCreate() {
+  var newArray = new array(10, 'graphView');
   activeElements.push(newArray);
-  viewState='array';
-  addition="/array";
+  viewState = 'array';
+  addition = "/array";
   sidebar.addTextToList('Array');
 }
 
-function stackCreate(){
-  var newStack= new stack();
+function stackCreate() {
+  var newStack = new stack();
   activeElements.push(newStack);
-  addition="/stack";
-  viewState='stack';
+  addition = "/stack";
+  viewState = 'stack';
   sidebar.addTextToList('Stack');
 }
 
-function binarySearchTreeCreate(){
+function binarySearchTreeCreate() {
   var newBst = new BinarySearchTree('graphView');
   activeElements.push(newBst);
-  addition="/BinarySearchTree";
-  viewState='bst';
+  addition = "/BinarySearchTree";
+  viewState = 'bst';
   sidebar.addTextToList('Binary-Search-Tree');
 }
 
-function SingelLLnkedListCreate(){
-  var newSll=new LinkedList('graphView');
+function SingelLLnkedListCreate() {
+  var newSll = new LinkedList('graphView');
   activeElements.push(newSll);
   sidebar.addTextToList('Singel-Linked-List');
-  addition="/SingelLLnkedList";
-  viewState='sll';
+  addition = "/SingelLLnkedList";
+  viewState = 'sll';
 }
 
-function MultiLinkedListCreate(){
-  var newMLL=new DoublyLinkedList(false,'graphView');
+function MultiLinkedListCreate() {
+  var newMLL = new DoublyLinkedList(false, 'graphView');
   activeElements.push(newMLL);
-  addition="/MultiLinkedList";
-  viewState='mll';
+  addition = "/MultiLinkedList";
+  viewState = 'mll';
   sidebar.addTextToList('Multi-Linked-List');
 
 }
 
-function GraphCreate(){
-  var newGraph=new Graph('graphView',800,800);
+function GraphCreate() {
+  var newGraph = new Graph('graphView', 800, 800);
   activeElements.push(newGraph);
-  addition="/Graph";
-  viewState='Graph';
+  addition = "/Graph";
+  viewState = 'Graph';
   sidebar.addTextToList('Graph');
 }
 
-//=============================================================
-//             end of Array Controll Section
-//=============================================================
 
-function sendMoveRequestForChild(){
-  ipcRenderer.send("comand","showVisualSecondScreen");
+
+
+
+function sendMoveRequestForChild() {
+  ipcRenderer.send("comand", "showVisualSecondScreen");
 }
 
-function sendMoveRequestForChildThird(){
-  ipcRenderer.send("comand","showVisualThirdScreen");
+function sendMoveRequestForChildThird() {
+  ipcRenderer.send("comand", "showVisualThirdScreen");
 }
 
-function sendEndPresentation(){
-  ipcRenderer.send("comand","endPresentation");
+function sendEndPresentation() {
+  ipcRenderer.send("comand", "endPresentation");
 }
 
 
-//=============================================================
-//            touch section
-//=============================================================
 
-var touchzone=document.getElementById('touchzone');
-  touchzone.addEventListener('click',event=>{
-  controllsWindow=window.open("./modules/controles/controls.html");
-  controllsWindow.addEventListener("blur", function() {
+
+
+
+var touchzone = document.getElementById('touchzone');
+touchzone.addEventListener('click', event => {
+  controllsWindow = window.open("./modules/controles/controls.html");
+  controllsWindow.addEventListener("blur", function () {
     controllsWindow.close();
   });
 });
 
-window.addEventListener("message", function(event) {
+window.addEventListener("message", function (event) {
   console.log(event.data);
   pars(event.data);
 });
 
 
-//=============================================================
-//          end of  touch sectoion 
-//=============================================================
-
-// Listener hinzufügen
-document.addEventListener('DOMContentLoaded', function() {
-  // Div-Element mit der ID "graphView" auswählen
 
 
-  // Alle Elemente innerhalb des Divs auswählen
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+
+
+
   var elements = view.querySelectorAll('*');
 
-  // Durch die Liste der Elemente iterieren
-  elements.forEach(function(element) {
-    // Listener für jedes Element hinzufügen
-    element.addEventListener('click', function() {
-      // Überprüfen, ob das Element die Klasse "my-class" hat
+
+  elements.forEach(function (element) {
+
+    element.addEventListener('click', function () {
+
       if (element.classList.contains('listyBox')) {
-        // Hintergrundfarbe des Elements ändern
-        if(element.style.backgroundColor!='yellow'){
+
+        if (element.style.backgroundColor != 'yellow') {
           element.style.backgroundColor = 'yellow';
-        }else{
-          element.style.backgroundColor='white';
+        } else {
+          element.style.backgroundColor = 'white';
         }
       }
     });
   });
 
 
-  elements.forEach(function(element) {
-    // Listener für jedes Element hinzufügen
-    element.addEventListener('mouseenter', function() {
-      // Überprüfen, ob das Element die Klasse "my-class" hat
+  elements.forEach(function (element) {
+
+    element.addEventListener('mouseenter', function () {
+
       if (element.classList.contains('listyBox')) {
-        // Hintergrundfarbe des Elements ändern
-        if(element.style.backgroundColor!='yellow'){
+
+        if (element.style.backgroundColor != 'yellow') {
           element.style.backgroundColor = 'deepskyblue';
         }
       }
     });
   });
 
-  elements.forEach(function(element) {
-    // Listener für jedes Element hinzufügen
-    element.addEventListener('mouseleave', function() {
-      // Überprüfen, ob das Element die Klasse "my-class" hat
+  elements.forEach(function (element) {
+
+    element.addEventListener('mouseleave', function () {
+
       if (element.classList.contains('listyBox')) {
-        // Hintergrundfarbe des Elements ändern
-        if(element.style.backgroundColor!='yellow'){
+
+        if (element.style.backgroundColor != 'yellow') {
           element.style.backgroundColor = 'white';
         }
       }
@@ -592,26 +612,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function getSelectedDatastructure(){
+function getSelectedDatastructure() {
   return activeElements[activeElementIndex];
 }
 
-function getInput(type=null){
+function getInput(type = null) {
 
-  var a=window.open("./modules/inputfield/input.html",'targetWindow',
-                                   `toolbar=no,
+  var a = window.open("./modules/inputfield/input.html", 'targetWindow',
+    `toolbar=no,
                                     location=no,
                                     status=no,
                                     menubar=no,
                                     scrollbars=no,
                                     resizable=no,
                                     width=770,
-                                    height=420`,"popup");
+                                    height=420`, "popup");
 
   return a
 }
 
-//helping functions
 function getFormattedCharacters(num) {
   let output = '';
 
@@ -625,18 +644,19 @@ function getFormattedCharacters(num) {
 }
 
 
-function randomGenerateGraphLength(graph,length){
+function randomGenerateGraphLength(graph, length) {
   for (let i = 0; i < length; i++) {
     var newNode = new Node(getFormattedCharacters(i));
     console.log("DONE");
     graph.insertNode(newNode);
   }
-  for(let i=0;i< Math.floor(Math.random() * (length + 1));i++){
-    graph.insertEdge( Math.floor(Math.random() * (length + 1)), Math.floor(Math.random() * (length + 1)));
+  for (let i = 0; i < Math.floor(Math.random() * (length + 1)); i++) {
+    graph.insertEdge(Math.floor(Math.random() * (length + 1)), Math.floor(Math.random() * (length + 1)));
   }
 }
-function randomGenerateMLLLength(mll,length){
-    console.log("At random Length create");
+
+function randomGenerateMLLLength(mll, length) {
+  console.log("At random Length create");
   for (let i = 0; i < length; i++) {
     console.log("TATA");
     mll.addFirst(Math.floor(Math.random() * 100) + 1);
@@ -645,22 +665,22 @@ function randomGenerateMLLLength(mll,length){
 
 }
 
-function randomGenerateSLLLength(sll,length){
+function randomGenerateSLLLength(sll, length) {
   for (let i = 0; i < length; i++) {
     sll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   sll.draw();
 }
 
-function randomGenerationArrayLength(array,length){
+function randomGenerationArrayLength(array, length) {
   for (var i = 0; i < length; i++) {
     var randomNumber = Math.floor(Math.random() * 100) + 1;
-    array.insertAtIndex(randomNumber,i);
+    array.insertAtIndex(randomNumber, i);
   }
   array.draw();
 }
 
-function randomGenerationBSTLenth(bst,length){
+function randomGenerationBSTLenth(bst, length) {
   console.log(bst);
   for (let i = 0; i < length; i++) {
     bst.insert(Math.floor(Math.random() * 100) + 1);
@@ -669,555 +689,536 @@ function randomGenerationBSTLenth(bst,length){
 
 }
 
-function randomGenerationStackLength(stack,length){
+function randomGenerationStackLength(stack, length) {
   for (let i = 0; i < length; i++) {
     stack.push(Math.floor(Math.random() * 100) + 1);
   }
   stack.draw();
 }
 
-//random generate section
-function randomGenerationArray(array){
-  let length=Math.floor(Math.random() * 50) + 1;
-  randomGenerationArrayLength(array,length);
+function randomGenerationArray(array) {
+  let length = Math.floor(Math.random() * 50) + 1;
+  randomGenerationArrayLength(array, length);
 }
 
-function randomGenerationBST(bst){
-  let length=Math.floor(Math.random() * 50) + 1;
-  randomGenerationBSTLenth(bst,length);
+function randomGenerationBST(bst) {
+  let length = Math.floor(Math.random() * 50) + 1;
+  randomGenerationBSTLenth(bst, length);
 }
 
-function randomGenerateSLL(sll){
-  let length=Math.floor(Math.random() * 50) + 1;
-  randomGenerateSLLLength(sll,length);
+function randomGenerateSLL(sll) {
+  let length = Math.floor(Math.random() * 50) + 1;
+  randomGenerateSLLLength(sll, length);
 }
 
-function randomGenerateMLL(mll){
-  let length=Math.floor(Math.random() * 50) + 1;
+function randomGenerateMLL(mll) {
+  let length = Math.floor(Math.random() * 50) + 1;
   console.log("TESTST");
-  randomGenerateMLLLength(mll,length);
+  randomGenerateMLLLength(mll, length);
 }
 
-function randomGenerationStack(stack){
-  let length=Math.floor(Math.random() * 50) + 1;
-  randomGenerationStackLength(stack,length);
-  
+function randomGenerationStack(stack) {
+  let length = Math.floor(Math.random() * 50) + 1;
+  randomGenerationStackLength(stack, length);
+
 }
 
-function randomGenerateGraph(graph){
-  let length=Math.floor(Math.random() * 50) + 1;
-  randomGenerateGraphLength(graph,length);
- 
+function randomGenerateGraph(graph) {
+  let length = Math.floor(Math.random() * 50) + 1;
+  randomGenerateGraphLength(graph, length);
+
 }
 
 
-//defineed generate section
-function defineGenerationArray(array,lenght){
+function defineGenerationArray(array, lenght) {
   for (var i = 0; i < length; i++) {
-    array.insertAtIndex(0,i);
+    array.insertAtIndex(0, i);
   }
   array.update();
 }
 
-function definesimpleArray(array,chrs){
-    for (var i = 0; i < chrs.length; i++) {
-      array.insertAtIndex(chrs[i],i);
-    }
-    array.update();
+function definesimpleArray(array, chrs) {
+  for (var i = 0; i < chrs.length; i++) {
+    array.insertAtIndex(chrs[i], i);
+  }
+  array.update();
 }
 
-function defineGenerationBST(bst){
+function defineGenerationBST(bst) {
   return bst;
 }
 
-function defineGenerateSLL(sll){
+function defineGenerateSLL(sll) {
   return sll;
 }
 
-function defineGenerateMLL(mll){
+function defineGenerateMLL(mll) {
   return mll;
 }
 
-function defineGenerationStack(stack){
+function defineGenerationStack(stack) {
   return stack;
 }
 
-function defineGenerateGraph(graph){
+function defineGenerateGraph(graph) {
   return Graph;
 }
 
 
-//check for types
-function checkIfSelectedIS(name){
-  console.log("AchtiveAlementIndex: "+activeElementIndex);
-  console.log("output"+sidebar.textArray[activeElementIndex]);
-  console.log(sidebar.textArray[activeElementIndex]+"|     |"+name);
-  if(sidebar.textArray[activeElementIndex]==name){
+
+function checkIfSelectedIS(name) {
+  console.log("AchtiveAlementIndex: " + activeElementIndex);
+  console.log("output" + sidebar.textArray[activeElementIndex]);
+  console.log(sidebar.textArray[activeElementIndex] + "|     |" + name);
+  if (sidebar.textArray[activeElementIndex] == name) {
     console.log("LOG:TRUE");
-       return true;   
+    return true;
   }
-    return false;
+  return false;
 }
 
 
-function clearSelectedDS(){
+function clearSelectedDS() {
   getSelectedDatastructure().clearDS();
 }
 
-function reomoveSelectedDS(){
-  activeElements.splice(activeElementIndex,activeElementIndex);
+function reomoveSelectedDS() {
+  activeElements.splice(activeElementIndex, activeElementIndex);
   sidebar.removeTextFromList(activeElementIndex);
-  activeElementIndex=-1;
+  activeElementIndex = -1;
 }
 
 
-//=============================================================
-//            pars section
-//=============================================================
 
-export function pars(command){
+
+
+
+export function pars(command) {
   switch (command) {
     case 'clear view':
       clearView();
       break;
-    case'clear output':
+    case 'clear output':
       clearOutput();
       break;
-    case'clear terminal':
+    case 'clear terminal':
       Clear();
       break;
-    case"presentation":
+    case "presentation":
       previewCMD();
       break;
-    case"back":
+    case "back":
       back();
       break;
-    case"ZOOM-IN":
+    case "ZOOM-IN":
       zoomIn();
       break;
-    case"ZOOM-OUT":
+    case "ZOOM-OUT":
       zoomOut();
       break;
-    case"ZOOM-PREVIEW-OUT":
+    case "ZOOM-PREVIEW-OUT":
       zoomOutPrev();
       break;
-    case"ZOOM-PREVIEW-IN":
+    case "ZOOM-PREVIEW-IN":
       zoomInPrev();
       break;
-    case"ZOOM-Preview-AUTO":
+    case "ZOOM-Preview-AUTO":
       toomAutoPrev();
       break;
-    case"EXIT":
+    case "EXIT":
       exitApp();
-    case"Presentation-to-Second-Screen":
+    case "Presentation-to-Second-Screen":
       sendMoveRequestForChild();
       break;
-    case"Presentation-to-Third-Screen":
+    case "Presentation-to-Third-Screen":
       sendMoveRequestForChildThird();
       break;
-    case"End-Presentation":
+    case "End-Presentation":
       sendEndPresentation();
       break;
-    case"Binary-Search-Tree":
+    case "Binary-Search-Tree":
       binarySearchTreeCreate();
       initializeTerminal();
       break;
-    case"Singel-Linked-List":
+    case "Singel-Linked-List":
       SingelLLnkedListCreate();
       initializeTerminal();
       break;
-    case"Multi-Linked-List":
+    case "Multi-Linked-List":
       MultiLinkedListCreate();
       initializeTerminal();
       break;
-    case"Stack":
+    case "Stack":
       stackCreate();
       initializeTerminal();
       break;
-    case"Array":
+    case "Array":
       arrayCreate();
       initializeTerminal();
       break;
-    case"Graph":
+    case "Graph":
       GraphCreate();
       initializeTerminal();
       break;
-    case"Clear-Selected":
-    clearSelectedDS();
+    case "Clear-Selected":
+      clearSelectedDS();
       break;
-    case"Remove-Selected":
+    case "Remove-Selected":
       reomoveSelectedDS();
       break;
     case "Array-insert":
-      if(checkIfSelectedIS("Array")){
-            var lbs=['Index','Value'];
-            var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-            console.log("Test:"+numIN);
-            window.addEventListener('message', (event) => {     
-                if (Array.isArray(event.data)) {
-                  getSelectedDatastructure().insertAtIndex(event.data[1], event.data[0]);
-                }
-              }
-            );
+      if (checkIfSelectedIS("Array")) {
+        var lbs = ['Index', 'Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        console.log("Test:" + numIN);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().insertAtIndex(event.data[1], event.data[0]);
+          }
+        });
       }
       break;
     case "Array-Create":
-        if(checkIfSelectedIS("Array")){
-          var lbs=['Length'];
-          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-          console.log("Test:"+numIN);
-          window.addEventListener('message', (event) => {     
-              if (Array.isArray(event.data)) {
-                getSelectedDatastructure().arrayCreateLength(event.data[0]);
-              }
-            }
-          );
-        }
-        break;
+      if (checkIfSelectedIS("Array")) {
+        var lbs = ['Length'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        console.log("Test:" + numIN);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().arrayCreateLength(event.data[0]);
+          }
+        });
+      }
+      break;
     case "Array-Simple-Creation":
-         definesimpleArray(getSelectedDatastructure(),['a','b','c']);
+      definesimpleArray(getSelectedDatastructure(), ['a', 'b', 'c']);
       break;
     case "Array-Random-Create":
-        if(checkIfSelectedIS("Array")){
-          randomGenerationArray(getSelectedDatastructure());
-        }
-        break;
+      if (checkIfSelectedIS("Array")) {
+        randomGenerationArray(getSelectedDatastructure());
+      }
+      break;
     case "Array-Random-Length-Create":
-        console.log("test");
-        if(checkIfSelectedIS("Array")){
-          var lbs=['Length'];
-          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-          console.log("Test:"+numIN);
-          window.addEventListener('message', (event) => {     
-              if (Array.isArray(event.data)) {
-                getSelectedDatastructure().setLength(length);
-                randomGenerationArrayLength(getSelectedDatastructure(),event.data[0]);
-              }
-            }
-          );
-        }
-        break;
-    case "Array-Bubbelsort":
-        if(checkIfSelectedIS("Array")){
-          getSelectedDatastructure().bubbleSortArray();
-        }
-        break;
-    case "Array-insertionSort":
-        if(checkIfSelectedIS("Array")){
-          getSelectedDatastructure().insertionSortArray();
-        }
-        break;
-    case "Array-selectionSort":
-        if(checkIfSelectedIS("Array")){
-          getSelectedDatastructure().selectionSortArray();
-        }
-        break;
-    case "BST-Random-Create":
-        if(checkIfSelectedIS("Binary-Search-Tree")){
-          console.log("BSTCREATE RANDOM");
-          randomGenerationBST(getSelectedDatastructure());
-        }
-        break;
-    case "BST-Random-Create-Length":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              randomGenerationBSTLenth(getSelectedDatastructure(),event.data[0]);  
-            }
+      console.log("test");
+      if (checkIfSelectedIS("Array")) {
+        var lbs = ['Length'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        console.log("Test:" + numIN);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().setLength(length);
+            randomGenerationArrayLength(getSelectedDatastructure(), event.data[0]);
           }
-        );
+        });
+      }
+      break;
+    case "Array-Bubbelsort":
+      if (checkIfSelectedIS("Array")) {
+        getSelectedDatastructure().bubbleSortArray();
+      }
+      break;
+    case "Array-insertionSort":
+      if (checkIfSelectedIS("Array")) {
+        getSelectedDatastructure().insertionSortArray();
+      }
+      break;
+    case "Array-selectionSort":
+      if (checkIfSelectedIS("Array")) {
+        getSelectedDatastructure().selectionSortArray();
+      }
+      break;
+    case "BST-Random-Create":
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
+        console.log("BSTCREATE RANDOM");
+        randomGenerationBST(getSelectedDatastructure());
+      }
+      break;
+    case "BST-Random-Create-Length":
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            randomGenerationBSTLenth(getSelectedDatastructure(), event.data[0]);
+          }
+        });
       }
       break;
     case "BST-Insert":
-        if(checkIfSelectedIS("Binary-Search-Tree")){
-          var lbs=['Value'];
-          var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-          window.addEventListener('message', (event) => {     
-              if (Array.isArray(event.data)) {
-                getSelectedDatastructure().insert(event.data[0]);   
-                getSelectedDatastructure().update();
-              }
-            }
-          );
-        }
-        break;
-    case "BST-Remove":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().remove(event.data[0]);
-              getSelectedDatastructure().update();
-            }
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().insert(event.data[0]);
+            getSelectedDatastructure().update();
           }
-        );
+        });
       }
-        break;
+      break;
+    case "BST-Remove":
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().remove(event.data[0]);
+            getSelectedDatastructure().update();
+          }
+        });
+      }
+      break;
     case "BST-Traverse-Inorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
         getSelectedDatastructure().animateInOrderTraversal(getSelectedDatastructure().root);
       }
-        break;
+      break;
     case "BST-Traverse-Preorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
         getSelectedDatastructure().animatePreOrderTraversal(getSelectedDatastructure().root);
       }
-        break;
+      break;
     case "BST-Traverse-Postorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
-          getSelectedDatastructure().animatePostOrderTraversal(getSelectedDatastructure().root);
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
+        getSelectedDatastructure().animatePostOrderTraversal(getSelectedDatastructure().root);
         break;
       }
     case "BST-Traverse-Levelorder":
-      if(checkIfSelectedIS("Binary-Search-Tree")){
+      if (checkIfSelectedIS("Binary-Search-Tree")) {
         getSelectedDatastructure().animateLevelOrderTraversal(getSelectedDatastructure().root);
       }
-        break;
-    case"Stack-Random-Generate":
-      if(checkIfSelectedIS("Stack")){
+      break;
+    case "Stack-Random-Generate":
+      if (checkIfSelectedIS("Stack")) {
         randomGenerationStack(getSelectedDatastructure());
       }
       break;
-    case"Stack-Random-Generate-Length":
-      if(checkIfSelectedIS("Stack")){
-        var lbs=['Length'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              randomGenerationStack(getSelectedDatastructure(),event.data[0]);
-            }
+    case "Stack-Random-Generate-Length":
+      if (checkIfSelectedIS("Stack")) {
+        var lbs = ['Length'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            randomGenerationStack(getSelectedDatastructure(), event.data[0]);
           }
-        );
+        });
       }
       break;
     case "Stack-Push":
-      if(checkIfSelectedIS("Stack")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
+      if (checkIfSelectedIS("Stack")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
         console.log("PUSHPUSHPUSH");
-        let set=false;
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              console.log(event);
-              if(set==false){
-                getSelectedDatastructure().push(event.data[0]);   
-                set=true;
-              }
+        let set = false;
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            console.log(event);
+            if (set == false) {
+              getSelectedDatastructure().push(event.data[0]);
+              set = true;
             }
           }
-        );
-      }    
-        break;
+        });
+      }
+      break;
     case "Stack-pop":
-      if(checkIfSelectedIS("Stack")){
+      if (checkIfSelectedIS("Stack")) {
         getSelectedDatastructure().pop();
       }
-        break;
+      break;
     case "Stack-peak":
-      if(checkIfSelectedIS("Stack")){
+      if (checkIfSelectedIS("Stack")) {
         getSelectedDatastructure().peak();
       }
-        break;
+      break;
     case "SLL-Random-Create":
-      if(checkIfSelectedIS("Singel-Linked-List")){
+      if (checkIfSelectedIS("Singel-Linked-List")) {
         randomGenerateSLL(getSelectedDatastructure());
       }
-        break;
+      break;
     case "SLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Singel-Linked-List")){
-        var lbs=['List length'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              randomGenerateSLLLength(getSelectedDatastructure(),event.data[0]);   
-            }
+      if (checkIfSelectedIS("Singel-Linked-List")) {
+        var lbs = ['List length'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            randomGenerateSLLLength(getSelectedDatastructure(), event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "SLL-Insert-End":
-      if(checkIfSelectedIS("Singel-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().addLast(event.data[0]);   
-            }
+      if (checkIfSelectedIS("Singel-Linked-List")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().addLast(event.data[0]);
           }
-        );
-      } 
-        break;
+        });
+      }
+      break;
     case "SLL-Insert-Begining":
-      if(checkIfSelectedIS("Singel-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().addFirst(event.data[0]);   
-            }
+      if (checkIfSelectedIS("Singel-Linked-List")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().addFirst(event.data[0]);
           }
-        );
+        });
       }
-        break;
-    case"SLL-Inser-At-Index":
-      if(checkIfSelectedIS("Singel-Linked-List")){
-        var lbs=['index','Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().insertAtIndex(event.data[0],event.data[1]);
-            }
+      break;
+    case "SLL-Inser-At-Index":
+      if (checkIfSelectedIS("Singel-Linked-List")) {
+        var lbs = ['index', 'Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().insertAtIndex(event.data[0], event.data[1]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "SLL-Remove-Start":
-      if(checkIfSelectedIS("Singel-Linked-List")){
+      if (checkIfSelectedIS("Singel-Linked-List")) {
         getSelectedDatastructure().removeFirst();
       }
-        break;
+      break;
     case "SLL-Remove-End":
-      if(checkIfSelectedIS("Singel-Linked-List")){
+      if (checkIfSelectedIS("Singel-Linked-List")) {
         getSelectedDatastructure().removeLast();
       }
-        break;
+      break;
     case "MLL-Random-Create":
-      if(checkIfSelectedIS("Multi-Linked-List")){
+      if (checkIfSelectedIS("Multi-Linked-List")) {
         console.log("TEST");
-          randomGenerateMLL(getSelectedDatastructure());
+        randomGenerateMLL(getSelectedDatastructure());
       }
-        break;
+      break;
     case "MLL-Random-Creat-Length":
-      if(checkIfSelectedIS("Multi-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              randomGenerateMLLLength(getSelectedDatastructure(),event.data[0]);             
-            }
+      if (checkIfSelectedIS("Multi-Linked-List")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            randomGenerateMLLLength(getSelectedDatastructure(), event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "MLL-Insert-End":
-      if(checkIfSelectedIS("Multi-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().addLast(event.data[0]);   
-            }
+      if (checkIfSelectedIS("Multi-Linked-List")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().addLast(event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "MLL-Insert-Begin":
-      if(checkIfSelectedIS("Multi-Linked-List")){
-        var lbs=['Value'];
-        var numIN=new numberInput(1,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().addFirst(event.data);      
-            }
+      if (checkIfSelectedIS("Multi-Linked-List")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(1, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().addFirst(event.data);
           }
-        );
+        });
       }
-        break;
+      break;
     case "MLL-Remove-End":
-      if(checkIfSelectedIS("Multi-Linked-List")){}
-        getSelectedDatastructure().removeLast();
-        break;
+      if (checkIfSelectedIS("Multi-Linked-List")) {}
+      getSelectedDatastructure().removeLast();
+      break;
     case "MLL-Remove-Begin":
-      if(checkIfSelectedIS("Multi-Linked-List")){}
-        getSelectedDatastructure().removeFirst();
-        break;
+      if (checkIfSelectedIS("Multi-Linked-List")) {}
+      getSelectedDatastructure().removeFirst();
+      break;
     case "Graph-Tiefensuche":
-      if(checkIfSelectedIS("Graph")){
+      if (checkIfSelectedIS("Graph")) {
         getSelectedDatastructure().tiefensuche();
       }
-        break;
+      break;
     case "Graph-Breitensuche":
-      if(checkIfSelectedIS("Graph")){
+      if (checkIfSelectedIS("Graph")) {
         getSelectedDatastructure().breitensuche();
       }
-        break;
+      break;
     case "Graph-Insert":
-      if(checkIfSelectedIS("Graph")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().insertNode(event.data[0]);   
-            }
+      if (checkIfSelectedIS("Graph")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().insertNode(event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "Graph-Remove":
-      if(checkIfSelectedIS("Graph")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              getSelectedDatastructure().removeNode(event.data[0]);
-            }
+      if (checkIfSelectedIS("Graph")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            getSelectedDatastructure().removeNode(event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "Graph-Random-Create":
-      if(checkIfSelectedIS("Graph")){}
-        randomGenerateGraph(getSelectedDatastructure());
-        break;
+      if (checkIfSelectedIS("Graph")) {}
+      randomGenerateGraph(getSelectedDatastructure());
+      break;
     case "Graph-Rendom-Lenght-Create":
-      if(checkIfSelectedIS("Graph")){
-        var lbs=['Value'];
-        var numIN=new numberInput(2,"ArrayInsertDialog",lbs);
-        window.addEventListener('message', (event) => {     
-            if (Array.isArray(event.data)) {
-              randomGenerateGraphLength(getSelectedDatastructure(),event.data[0]);
-            }
+      if (checkIfSelectedIS("Graph")) {
+        var lbs = ['Value'];
+        var numIN = new numberInput(2, "ArrayInsertDialog", lbs);
+        window.addEventListener('message', (event) => {
+          if (Array.isArray(event.data)) {
+            randomGenerateGraphLength(getSelectedDatastructure(), event.data[0]);
           }
-        );
+        });
       }
-        break;
+      break;
     case "Graph-ResetColor":
-      if(checkIfSelectedIS("Graph")){
+      if (checkIfSelectedIS("Graph")) {
         getSelectedDatastructure().resetColor();
       }
-        break;
+      break;
     default:
       break;
   }
- 
+
 }
 
 
-//=============================================================
-//          end of pars sectoion 
-//=============================================================
 
-function zoomInPrev(){
-  ipcRenderer.send("updateZoomPrev","in");
+
+
+
+function zoomInPrev() {
+  ipcRenderer.send("updateZoomPrev", "in");
 }
 
-function zoomOutPrev(){
-  ipcRenderer.send("updateZoomPrev","out");
-}
-function toomAutoPrev(){
-  ipcRenderer.send("updateZoomPrev","fit");
+function zoomOutPrev() {
+  ipcRenderer.send("updateZoomPrev", "out");
 }
 
+function toomAutoPrev() {
+  ipcRenderer.send("updateZoomPrev", "fit");
+}
 
-//=============================================================
-//             comand section
-//=============================================================
 
 
-function processCMD(command){
+
+
+
+
+function processCMD(command) {
   switch (command) {
     case 'date':
       output = new Date().toString();
@@ -1226,7 +1227,7 @@ function processCMD(command){
       output = 'Hello, world!';
       break;
     case 'help':
-      output="";
+      output = "";
       spawnHelp();
       break;
     case 'create':
@@ -1237,51 +1238,51 @@ function processCMD(command){
       output = 'Singel-Linked-list Spawned';
       SingelLLnkedListCreate();
       break;
-    case'mll':
-    case'multi linked list':
-    case'multilinkedlist':
+    case 'mll':
+    case 'multi linked list':
+    case 'multilinkedlist':
       MultiLinkedListCreate();
       break;
     case 'clear':
-      output="";
+      output = "";
       Clear();
       break;
     case 'clearview':
     case 'clear view':
-      output="View Is cleared";
+      output = "View Is cleared";
       clearView();
       break;
-    case'clear output':
-    case'clearoutput':
-      output="Clead Output";
+    case 'clear output':
+    case 'clearoutput':
+      output = "Clead Output";
       clearOutput();
       break;
-    case'exit':
-    case'exit()':
+    case 'exit':
+    case 'exit()':
       exitApp();
       break;
-    case'array':
+    case 'array':
       arrayCreate();
       break;
-    case'bst':
-    case'binarySearchTree':
-    case'binary-search-tree':
+    case 'bst':
+    case 'binarySearchTree':
+    case 'binary-search-tree':
       binarySearchTreeCreate();
       break;
-    case'back':
+    case 'back':
       back();
       break;
-    case'stack':
-     stackCreate();
+    case 'stack':
+      stackCreate();
       break;
-    case'preview':
+    case 'preview':
       previewCMD();
       break;
-    case'info':
+    case 'info':
       displayInfo(viewState);
       break;
-    case'Graph':
-    case'graph':
+    case 'Graph':
+    case 'graph':
       GraphCreate();
       break;
     default:
@@ -1291,26 +1292,26 @@ function processCMD(command){
   return output;
 }
 
-//=============================================================
-//             end of comand section
-//=============================================================
 
 
-ipcRenderer.on("logChannel",(event,data)=>{
+
+
+
+ipcRenderer.on("logChannel", (event, data) => {
   addLog(data);
 });
 
-ipcRenderer.on("errorChannel",(event,data)=>{
+ipcRenderer.on("errorChannel", (event, data) => {
   addError(data);
 });
 
-ipcRenderer.on("warningChannel",(event,data)=>{
+ipcRenderer.on("warningChannel", (event, data) => {
   addWarning(data);
 });
 
 initSettings();
 
 
-ipcRenderer.on('menueBar',(event,data)=>{
-  
+ipcRenderer.on('menueBar', (event, data) => {
+
 });

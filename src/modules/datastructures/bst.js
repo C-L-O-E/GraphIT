@@ -18,7 +18,7 @@ class Node {
     this.color = color;
   }
 
-  getColor(){
+  getColor() {
     return this.color;
   }
 }
@@ -39,10 +39,10 @@ export default class BinarySearchTree {
     this.view.style.zoom = this.zoomLevel;
   }
 
-  
-  clearDS(){
-    this.root=null;
-    this.bstDiv.innerHTML=null;
+
+  clearDS() {
+    this.root = null;
+    this.bstDiv.innerHTML = null;
   }
 
   addNode(data, x, y) {
@@ -180,7 +180,7 @@ export default class BinarySearchTree {
 
   async postOrderTraversalNode(node, callback) {
     if (node !== null) {
-    
+
       this.postOrderTraversalNode(node.left, callback);
       this.postOrderTraversalNode(node.right, callback);
       callback(node);
@@ -209,7 +209,7 @@ export default class BinarySearchTree {
     }
   }
 
-  
+
 
   async calculateNodePositions(node, level, minX, maxX, x, y, addNode, oldLineX, oldLineY) {
     if (node === null) {
@@ -222,7 +222,7 @@ export default class BinarySearchTree {
       this.addLine(oldLineX, oldLineY, midX + 34, newY, node.getColor());
     }
     this.addNodeColored(node.value, midX, newY, node.getColor());
-   
+
     this.calculateNodePositions(node.left, level + 1, minX, midX, x - Math.pow(2, level), newY, addNode, midX + 34, newY + 50);
     this.calculateNodePositions(node.right, level + 1, midX, maxX, x + Math.pow(2, level), newY, addNode, midX + 34, newY + 50);
   }
@@ -240,8 +240,8 @@ export default class BinarySearchTree {
     });
   }
 
-  update(){
-    this.bstDiv.innerHTML='';
+  update() {
+    this.bstDiv.innerHTML = '';
     this.draw();
   }
 
@@ -250,20 +250,20 @@ export default class BinarySearchTree {
       return;
     }
 
-    node.setColor('red'); 
-    this.draw(); 
-    await Sleep(500); 
+    node.setColor('red');
+    this.draw();
+    await Sleep(500);
 
-    node.setColor('lightgreen'); 
-    
+    node.setColor('lightgreen');
+
     await this.animatePreOrderTraversal(node.left);
 
-    
+
     await this.animatePreOrderTraversal(node.right);
 
     console.log(node.value);
-    this.draw(); 
-    await Sleep(500); 
+    this.draw();
+    await Sleep(500);
   }
 
   async animatePostOrderTraversal(node) {
@@ -271,21 +271,21 @@ export default class BinarySearchTree {
       return;
     }
 
-    
+
     await this.animatePostOrderTraversal(node.left);
 
-    
+
     await this.animatePostOrderTraversal(node.right);
 
-    node.setColor('red'); 
+    node.setColor('red');
 
-    this.draw(); 
-    await Sleep(500); 
+    this.draw();
+    await Sleep(500);
 
-    node.setColor('lightblue'); 
+    node.setColor('lightblue');
     console.log(node.value);
-    this.draw(); 
-    await Sleep(500); 
+    this.draw();
+    await Sleep(500);
   }
 
   async animateInOrderTraversal(node) {
@@ -295,11 +295,11 @@ export default class BinarySearchTree {
 
     await this.animateInOrderTraversal(node.left);
 
-    node.setColor('red'); 
-    this.draw(); 
-    await Sleep(500); 
+    node.setColor('red');
+    this.draw();
+    await Sleep(500);
     console.log(node.value);
-    
+
     await this.animateInOrderTraversal(node.right);
   }
 
@@ -315,9 +315,9 @@ export default class BinarySearchTree {
     while (queue.length > 0) {
       const node = queue.shift();
 
-      node.setColor('red'); 
-      this.draw(); 
-      await Sleep(500); 
+      node.setColor('red');
+      this.draw();
+      await Sleep(500);
 
       if (node.left !== null) {
         queue.push(node.left);
@@ -327,44 +327,10 @@ export default class BinarySearchTree {
         queue.push(node.right);
       }
 
-      node.setColor('orange'); 
-      this.draw(); 
-      await Sleep(500); 
+      node.setColor('orange');
+      this.draw();
+      await Sleep(500);
     }
   }
-  
-}
-
-function test(){
-const bst = new BinarySearchTree();
-bst.init();
-
-bst.insert(50);
-for (let i = 0; i < 30; i++) {
-  bst.insert(Math.floor(Math.random() * 100) + 1);
-}
-
-bst.draw();
-
-
-
-
-
-bst.animatePreOrderTraversal(bst.root);
-
-
-
-
-
-
-console.log("==============================");
-console.log('Inorder-Traversierung:');
-bst.inOrderTraversal(node => {
-  console.log(node.value);
-});
-console.log("==============================");
-  
-
 
 }
-
