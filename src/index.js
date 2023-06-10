@@ -294,6 +294,9 @@ ipcMain.on('open-file-explorer', () => {
   openFileExplorer();
 });
 
+
+
+
 // Konfiguration der automatischen Updates
 autoUpdater.autoDownload = false; // Deaktiviert das automatische Herunterladen der Updates
 
@@ -301,14 +304,17 @@ autoUpdater.autoDownload = false; // Deaktiviert das automatische Herunterladen 
 app.on('ready', () => {
   createWindow();
   console.log("Checking for updates");
-  autoUpdater.checkForUpdates();
+  autoUpdater.checkForUpdates().catch(err => {
+    console.error("Error checking for updates:", err);
+  });
 });
 
 // GitHub-Repository-URL angeben
 autoUpdater.setFeedURL({
+  provider: 'github',
   owner: 'C-L-O-E',
   repo: 'GraphIT',
-  branch: 'release' // Optional: Branch angeben, falls abweichend von 'master'
+  releaseType: 'release' // Optional: Release-Typ angeben, z.B. 'release', 'prerelease' oder 'draft'
 });
 
 // Eventlistener für den Abschluss des Downloads
@@ -322,15 +328,18 @@ autoUpdater.on('update-downloaded', () => {
 // Eventlistener für das Aktualisieren der App
 ipcMain.on('app:update', () => {
   console.log("Downloading update");
-  autoUpdater.downloadUpdate(); // Herunterladen des Updates
+  autoUpdater.downloadUpdate().catch(err => {
+    console.error("Error downloading update:", err);
+  }); // Herunterladen des Updates
 });
 
 // Eventlistener für Fehler während des Update-Prozesses
 autoUpdater.on('error', (err) => {
-  // Hier kannst du Fehlerbehandlung durchführen, z.B. eine Fehlermeldung anzeigen
+  console.error("Update error:", err);
 });
 
 // Eventlistener für Fortschritt des Downloads
 autoUpdater.on('download-progress', (progress) => {
   // Hier kannst du den Fortschritt des Downloads anzeigen, z.B. in einer Fortschrittsleiste
+  console.log("Download progress:", progress);
 });
