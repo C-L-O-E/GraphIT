@@ -1,13 +1,13 @@
-body{
+body {
     width: 100%;
     height: 100%;
-    top:0px;
-    left:0px;
+    top: 0px;
+    left: 0px;
     margin: 0px;
     background-color: rgb(51, 51, 67);
 }
 
-#view{
+#view {
     position: absolute;
     width: 100%;
     height: 92%;
@@ -19,54 +19,54 @@ body{
 
 }
 
-#topBar{
+#topBar {
     background-color: rgb(33, 34, 41);
     width: 100%;
     position: absolute;
     left: 0px;
     top: 0px;
     height: 8%;
-    display:grid;
+    display: grid;
     grid-template-columns: 1em 1em 1em;
 }
 
-.tobBarElement{
+.tobBarElement {
     text-align: center;
     color: aliceblue;
     width: 200px;
-    height:100%
-    
-
+    height: 100%
 }
 
-#i{
+#i {
     position: absolute;
     left: 0px;
     top: 0px;
 }
-#ii{
+
+#ii {
     position: absolute;
     left: 200px;
     top: 0px;
 }
-#iii{
+
+#iii {
     position: absolute;
     left: 400px;
     top: 0px;
 }
 
-#iiii{
+#iiii {
     position: absolute;
     left: 600px;
     top: 0px;
 }
 
-.tobBarElement:hover{
+.tobBarElement:hover {
     background-color: rgb(47, 50, 66);
-    
+
 }
 
-.viewElement{
+.viewElement {
     height: 80px;
     background-color: rgb(36, 38, 48);
     text-align: center;
@@ -74,9 +74,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.viewElement:hover{
+.viewElement:hover {
     background-color: rgb(91, 101, 129);
-  
+
 }
-
-

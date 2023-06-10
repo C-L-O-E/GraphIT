@@ -1,103 +1,110 @@
-import { getAppVersion,generateSettingsObject} from '../settings.js';
-import { addLog,addError,addWarning } from '../modules/terminal.js';
+import {
+  getAppVersion,
+  generateSettingsObject
+} from '../settings.js';
+import {
+  addLog,
+  addError,
+  addWarning
+} from '../modules/terminal.js';
 const fs = require('fs');
-var settingsFilePath=process.env.settingsFilePath;
+var settingsFilePath = process.env.settingsFilePath;
 
 export function saveToDisk(path, filename, ...data) {
-    const timestamp = new Date().toISOString();
-    const jsonData = {
-      version: getAppVersion(),
-      timestamp: timestamp,
-      data: data
-    };
+  const timestamp = new Date().toISOString();
+  const jsonData = {
+    version: getAppVersion(),
+    timestamp: timestamp,
+    data: data
+  };
 
-    const filePath = `${path}/${filename}.json`;
-    const jsonString = JSON.stringify(jsonData, null, 2);
+  const filePath = `${path}/${filename}.json`;
+  const jsonString = JSON.stringify(jsonData, null, 2);
 
-    fs.writeFile(filePath, jsonString, 'utf8', (err) => {
-      if (err) {
-        addError('Fehler beim Speichern der Datei:'+err);
-      } else {
-        addLog(`Daten erfolgreich in "${filePath}" gespeichert.`);
-      }
-    });
-  }
+  fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+    if (err) {
+      addError('Fehler beim Speichern der Datei:' + err);
+    } else {
+      addLog(`Daten erfolgreich in "${filePath}" gespeichert.`);
+    }
+  });
+}
 
 export function loadFromDisk(filePath) {
-    readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        addError('Fehler beim Laden der Datei:', err);
-        return;
+  readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      addError('Fehler beim Laden der Datei:', err);
+      return;
+    }
+
+    try {
+      const jsonData = JSON.parse(data);
+
+      if (jsonData.version !== this.version) {
+        addWarning('Die geladene Datei hat eine andere Version.');
       }
 
-      try {
-        const jsonData = JSON.parse(data);
 
-        if (jsonData.version !== this.version) {
-          addWarning('Die geladene Datei hat eine andere Version.');
-        }
-
-        // Variablen und Arrays aktualisieren
-        const loadedData = jsonData.data;
-        // ...
-
-        addLog('Daten erfolgreich geladen und aktualisiert.');
-      } catch (error) {
-        addError('Fehler beim Parsen der JSON-Datei: '+error);
-      }
-    });
-  }
+      const loadedData = jsonData.data;
 
 
-  // Check if the directory exists
-  export function createDirectoryIfNotExists(directoryPath) {
-    if (!fs.existsSync(directoryPath)) {
-      try{
-        fs.mkdirSync(directoryPath);
-        addLog(`Directory "${directoryPath}" created successfully.`);
-        return true;
-      }catch(error){
-        addError(`Directory "${directoryPath}" was not created.`);
-        return false;
-      }
-    } else {
-      addLog(`Directory "${directoryPath}" already exists.`);
+      addLog('Daten erfolgreich geladen und aktualisiert.');
+    } catch (error) {
+      addError('Fehler beim Parsen der JSON-Datei: ' + error);
+    }
+  });
+}
+
+
+
+export function createDirectoryIfNotExists(directoryPath) {
+  if (!fs.existsSync(directoryPath)) {
+    try {
+      fs.mkdirSync(directoryPath);
+      addLog(`Directory "${directoryPath}" created successfully.`);
       return true;
+    } catch (error) {
+      addError(`Directory "${directoryPath}" was not created.`);
+      return false;
     }
+  } else {
+    addLog(`Directory "${directoryPath}" already exists.`);
+    return true;
   }
-  
+}
 
-  export function createFileIfNotExists(filePath, content) {
-    if (!fs.existsSync(filePath)) {
-      try{
-        fs.writeFileSync(filePath, content);
-        addLog(`File "${filePath}" created successfully.`);
-        return true;
-      }catch(error){
-        addError(`File "${filePath}" was not created. Reason:${error}`);
-        return false;
-      }
-    } else {
-        addLog(`File "${filePath}" already exists.`);
-        return true;
+
+export function createFileIfNotExists(filePath, content) {
+  if (!fs.existsSync(filePath)) {
+    try {
+      fs.writeFileSync(filePath, content);
+      addLog(`File "${filePath}" created successfully.`);
+      return true;
+    } catch (error) {
+      addError(`File "${filePath}" was not created. Reason:${error}`);
+      return false;
     }
+  } else {
+    addLog(`File "${filePath}" already exists.`);
+    return true;
   }
+}
 
-// Lade Einstellungen
+
 export function loadSettings() {
   try {
     const data = fs.readFileSync(settingsFilePath, 'utf-8');
     addLog("Succsesfully load settings.");
     return JSON.parse(data);
   } catch (error) {
-    addError('Fehler beim Laden der Einstellungen: Reason: '+error);
+    addError('Fehler beim Laden der Einstellungen: Reason: ' + error);
     addLog('Try to Create a Settings File to Fix it automaticly...');
-    createFileIfNotExists(settingsFilePath,JSON.stringify(generateSettingsObject()));
-    return{};
+    createFileIfNotExists(settingsFilePath, JSON.stringify(generateSettingsObject()));
+    return {};
   }
 }
 
-// Speichere Einstellungen
+
 export function saveSettings(settings) {
   try {
     fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2), 'utf-8');
