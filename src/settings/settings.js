@@ -68,7 +68,7 @@ import {
   }
   
   // Beispielaufruf der updateSettings-Funktion
-  setInterval(updateSettings,1000);
+  setInterval(updateSettings,100);
   updateSettings();
   
 

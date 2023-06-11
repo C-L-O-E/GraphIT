@@ -5,9 +5,10 @@ const {
   dialog,
   Menu
 } = require('electron');
-const {
-  autoUpdater
-} = require('electron-updater');
+const { zoomIn, zoomOut } = require('./zoomlisteners.js');
+const { addError } = require('./modules/terminal.js');
+const {autoUpdater} = require('electron-updater');
+const { exec } = require('child_process');
 const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
@@ -51,7 +52,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
 
   const template = [{
@@ -82,6 +83,133 @@ const createWindow = () => {
           },
         },
       ],
+
+
+      label: 'View',
+      submenu: [{
+          label: 'Zoom In',
+          click: () => {
+            zoomIn();
+          },
+        },{  label: 'Zoom Out',
+        click: () => {
+          zoomOut();
+        },
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'Preview',
+          click: () => {
+            preview('create');
+          },
+        },
+        {
+          label: 'Preview to second Screen',
+          click: () => {
+            showVisualSecondScreen('PreviewSecondScreen');
+          },
+
+        },
+        {
+          label: 'Preview to third Screen',
+          click: () => {
+            showVisualSecondScreen('PreviewThirdScreen');
+          },
+
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'task',
+          click: () => {
+            
+          },
+        },
+      ],
+
+
+      label: 'Datastructurs',
+      submenu: [{
+          label: 'Array',
+          click: () => {
+            //todo
+          },
+        },{  label: 'BinarySearchTree',
+        click: () => {
+                      //todo
+
+        },
+        },,
+        {
+          label: 'Stack',
+          click: () => {
+          //
+          },
+        },
+        {
+          label: 'Singel Linked List',
+          click: () => {
+            //
+          },
+
+        },
+        {
+          label: 'Multi Linked List',
+          click: () => {
+            //
+          },
+
+        },
+        {
+          label: 'Graph',
+          click: () => {
+            
+          },
+        },
+      ],
+
+      label: 'Help',
+      submenu: [{
+          label: 'Info Page',
+          click: () => {
+            const documentationURL = 'https://github.com/C-L-O-E/GraphIT/wiki/Dokumentation';
+            openWebsite(documentationURL);
+          },
+        },
+        {
+          label: 'Info Page',
+          click: () => {
+            const documentationURL = 'https://c-l-o-e.github.io/projects.html';
+            openWebsite(documentationURL);
+          },
+        },
+        {
+            label: 'Documentation',
+        click: () => {
+          const documentationURL = 'https://github.com/C-L-O-E/GraphIT/wiki/Dokumentation';
+          openWebsite(documentationURL);
+
+        },
+        },,
+        {
+          label: 'Get Help',
+          click: () => {
+            const documentationURL = ' https://github.com/C-L-O-E/GraphIT';
+            openWebsite(documentationURL);
+          },
+        },{
+          label: 'Isues',
+          click:()=>{
+         
+            const documentationURL = 'https://github.com/C-L-O-E/GraphIT/issues';
+            openWebsite(documentationURL);
+          },
+        }
+      ]
+
     },
 
   ];
@@ -117,6 +245,7 @@ const {
 const {
   writeFile
 } = require('fs');
+
 ipcMain.on('getUpdate', (event, data) => {
 
   event.sender.send("update", viewContend);
@@ -165,6 +294,10 @@ ipcMain.on('info', (event, data) => {
 
 
 ipcMain.on('comand', (event, data) => {
+  preview(data);
+});
+
+function preview(data){
   if (data == 'showVisualSecondScreen') {
     if (child != null) {
       var retStrArr = moveWindowToSecondScreenAndFullscreen(child);
@@ -204,7 +337,7 @@ ipcMain.on('comand', (event, data) => {
     child.close();
     child = null;
   }
-});
+}
 
 function exitSys() {
   try {
@@ -426,3 +559,29 @@ const createSettingsWindow = () => {
   updateWindow.loadFile('./src/settings/settings.html');
   updateWindow.setIcon(iconPath);
 }
+
+function openWebsite(url) {
+  let command;
+
+  switch (process.platform) {
+    case 'darwin':
+      command = `open ${url}`;
+      break;
+    case 'win32':
+      command = `start ${url}`;
+      break;
+    case 'linux':
+      command = `xdg-open ${url}`;
+      break;
+    default:
+      addError('Unsupported platform');
+      return;
+  }
+
+  exec(command, (error) => {
+    if (error) {
+      addError(`Unable to open browser: ${error}`);
+    }
+  });
+}
+
