@@ -222,4 +222,14 @@ body {
   height: 95%;
 }
 
+#movetogle{
+  position: fixed;
+  left: 1%;
+  top: -10px;
+}
 
+#pointertoggle{
+  position: fixed;
+  left: 6%;
+  top: 0px;
+}
