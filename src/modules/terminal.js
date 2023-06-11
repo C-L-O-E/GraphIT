@@ -534,9 +534,6 @@ function sendEndPresentation() {
 
 
 
-
-
-
 var touchzone = document.getElementById('touchzone');
 touchzone.addEventListener('click', event => {
   controllsWindow = window.open("./modules/controles/controls.html");
@@ -1312,5 +1309,13 @@ ipcRenderer.on('startupMsg', (event, data) => {
   console.log(data);
 });
 
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Tab') {
+   
+    console.log('Tabulatortaste wurde gedrückt');
+   
+  }
+});
 
 
