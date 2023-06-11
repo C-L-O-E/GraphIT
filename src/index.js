@@ -5,8 +5,7 @@ const {
   dialog,
   Menu
 } = require('electron');
-const { zoomIn, zoomOut } = require('./zoomlisteners.js');
-const { addError } = require('./modules/terminal.js');
+
 const {autoUpdater} = require('electron-updater');
 const { exec } = require('child_process');
 const path = require('path');
@@ -574,13 +573,15 @@ function openWebsite(url) {
       command = `xdg-open ${url}`;
       break;
     default:
-      addError('Unsupported platform');
+      mainWindow.webContents.send('error-channel','Unsupported platform');
       return;
   }
 
+
+
   exec(command, (error) => {
     if (error) {
-      addError(`Unable to open browser: ${error}`);
+      mainWindow.webContents.send('error-channel',`Unable to open browser: ${error}`);
     }
   });
 }
