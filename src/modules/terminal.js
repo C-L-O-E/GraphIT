@@ -1314,6 +1314,11 @@ document.addEventListener('keydown', function(event) {
   if (event.key === 'Tab') {
    
     console.log('Tabulatortaste wurde gedrückt');
+    var pointer = document.getElementById('toggleSwitchPointer');
+    var checkboxValue = pointer.checked;
+    var switchElementMove = document.getElementById('toggleSwitchMove');
+  switchElementMove.checked = !switchElementMove.checked; // Ä
+    
    
   }
 });
