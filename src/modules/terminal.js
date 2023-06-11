@@ -1318,25 +1318,31 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-var pointertogle=false;
-var movetogle=false;
+var pointertogle = false;
+var movetogle = false;
 
 const switchElementPointer = document.getElementById('pointertoggle');
 switchElementPointer.addEventListener('change', function() {
-  console.log("Hello");
+  pointertogle = switchElementPointer.checked;
 });
 
 const switchElementMove = document.getElementById('movetogle');
 switchElementMove.addEventListener('change', function() {
-  console.log("Hellooooo");
+  movetogle = switchElementMove.checked;
 });
 
 document.addEventListener('mousemove', function(event) {
   var laser = document.getElementById('laser');
-  if(view.onmouseover&&pointertogle){
-  laser.style.left = event.clientX + 'px';
-  laser.style.top = event.clientY + 'px';
+  var graphView = document.getElementById('graph-view');
+  
+  if (pointertogle  && event.target === graphView) {
+    laser.style.left = event.clientX + 'px';
+    laser.style.top = event.clientY + 'px';
+    laser.style.display = 'block';
+  } else {
+    laser.style.display = 'none';
   }
 });
+
 
 
