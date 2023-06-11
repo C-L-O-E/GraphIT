@@ -1,6 +1,14 @@
 import {
-  getAppVersion,
-  generateSettingsObject
+  getVersion,
+  createSettingsObject,
+  getUser,
+  getProjectName,
+  getAutoSaveOn,
+  getGlobalWorkspacePath,
+  getGlobalSettingsPath,
+  getColorMode,
+  getUpdateNumber,
+  getTextColor
 } from '../settings.js';
 import {
   addLog,
@@ -13,7 +21,7 @@ var settingsFilePath = process.env.settingsFilePath;
 export function saveToDisk(path, filename, ...data) {
   const timestamp = new Date().toISOString();
   const jsonData = {
-    version: getAppVersion(),
+    version: getVersion(),
     timestamp: timestamp,
     data: data
   };
@@ -99,7 +107,7 @@ export function loadSettings() {
   } catch (error) {
     addError('Fehler beim Laden der Einstellungen: Reason: ' + error);
     addLog('Try to Create a Settings File to Fix it automaticly...');
-    createFileIfNotExists(settingsFilePath, JSON.stringify(generateSettingsObject()));
+    createFileIfNotExists(settingsFilePath, JSON.stringify(createSettingsObject()));
     return {};
   }
 }
@@ -107,7 +115,9 @@ export function loadSettings() {
 
 export function saveSettings(settings) {
   try {
-    fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2), 'utf-8');
+   
+
+    fs.writeFileSync(settingsFilePath, JSON.stringify(createSettingsObject(), null, 2), 'utf-8');
     addLog('Einstellungen erfolgreich gespeichert.');
   } catch (error) {
     addError('Fehler beim Speichern der Einstellungen:', error);

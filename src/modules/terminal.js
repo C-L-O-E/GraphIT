@@ -20,13 +20,18 @@ import {
   selectFile
 } from '../diskControler/diskController.js';
 import {
-  initSettings,
   getAppVersion,
-  setAutoSaveOn,
-  getGlobalWorkspace,
-  getProjektname,
-  generateSettingsFunctions,
-  setSettings
+  createSettingsObject,
+  getUser,
+  getProjectName,
+  getAutoSaveOn,
+  getGlobalWorkspacePath,
+  getGlobalSettingsPath,
+  getColorMode,
+  getUpdateNumber,
+  getTextColor,
+  initSettings,
+  setAutoSaveOn
 } from '../settings.js';
 import {
   Node
@@ -203,15 +208,6 @@ function terminalLog(data) {
   }
   logsHistory.push(logputLine);
 }
-
-
-
-
-
-
-
-
-
 
 
 var term = document.getElementById('termLBN');
@@ -1293,10 +1289,6 @@ function processCMD(command) {
 }
 
 
-
-
-
-
 ipcRenderer.on("logChannel", (event, data) => {
   addLog(data);
 });
@@ -1315,3 +1307,10 @@ initSettings();
 ipcRenderer.on('menueBar', (event, data) => {
 
 });
+
+ipcRenderer.on('startupMsg', (event, data) => {
+  console.log(data);
+});
+
+
+

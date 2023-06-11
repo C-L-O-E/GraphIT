@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/update.css">
+    <title>Update</title>
+</head>
+<body>
+    <p class="txt" id="name">GraphIT</p>
+    <img src="img/graph.png" alt="Description of the image" style="position: absolute; top: 10px; left: 118px; width: 150px; height: 150px;">
+    <div id="msgContainer"></div>
+</body>
+
+<script>
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('setString', (event, text) => {
+      const messageElement = document.getElementById('msgContainer');
+      messageElement.innerText = text;
+    });
+</script>
+
+</html>

@@ -12,9 +12,18 @@ const path = require('path');
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'GraphIt-settings.json');
 const workspacePath = path.join(userDataPath, 'GraphIT');
+const iconPath = path.join(app.getAppPath(), 'src', 'img', 'logo.ico');
 process.env.settingsFilePath = settingsFilePath;
 process.env.userDataPath = userDataPath;
 process.env.workspacePath = workspacePath;
+process.env.autoDownload = "false";
+var autoupdate=false;
+if(process.env.autoDownload=="false"){
+  autoupdate=false;
+}else{
+  autoupdate=true;
+}
+autoUpdater.autoDownload = autoupdate;
 
 var child = null;
 var info = null;
@@ -30,8 +39,6 @@ const createWindow = () => {
     width: 800,
     height: 600,
 
-
-
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -40,7 +47,7 @@ const createWindow = () => {
     },
   });
   mainWindow.maximize();
-
+  mainWindow.setIcon(iconPath);
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
@@ -54,11 +61,15 @@ const createWindow = () => {
           click: () => {
             process.env.userDataPath = openFileExplorer();
           },
+        },{  label: 'Settings',
+        click: () => {
+          createSettingsWindow();
+        },
         },
         {
           label: 'Save',
           click: () => {
-            writeFile
+            //writeFile
           },
         },
         {
@@ -82,8 +93,6 @@ const createWindow = () => {
 
 
 
-
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -93,11 +102,10 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
 
   if (BrowserWindow.getAllWindows().length === 0) {
+    createUpdateWindow();
     createWindow();
   }
 });
-
-
 
 
 
@@ -148,6 +156,7 @@ ipcMain.on('info', (event, data) => {
 
       nodeIntegration: true,
       contextIsolation: false,
+      enableRemoteModule: true
 
     },
   });
@@ -181,7 +190,7 @@ ipcMain.on('comand', (event, data) => {
       height: 400,
       x: 0,
       y: 0,
-
+   
 
       webPreferences: {
 
@@ -287,6 +296,11 @@ function moveWindowToTirdScreenAndFullscreen(window) {
 }
 
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 function openFileExplorer() {
   dialog.showOpenDialog({
     properties: ['openFile']
@@ -302,21 +316,49 @@ ipcMain.on('open-file-explorer', () => {
   openFileExplorer();
 });
 
-
-
-
-
-autoUpdater.autoDownload = false;
-
+async function delaitCreateWindow(sleepTime){
+  await sleep(sleepTime);
+  createWindow();
+  updateWindow.close();
+} 
 
 app.on('ready', () => {
-  createWindow();
-  console.log("Checking for updates");
+  createUpdateWindow();
+  updateWindow.webContents.send('setString', 'Checking for updates...');
   autoUpdater.checkForUpdates().catch(err => {
-    console.error("Error checking for updates:", err);
+    updateWindow.webContents.send('setString', "Error checking for updates:", err);
   });
+  if(process.env.autoDownload=="false"){
+    delaitCreateWindow(1000);
+  }
 });
 
+
+
+const createUpdateWindow = () => {
+  updateWindow = new BrowserWindow({
+    width: 400,
+    height: 220,
+    frame: false,
+    resizable: false,
+
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+
+    },
+  });
+  updateWindow.webContents.on('did-finish-load', () => {
+    updateWindow.webContents.send('setString', "Loading...");
+  });
+
+  updateWindow.on('closed', () => {
+    updateWindow = null;
+  });
+  updateWindow.loadFile('./src/update.html');
+  updateWindow.setIcon(iconPath);
+}
 
 autoUpdater.setFeedURL({
   provider: 'github',
@@ -327,27 +369,60 @@ autoUpdater.setFeedURL({
 
 
 autoUpdater.on('update-downloaded', () => {
-
-
-
+  updateWindow.webContents.send('setString', 'Update-App...');
   mainWindow.webContents.send('app:updateReady');
+  updateWindow.close();
+  delaitCreateWindow(1000);
 });
 
 
 ipcMain.on('app:update', () => {
-  console.log("Downloading update");
+  updateWindow.webContents.send('setString', 'Start updating');
   autoUpdater.downloadUpdate().catch(err => {
-    console.error("Error downloading update:", err);
+    updateWindow.webContents.send('setString', "Error downloading update:"+ err);
+    updateWindow.close();
+    delaitCreateWindow(1000);
   });
+  updateWindow.close();
+  delaitCreateWindow(1000);
 });
 
 
 autoUpdater.on('error', (err) => {
-  console.error("Update error:", err);
+  updateWindow.webContents.send('setString', "Error downloading update:"+ err);
+  updateWindow.close();
+  delaitCreateWindow(1000);
 });
 
 
 autoUpdater.on('download-progress', (progress) => {
-
-  console.log("Download progress:", progress);
+  updateWindow.webContents.send('setString', "Download progress:"+progress);
 });
+
+
+
+
+const createSettingsWindow = () => {
+  updateWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    frame: true,
+    resizable: false,
+
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+
+    },
+  });
+  updateWindow.webContents.on('did-finish-load', () => {
+    updateWindow.webContents.send('setString', "Loading...");
+  });
+
+  updateWindow.on('closed', () => {
+    updateWindow = null;
+  });
+  updateWindow.loadFile('./src/settings/settings.html');
+  updateWindow.setIcon(iconPath);
+}

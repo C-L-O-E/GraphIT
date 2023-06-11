@@ -130,7 +130,7 @@ export default class Graph {
   insertEdgeWithText(nodeFrom, nodeTo, Text) {
     var edge = new Edge(nodeFrom, nodeTo);
     this.edges.push(edge);
-    edge.setText(Text);
+    //edge.setText(Text); // TODO FIX the DRAWIG
     this.update();
   }
 

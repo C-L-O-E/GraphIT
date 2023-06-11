@@ -74,7 +74,7 @@
       "publisher": "CN=OlympiaDevelopments",
       "identityName": "m.weiss"
     },
-    "android": {
+    "apk": {
       "package": "com.GraphIT.app",
       "versionCode": 1,
       "versionName": "1.0.0"

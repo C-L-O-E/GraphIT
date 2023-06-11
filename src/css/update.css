@@ -1,0 +1,42 @@
+:root{
+    --base-color-r: 34;
+    --base-color-g: 33;
+    --base-color-b: 37;
+  
+    --background-color: rgb(
+      calc(var(--base-color-r) - 0),
+      calc(var(--base-color-g) - 0),
+      calc(var(--base-color-b) - 0)
+    );
+
+    --text-color:rgb(240, 248, 255);
+}
+
+body{
+    background-color: var(--background-color) ;
+    color: var(--text-color);
+}
+
+.txt{
+    font-family:'Lucida Grande', sans-serif;font-size:30px;letter-spacing:0.2em;color:#FFFFFF;padding:em;
+}
+
+#name{
+    position: absolute;
+    left: 30%;
+    top:110px;
+}
+
+#msgContainer{
+    position: absolute;
+    top:175px;
+    left:0px;
+    text-align: center;
+    height: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:Tahoma, sans-serif;font-size:13px;color:#FFFFFF;padding:em;
+}
+

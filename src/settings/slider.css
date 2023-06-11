@@ -1,0 +1,13 @@
+.slider-container {
+    width: 300px;
+    margin: 20px;
+  }
+  
+  #slider {
+    width: 100%;
+  }
+  
+  #slider-value {
+    text-align: center;
+  }
+  
