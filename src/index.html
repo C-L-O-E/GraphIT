@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="modules/graph/graph.css">
     <link rel="stylesheet" href="modules/terminalTouchControles.css">
     <link rel="stylesheet" href="css/switch.css">
+    <link rel="stylesheet" href="css/laser.css">
   </head>
   <body>
     <div id="flexboxV">
@@ -32,6 +33,16 @@
         <a id="ausgLBN" class="custom-label">Ausgabe</a>
         <a id="controlLBN" class="custom-label">Contols</a>
         
+        <div id="movetogle" class="switch">
+          <input type="checkbox" id="toggleSwitchMove">
+          <label for="toggleSwitchMove"></label>
+        </div>
+    
+        <div id="pointertoggle" class="switch">
+          <input type="checkbox" id="toggleSwitchPointer">
+          <label for="toggleSwitchPointer"></label>
+        </div>
+
         <div id="zoomOut" class="custom-label">-</div>
         <a id="zoomIn" class="custom-label">+</a>
         
@@ -43,17 +54,9 @@
       </div>
     </div>
     <div id="touchzone"><a>C</a><a>O</a><a>N</a><a>T</a><a>R</a><a>O</a><a>L</a><a>S</a></div>
-
-
-    <div id="movetogle" class="switch">
-      <input type="checkbox" id="toggleSwitch">
-      <label for="toggleSwitch"></label>
-    </div>
-
-    <div id="pointertoggle" class="switch">
-      <input type="checkbox" id="toggleSwitch">
-      <label for="toggleSwitch"></label>
-    </div>
+   
+      <div id="laser"></div>
+ 
     
   </body>
   

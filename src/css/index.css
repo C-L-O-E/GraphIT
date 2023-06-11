@@ -223,13 +223,13 @@ body {
 }
 
 #movetogle{
-  position: fixed;
-  left: 1%;
-  top: -10px;
+  position: absolute;
+  right: 14%;
+  top: 3px;
 }
 
 #pointertoggle{
-  position: fixed;
-  left: 6%;
-  top: 0px;
+  position: absolute;
+  right: 9%;
+  top: 3px;
 }

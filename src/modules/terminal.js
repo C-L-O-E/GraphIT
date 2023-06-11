@@ -1318,4 +1318,25 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+var pointertogle=false;
+var movetogle=false;
+
+const switchElementPointer = document.getElementById('pointertoggle');
+switchElementPointer.addEventListener('change', function() {
+  console.log("Hello");
+});
+
+const switchElementMove = document.getElementById('movetogle');
+switchElementMove.addEventListener('change', function() {
+  console.log("Hellooooo");
+});
+
+document.addEventListener('mousemove', function(event) {
+  var laser = document.getElementById('laser');
+  if(view.onmouseover&&pointertogle){
+  laser.style.left = event.clientX + 'px';
+  laser.style.top = event.clientY + 'px';
+  }
+});
+
 

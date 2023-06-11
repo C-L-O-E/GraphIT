@@ -1,0 +1,13 @@
+ 
+  #laser {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    background-color: red;
+    padding: 5px;
+    filter: blur(1px);
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Damit der Laser den Mauszeiger nicht beeinflusst */
+  }
+  
