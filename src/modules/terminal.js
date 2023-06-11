@@ -1309,15 +1309,6 @@ ipcRenderer.on('startupMsg', (event, data) => {
   console.log(data);
 });
 
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Tab') {
-    var switchElementMove = document.getElementById('toggleSwitchMove');
-    switchElementMove.checked = !switchElementMove.checked; 
-    movetogle=!movetogle;
-  }
-});
-
 var pointertogle=false;
 var movetogle=false;
 
@@ -1348,22 +1339,29 @@ document.addEventListener('mousemove', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
- // const box = document.getElementById('view');
- // const stepSize = 10; // Schrittgröße für das Scrollen
+ 
+ if(movetogle){
 
   if (event.key === 'ArrowDown') {
-  //  box.scrollTop += stepSize; // Nach unten scrollen
+  
     ipcRenderer.send('scroll', 'down');
   } else if (event.key === 'ArrowUp') {
- //   box.scrollTop -= stepSize; // Nach oben scrollen
+ 
     ipcRenderer.send('scroll', 'up');
   } else if (event.key === 'ArrowLeft') {
- //   box.scrollLeft -= stepSize; // Nach links scrollen
+ 
     ipcRenderer.send('scroll', 'left');
   } else if (event.key === 'ArrowRight') {
- //   box.scrollLeft += stepSize; // Nach rechts scrollen
+ 
     ipcRenderer.send('scroll', 'right');
   }
+}
+if (event.key === 'Tab') {
+  var switchElementMove = document.getElementById('toggleSwitchMove');
+  switchElementMove.checked = !switchElementMove.checked; 
+  movetogle=!movetogle;
+
+}
 });
 
 

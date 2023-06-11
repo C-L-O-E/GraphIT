@@ -51,7 +51,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   const template = [
     {
@@ -335,7 +335,7 @@ function preview(data){
       },
     });
     child.loadFile(path.join(__dirname, 'preview.html'));
-    child.webContents.openDevTools();
+    //child.webContents.openDevTools();
   } else if (data == "endPresentation") {
     child.close();
     child = null;
