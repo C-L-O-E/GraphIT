@@ -1318,31 +1318,38 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-var pointertogle = false;
-var movetogle = false;
+var pointertogle=false;
+var movetogle=false;
 
 const switchElementPointer = document.getElementById('pointertoggle');
 switchElementPointer.addEventListener('change', function() {
-  pointertogle = switchElementPointer.checked;
+
+  const pointer = document.getElementById('toggleSwitchPointer');
+  const checkboxValue = pointer.checked;
+
+  if (checkboxValue) {
+    console.log('Checkbox is checked');
+    pointer.checked = true; 
+
+  } else {
+    console.log('Checkbox is not checked');
+    pointer.checked = false; 
+
+  }
+
 });
 
 const switchElementMove = document.getElementById('movetogle');
 switchElementMove.addEventListener('change', function() {
-  movetogle = switchElementMove.checked;
+  console.log("Hellooooo");
 });
 
 document.addEventListener('mousemove', function(event) {
   var laser = document.getElementById('laser');
-  var graphView = document.getElementById('graph-view');
-  
-  if (pointertogle  && event.target === graphView) {
-    laser.style.left = event.clientX + 'px';
-    laser.style.top = event.clientY + 'px';
-    laser.style.display = 'block';
-  } else {
-    laser.style.display = 'none';
+  if(view.onmouseover&&pointertogle){
+  laser.style.left = event.clientX + 'px';
+  laser.style.top = event.clientY + 'px';
   }
 });
-
 
 
