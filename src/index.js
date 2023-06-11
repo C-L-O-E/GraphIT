@@ -461,11 +461,11 @@ async function delaitCreateWindow(sleepTime){
 app.on('ready', () => {
   createUpdateWindow();
   updateWindow.webContents.send('setString', 'Checking for updates...');
-  autoUpdater.checkForUpdates().catch(err => {
-    updateWindow.webContents.send('setString', "Error checking for updates:", err);
-  });
   if(process.env.autoDownload=="false"){
     delaitCreateWindow(1000);
+    autoUpdater.checkForUpdates().catch(err => {
+      updateWindow.webContents.send('setString', "Error checking for updates:", err);
+    });
   }
 });
 
