@@ -1312,14 +1312,9 @@ ipcRenderer.on('startupMsg', (event, data) => {
 
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Tab') {
-   
-    console.log('Tabulatortaste wurde gedrückt');
-    var pointer = document.getElementById('toggleSwitchPointer');
-    var checkboxValue = pointer.checked;
     var switchElementMove = document.getElementById('toggleSwitchMove');
-  switchElementMove.checked = !switchElementMove.checked; // Ä
-    
-   
+    switchElementMove.checked = !switchElementMove.checked; 
+    movetogle=!movetogle;
   }
 });
 
@@ -1330,30 +1325,44 @@ const switchElementPointer = document.getElementById('pointertoggle');
 switchElementPointer.addEventListener('change', function() {
 
   const pointer = document.getElementById('toggleSwitchPointer');
-  const checkboxValue = pointer.checked;
-
-  if (checkboxValue) {
-    console.log('Checkbox is checked');
-    pointer.checked = true; 
-
-  } else {
-    console.log('Checkbox is not checked');
-    pointer.checked = false; 
-
-  }
+  pointertogle=!pointertogle;
+  
 
 });
 
 const switchElementMove = document.getElementById('movetogle');
 switchElementMove.addEventListener('change', function() {
-  console.log("Hellooooo");
+  movetogle=!movetogle;
 });
 
 document.addEventListener('mousemove', function(event) {
   var laser = document.getElementById('laser');
-  if(view.onmouseover&&pointertogle){
-  laser.style.left = event.clientX + 'px';
-  laser.style.top = event.clientY + 'px';
+  
+  if (pointertogle) {
+    laser.style.left = event.clientX + 'px';
+    laser.style.top = event.clientY + 'px'; 
+    laser.classList.remove('hidden'); 
+  }else{
+    laser.classList.add('hidden');
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+ // const box = document.getElementById('view');
+ // const stepSize = 10; // Schrittgröße für das Scrollen
+
+  if (event.key === 'ArrowDown') {
+  //  box.scrollTop += stepSize; // Nach unten scrollen
+    ipcRenderer.send('scroll', 'down');
+  } else if (event.key === 'ArrowUp') {
+ //   box.scrollTop -= stepSize; // Nach oben scrollen
+    ipcRenderer.send('scroll', 'up');
+  } else if (event.key === 'ArrowLeft') {
+ //   box.scrollLeft -= stepSize; // Nach links scrollen
+    ipcRenderer.send('scroll', 'left');
+  } else if (event.key === 'ArrowRight') {
+ //   box.scrollLeft += stepSize; // Nach rechts scrollen
+    ipcRenderer.send('scroll', 'right');
   }
 });
 

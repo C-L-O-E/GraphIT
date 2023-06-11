@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="css/terminal.css">
 </head>
 <body>
-    <div id="graphView">
+    <div id="move">
+        <div id="graphView">
        
+        </div>
     </div>
+    
 </body>
 <script src="modules/preview.js"></script>
 <script>
@@ -28,7 +31,7 @@
         ipcRenderer.send("getUpdate","getUpdate to Preview");
     }
     ipcRenderer.on("update",(event,data)=>{
-      //  console.log("From Main: "+data);
+      
         view.innerHTML=data;
 
     })
@@ -58,20 +61,39 @@
     view.style.zoom=zoomLevel;
 }
     function fitZoom(){
-        // Finde alle Div-Elemente innerhalb des "graphView"-Elements
+        
     const divElements = view.querySelectorAll('div');
 
-    // Ermittle die Position des am weitesten links gelegenen Div-Elements
+    
     let maxLeftPosition = Infinity;
     divElements.forEach((div) => {
         const divPosition = div.getBoundingClientRect().left;
         maxLeftPosition = Math.min(maxLeftPosition, divPosition);
     });
 
-    // Passe das Zoom-Level entsprechend an
+    
     const zoomLevel = (view.offsetWidth - maxLeftPosition) / view.offsetWidth;
     view.style.zoom = zoomLevel;
     }
+
+    function handleScrollCommand(direction) {
+        const box = document.getElementById('move');
+        const stepSize = 100; 
+        console.log(direction);
+        if (direction === 'down') {
+          box.scrollTop += stepSize; 
+        } else if (direction === 'up') {
+          box.scrollTop -= stepSize; 
+        } else if (direction === 'left') {
+          box.scrollLeft -= stepSize; 
+        } else if (direction === 'right') {
+          box.scrollLeft += stepSize; 
+        }
+      }
+      
+      ipcRenderer.on('scroll', (event, direction) => {
+        handleScrollCommand(direction);
+      });
 
 </script>
 </html>

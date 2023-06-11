@@ -8,6 +8,10 @@
     padding: 5px;
     filter: blur(1px);
     transform: translate(-50%, -50%);
-    pointer-events: none; /* Damit der Laser den Mauszeiger nicht beeinflusst */
+    pointer-events: none; 
+    
   }
-  
+
+  .hidden{
+    display: none;
+  }

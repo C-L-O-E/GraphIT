@@ -177,15 +177,14 @@ export default class LinkedList {
     return result;
   }
 
-  drawArrowLeftToRight(startX, startY, endX, endY) {
 
+
+  drawArrowLeftToRight(startX, startY, endX, endY) {
     var arrowDiv = document.createElement('div');
-    let y = startY - 30;
-    var arrowSVG = `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><polyline points="${startX},${y},${endX},${y},${endX-10},${y-10},${endX},${y},${endX-10},${y+10}" fill="none" stroke="white" /></svg>`;
+    var arrowSVG = `<svg width="8000" height="600" xmlns="http://www.w3.org/2000/svg"><polyline points="${startX},${startY},${endX},${endY},${endX-10},${endY-10},${endX},${endY},${endX-10},${endY+10}" fill="none" stroke="white" /></svg>`;
     arrowDiv.className = "arrowDiv";
     arrowDiv.style.position = "absolute";
-    arrowDiv.style.top = startY + "px";
-    arrowDiv.style.left = startX + "px";
+    arrowDiv.style.top = startY;
     arrowDiv.innerHTML = arrowSVG;
     this.listDiv.appendChild(arrowDiv);
     return null;
@@ -193,13 +192,11 @@ export default class LinkedList {
   }
 
   drawArrowRightToLeft(startX, startY, endX, endY) {
-    startY = startY - 30;
     var arrowDiv = document.createElement('div');
-    var arrowSVG = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><polyline points="${endX},${endY+10},${endX-10},${endY},${endX},${endY-10},${endX-10},${endY}, ${startX},${startY}" fill="none" stroke="white" /></svg>`;
+    var arrowSVG = `<svg width="8000" height="800" xmlns="http://www.w3.org/2000/svg"><polyline points="${endX},${endY+10},${endX-10},${endY},${endX},${endY-10},${endX-10},${endY}, ${startX},${startY}" fill="none" stroke="white" /></svg>`;
     arrowDiv.className = "arrowDiv";
     arrowDiv.style.position = "absolute";
-    arrowDiv.style.top = startY + "px";
-    arrowDiv.style.left = startX + "px";
+    arrowDiv.style.top = startY;
     arrowDiv.innerHTML = arrowSVG;
     this.listDiv.appendChild(arrowDiv);
 

@@ -217,7 +217,7 @@ export default class DoublyLinkedList {
 
   drawArrowLeftToRight(startX, startY, endX, endY) {
     var arrowDiv = document.createElement('div');
-    var arrowSVG = `<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg"><polyline points="${startX},${startY},${endX},${endY},${endX-10},${endY-10},${endX},${endY},${endX-10},${endY+10}" fill="none" stroke="white" /></svg>`;
+    var arrowSVG = `<svg width="8000" height="600" xmlns="http://www.w3.org/2000/svg"><polyline points="${startX},${startY},${endX},${endY},${endX-10},${endY-10},${endX},${endY},${endX-10},${endY+10}" fill="none" stroke="white" /></svg>`;
     arrowDiv.className = "arrowDiv";
     arrowDiv.style.position = "absolute";
     arrowDiv.style.top = startY;
@@ -229,7 +229,7 @@ export default class DoublyLinkedList {
 
   drawArrowRightToLeft(startX, startY, endX, endY) {
     var arrowDiv = document.createElement('div');
-    var arrowSVG = `<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg"><polyline points="${endX},${endY+10},${endX-10},${endY},${endX},${endY-10},${endX-10},${endY}, ${startX},${startY}" fill="none" stroke="white" /></svg>`;
+    var arrowSVG = `<svg width="8000" height="800" xmlns="http://www.w3.org/2000/svg"><polyline points="${endX},${endY+10},${endX-10},${endY},${endX},${endY-10},${endX-10},${endY}, ${startX},${startY}" fill="none" stroke="white" /></svg>`;
     arrowDiv.className = "arrowDiv";
     arrowDiv.style.position = "absolute";
     arrowDiv.style.top = startY;

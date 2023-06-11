@@ -335,6 +335,7 @@ function preview(data){
       },
     });
     child.loadFile(path.join(__dirname, 'preview.html'));
+    child.webContents.openDevTools();
   } else if (data == "endPresentation") {
     child.close();
     child = null;
@@ -588,5 +589,10 @@ function openWebsite(url) {
     }
   });
 }
+
+ipcMain.on('scroll', (event, direction) => {
+  child.webContents.send('scroll',direction);
+  console.log(`Scrolling ${direction}`);
+});
 
 
