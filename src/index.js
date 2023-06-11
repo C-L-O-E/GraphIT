@@ -53,23 +53,26 @@ const createWindow = () => {
 
   //mainWindow.webContents.openDevTools();
 
-
-  const template = [{
+  const template = [
+    {
       label: 'File',
-      submenu: [{
+      submenu: [
+        {
           label: 'Open File',
           click: () => {
             process.env.userDataPath = openFileExplorer();
           },
-        },{  label: 'Settings',
-        click: () => {
-          createSettingsWindow();
         },
+        {
+          label: 'Settings',
+          click: () => {
+            createSettingsWindow();
+          },
         },
         {
           label: 'Save',
           click: () => {
-            //writeFile
+            // writeFile
           },
         },
         {
@@ -82,18 +85,21 @@ const createWindow = () => {
           },
         },
       ],
-
-
+    },
+    {
       label: 'View',
-      submenu: [{
+      submenu: [
+        {
           label: 'Zoom In',
           click: () => {
             zoomIn();
           },
-        },{  label: 'Zoom Out',
-        click: () => {
-          zoomOut();
         },
+        {
+          label: 'Zoom Out',
+          click: () => {
+            zoomOut();
+          },
         },
         {
           type: 'separator',
@@ -109,69 +115,69 @@ const createWindow = () => {
           click: () => {
             showVisualSecondScreen('PreviewSecondScreen');
           },
-
         },
         {
           label: 'Preview to third Screen',
           click: () => {
             showVisualSecondScreen('PreviewThirdScreen');
           },
-
         },
         {
           type: 'separator',
         },
         {
-          label: 'task',
+          label: 'Task',
           click: () => {
-            
+            // todo
           },
         },
       ],
-
-
-      label: 'Datastructurs',
-      submenu: [{
+    },
+    {
+      label: 'Datastructures',
+      submenu: [
+        {
           label: 'Array',
           click: () => {
-            //todo
+            // todo
           },
-        },{  label: 'BinarySearchTree',
-        click: () => {
-                      //todo
-
         },
-        },,
+        {
+          label: 'BinarySearchTree',
+          click: () => {
+            // todo
+          },
+        },
         {
           label: 'Stack',
           click: () => {
-          //
+            // todo
           },
         },
         {
-          label: 'Singel Linked List',
+          label: 'Single Linked List',
           click: () => {
-            //
+            // todo
           },
-
         },
         {
           label: 'Multi Linked List',
           click: () => {
-            //
+            // todo
           },
-
         },
         {
           label: 'Graph',
           click: () => {
-            
+            // todo
           },
         },
       ],
-
+    },
+    {
       label: 'Help',
-      submenu: [{
+      submenu: [
+        {
           label: 'Info Page',
           click: () => {
             const documentationURL = 'https://github.com/C-L-O-E/GraphIT/wiki/Dokumentation';
@@ -179,38 +185,35 @@ const createWindow = () => {
           },
         },
         {
-          label: 'Info Page',
+          label: 'Projects Page',
           click: () => {
             const documentationURL = 'https://c-l-o-e.github.io/projects.html';
             openWebsite(documentationURL);
           },
         },
         {
-            label: 'Documentation',
-        click: () => {
-          const documentationURL = 'https://github.com/C-L-O-E/GraphIT/wiki/Dokumentation';
-          openWebsite(documentationURL);
-
+          label: 'Documentation',
+          click: () => {
+            const documentationURL = 'https://github.com/C-L-O-E/GraphIT/wiki/Dokumentation';
+            openWebsite(documentationURL);
+          },
         },
-        },,
         {
           label: 'Get Help',
           click: () => {
-            const documentationURL = ' https://github.com/C-L-O-E/GraphIT';
+            const documentationURL = 'https://github.com/C-L-O-E/GraphIT';
             openWebsite(documentationURL);
           },
-        },{
-          label: 'Isues',
-          click:()=>{
-         
+        },
+        {
+          label: 'Issues',
+          click: () => {
             const documentationURL = 'https://github.com/C-L-O-E/GraphIT/issues';
             openWebsite(documentationURL);
           },
-        }
-      ]
-
+        },
+      ],
     },
-
   ];
 
   const menu = Menu.buildFromTemplate(template);
