@@ -314,7 +314,7 @@ ipcMain.on('comand', (event, data) => {
         event.sender.send("errorChannel", retStrArr[1]);
       }
     }
-  } else if (data == 'showVisual') {
+  } else if (data == 'showVisual'&&child==null) {
     console.log("Data From Client: " + data);
     child = new BrowserWindow({
       width: 400,
