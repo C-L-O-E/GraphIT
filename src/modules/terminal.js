@@ -284,6 +284,7 @@ function switchView() {
 
 
 function exitApp() {
+  closeAllWindows();
   ipcRenderer.send('exit', "exit");
 }
 
@@ -1362,5 +1363,9 @@ if (event.key === 'Tab') {
 
 }
 });
+
+function closeAllWindows(){
+  ipcRenderer.send('closeAllWindows','*')
+}
 
 

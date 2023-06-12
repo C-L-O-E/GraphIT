@@ -589,8 +589,34 @@ function openWebsite(url) {
 }
 
 ipcMain.on('scroll', (event, direction) => {
+  if(child!=null){
   child.webContents.send('scroll',direction);
   console.log(`Scrolling ${direction}`);
+  }
 });
+
+
+ipcMain.on('closeAllWindows',(event,data)=>{
+    try {
+      mainWindow.close();
+      mainWindow=null;
+    } catch (error) { 
+      console.log("Error Main Window"+ Error)
+    }
+    try {
+      child.close();
+      child=null;
+    } catch (error) { 
+      console.log("Error child window"+ Error)
+    }
+    try {
+      updateWindow.close();
+      updateWindow=null;
+    } catch (error) { 
+      console.log("Error child window"+ Error)
+    }
+    
+})
+
 
 
