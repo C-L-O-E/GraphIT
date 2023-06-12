@@ -278,11 +278,6 @@ function switchView() {
 
 
 
-
-
-
-
-
 function exitApp() {
   closeAllWindows();
   ipcRenderer.send('exit', "exit");
