@@ -42,3 +42,56 @@
   .switch input:checked + label:before {
     transform: translateX(26px);
   }
+
+#mainContainer{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 70%;
+  background-color: rgb(56, 57, 72);
+  overflow-y: auto;
+}
+
+
+#sidebar{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(39, 40, 49);
+  border-right: 1px solid rgb(255, 255, 255);
+}
+
+#contentContainer{
+  position:absolute;
+  left: 3%;
+  top: 2%;
+}
+
+#sidebar hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin:  auto; 
+  width: 95%;
+}
+
+.menuebox{
+  text-align: center;
+  height: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.menuebox:hover{
+  background-color: rgb(50, 56, 71);;
+}
+
+.menuebox:focus{
+  background-color: rgb(50, 56, 71);;
+}
+
+
+

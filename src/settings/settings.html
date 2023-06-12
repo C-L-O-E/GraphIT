@@ -8,56 +8,90 @@
     <link rel="stylesheet" href="./settings.css"> 
 </head>
 <body>
+ 
   
+  <div id="sidebar">
+    <div class="menuebox" id="startpageLBN">Start</div>
+    <hr>
+    <div class="menuebox" id="projectPageLBN">Project</div>
+    <hr>
+    <div class="menuebox" id="collorLBN">controll</div>
+    <hr>
+    <div class="menuebox" id="savingLBN">Saving</div>
+    <hr>
+    <div class="menuebox" id="updateLBN">update</div>
+    <hr>
+    <div class="menuebox" id="infoLBN">info</div>
+  </div>
+
   
+  <div id="mainContainer">
+    <div id="contentContainer">
+      <div id="StartPage">
+          <label for="app-version">App Version:</label>
+        <input type="text" id="app-version" value="1.0">
+        <br>
+        <label for="user">User:</label>
+        <input type="text" id="user" value="John">
+        <br>
+        <label for="project-name">Project Name:</label>
+        <input type="text" id="project-name" value="My Project">
+        <br>
+        <label for="auto-save">Auto Save:</label>
+        <div class="switch">
+          <input type="checkbox" id="auto-save" checked>
+          <label for="auto-save"></label>
+        </div>
+        <br><br><br>
+        <label for="workspace-path">Global Workspace Path:</label>
+        <input type="text" id="workspace-path" value="/path/to/workspace">
+        <br>
+        <label for="color-mode">Color Mode:</label>
+        <div class="switch">
+          <input type="checkbox" id="color-mode" checked>
+          <label for="color-mode"></label>
+        </div>
+        <br><br><br>
+        <label for="text-color">Text Color:</label>
+        <input type="color" id="text-color" value="#000000">
+        <br>
 
 
-  <label for="app-version">App Version:</label>
-<input type="text" id="app-version" value="1.0">
-<br>
-<label for="user">User:</label>
-<input type="text" id="user" value="John">
-<br>
-<label for="project-name">Project Name:</label>
-<input type="text" id="project-name" value="My Project">
-<br>
-<label for="auto-save">Auto Save:</label>
-<div class="switch">
-  <input type="checkbox" id="auto-save" checked>
-  <label for="auto-save"></label>
-</div>
-<br><br><br>
-<label for="workspace-path">Global Workspace Path:</label>
-<input type="text" id="workspace-path" value="/path/to/workspace">
-<br>
-<label for="color-mode">Color Mode:</label>
-<div class="switch">
-  <input type="checkbox" id="color-mode" checked>
-  <label for="color-mode"></label>
-</div>
-<br><br><br>
-<label for="text-color">Text Color:</label>
-<input type="color" id="text-color" value="#000000">
-<br>
-
-
-    <div class="switch">
-        <input type="checkbox" id="switch-checkbox">
-        <label for="switch-checkbox"></label>
+            <div class="switch">
+                <input type="checkbox" id="switch-checkbox">
+                <label for="switch-checkbox"></label>
+              </div>
+              <br><br><br>
+              <div class="slider-container">
+                <input type="range" id="slider" min="1" max="100" value="50">
+                <p id="slider-value">50</p>
+              </div>
+              <br>
+              <div class="slider-container">
+                <a>Color Settings Background</a>
+                <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
+                <input type="range" min="0" max="255" value="0" class="slider" id="greenSlider">
+                <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+              </div>
+              <div id="colorBox"></div>
       </div>
-      <br><br><br>
-      <div class="slider-container">
-        <input type="range" id="slider" min="1" max="100" value="50">
-        <p id="slider-value">50</p>
+
+      <div id="">
+
+
       </div>
-      <br>
-      <div class="slider-container">
-        <a>Color Settings Background</a>
-        <input type="range" min="0" max="255" value="0" class="slider" id="redSlider">
-        <input type="range" min="0" max="255" value="0" class="slider" id="greenSlider">
-        <input type="range" min="0" max="255" value="0" class="slider" id="blueSlider">
+
+      <div id="">
+
+
       </div>
-      <div id="colorBox"></div>
+
+      <div id="">
+
+
+      </div>
+    </div>
+  </div>
 </body>
 <script type="module" src="./settings.js"></script>
 </html>
