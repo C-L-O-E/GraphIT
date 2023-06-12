@@ -548,64 +548,57 @@ window.addEventListener("message", function (event) {
 });
 
 
+function isHighlightable(element) {
+  var highlightableClasses = [
+    'listyBox',
+    'listBox',
+    'stackBox',
+    'arrayBox',
+    'bstNode',
+    'GraphEdge',
+    'GraphNode'
+  ];
+  console.log("check");
+  return highlightableClasses.some(function(className) {
+    return element.classList.contains(className);
+  });
+}
 
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-
-
-
-
+function updateListenerForHighlighting() {
+  console.log("Listeners update");
   var elements = view.querySelectorAll('*');
 
+  elements.forEach(function(element) {
+    element.addEventListener('click', function() {
+      if (isHighlightable(element)) {
+        element.classList.toggle('highlighted');
+        console.log("OK");
+      }
+    });
 
-  elements.forEach(function (element) {
+    element.addEventListener('mouseenter', function() {
+      if (isHighlightable(element) && !element.classList.contains('highlighted')) {
+        element.style.backgroundColor = 'deepskyblue';
+        console.log("mousein");
+      }
+    });
 
-    element.addEventListener('click', function () {
+    element.addEventListener('mouseleave', function() {
+      if (isHighlightable(element) && !element.classList.contains('highlighted')) {
+        element.style.backgroundColor = 'white';
+        console.log("mouseOUT");
 
-      if (element.classList.contains('listyBox')) {
-
-        if (element.style.backgroundColor != 'yellow') {
-          element.style.backgroundColor = 'yellow';
-        } else {
-          element.style.backgroundColor = 'white';
-        }
       }
     });
   });
+}
 
-
-  elements.forEach(function (element) {
-
-    element.addEventListener('mouseenter', function () {
-
-      if (element.classList.contains('listyBox')) {
-
-        if (element.style.backgroundColor != 'yellow') {
-          element.style.backgroundColor = 'deepskyblue';
-        }
-      }
-    });
-  });
-
-  elements.forEach(function (element) {
-
-    element.addEventListener('mouseleave', function () {
-
-      if (element.classList.contains('listyBox')) {
-
-        if (element.style.backgroundColor != 'yellow') {
-          element.style.backgroundColor = 'white';
-        }
-      }
-    });
-  });
-
+document.addEventListener('DOMContentLoaded', function() {
+  updateListenerForHighlighting();
 });
 
 function getSelectedDatastructure() {
+  updateListenerForHighlighting();
   return activeElements[activeElementIndex];
 }
 
@@ -646,6 +639,7 @@ function randomGenerateGraphLength(graph, length) {
   for (let i = 0; i < Math.floor(Math.random() * (length + 1)); i++) {
     graph.insertEdge(Math.floor(Math.random() * (length + 1)), Math.floor(Math.random() * (length + 1)));
   }
+  updateListenerForHighlighting();
 }
 
 function randomGenerateMLLLength(mll, length) {
@@ -655,6 +649,7 @@ function randomGenerateMLLLength(mll, length) {
     mll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   mll.draw();
+  updateListenerForHighlighting();
 
 }
 
@@ -663,6 +658,7 @@ function randomGenerateSLLLength(sll, length) {
     sll.addFirst(Math.floor(Math.random() * 100) + 1);
   }
   sll.draw();
+  updateListenerForHighlighting();
 }
 
 function randomGenerationArrayLength(array, length) {
@@ -671,6 +667,7 @@ function randomGenerationArrayLength(array, length) {
     array.insertAtIndex(randomNumber, i);
   }
   array.draw();
+  updateListenerForHighlighting();
 }
 
 function randomGenerationBSTLenth(bst, length) {
@@ -679,6 +676,7 @@ function randomGenerationBSTLenth(bst, length) {
     bst.insert(Math.floor(Math.random() * 100) + 1);
   }
   bst.draw();
+  updateListenerForHighlighting();
 
 }
 
@@ -687,6 +685,7 @@ function randomGenerationStackLength(stack, length) {
     stack.push(Math.floor(Math.random() * 100) + 1);
   }
   stack.draw();
+  updateListenerForHighlighting();
 }
 
 function randomGenerationArray(array) {
