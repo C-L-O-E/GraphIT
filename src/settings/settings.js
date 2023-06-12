@@ -26,7 +26,6 @@ import {
   var colorMode = colorModeInput.checked ? 'dark' : 'light';
   var textColor = textColorInput.value;
   
-  // Event Listener für Änderungen
   appVersionInput.addEventListener('input', function() {
     appVersion = appVersionInput.value;
   });
@@ -55,9 +54,7 @@ import {
     textColor = textColorInput.value;
   });
   
-  // Funktion zum Aktualisieren der Einstellungen
   function updateSettings() {
-    // Aktualisiere die Einstellungen mit den aktuellen Variablenwerten
     console.log('App Version:', appVersion);
     console.log('User:', user);
     console.log('Project Name:', projectName);
@@ -67,7 +64,6 @@ import {
     console.log('Text Color:', textColor);
   }
   
-  // Beispielaufruf der updateSettings-Funktion
   setInterval(updateSettings,100);
   updateSettings();
   
@@ -83,7 +79,6 @@ import {
     textColorInput.value = getTextColor();
   }
   
-  // Aufruf der Funktion zum Populieren der Felder
   populateFields();
 
 
@@ -106,3 +101,21 @@ slider.addEventListener('input', function() {
   const value = slider.value;
   sliderValue.textContent = value;
 });
+
+const redSlider = document.getElementById("redSlider");
+const greenSlider = document.getElementById("greenSlider");
+const blueSlider = document.getElementById("blueSlider");
+const colorBox = document.getElementById("colorBox");
+
+redSlider.addEventListener("input", updateColor);
+greenSlider.addEventListener("input", updateColor);
+blueSlider.addEventListener("input", updateColor);
+
+function updateColor() {
+  const redValue = redSlider.value;
+  const greenValue = greenSlider.value;
+  const blueValue = blueSlider.value;
+
+  const color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+  colorBox.style.backgroundColor = color;
+}
