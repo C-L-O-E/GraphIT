@@ -186,7 +186,7 @@ async function jumpToindex(elem, index) {
 
 
 async function longShiftSwap(takeOutIndex, PutInIndex) {
-    var elements = document.querySelectorAll('.arrayBox');
+    var elements = Array.from(document.querySelectorAll('.arrayBox'));
     var takeoutElement = elements[takeOutIndex];
 
     for (var i = 0; i < 90; i++) {
@@ -210,6 +210,7 @@ async function longShiftSwap(takeOutIndex, PutInIndex) {
 
     return true;
 }
+
 
 async function bubbleSort(arr) {
     var len = arr.length;

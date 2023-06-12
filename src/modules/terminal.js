@@ -83,7 +83,7 @@ export function saveToLocalFile() {
       projectFileExists = true;
     }
   }
-  saveToDisk(getGlobalWorkspace(), getProjektname(), activeElementIndex, activeElements);
+  saveToDisk(getGlobalWorkspacePath(), getProjectName(), activeElementIndex, activeElements);
 }
 
 export function addLog(data) {

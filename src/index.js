@@ -51,7 +51,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   const template = [
     {
@@ -296,10 +296,6 @@ ipcMain.on('info', (event, data) => {
 
 
 ipcMain.on('comand', (event, data) => {
-  preview(data);
-});
-
-function preview(data){
   if (data == 'showVisualSecondScreen') {
     if (child != null) {
       var retStrArr = moveWindowToSecondScreenAndFullscreen(child);
@@ -340,7 +336,9 @@ function preview(data){
     child.close();
     child = null;
   }
-}
+});
+
+
 
 function exitSys() {
   try {
