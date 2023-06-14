@@ -1354,19 +1354,39 @@ function setAdditions(){
     console.log("Binary tre object should be: "+getSelectedDatastructure());
     var adjMatrix=getSelectedDatastructure().gettAdjazentMatrix();
     console.log(adjMatrix);
-    createAdjazenzMatrix(adjMatrix);
+    createAdjazenzMatrix(adjMatrix,adjMatrix.lenght);
   }
 }
 
-function createAdjazenzMatrix(adjMatrix){
+function getNewAdjmatrixBox(val){
+  var box =document.createElement('div');
+  box.innerText=val;
+  box.style.height='100px';
+  if(val==0){ 
+    box.style.backgroundColor='lightred';
+  }else{
+    box.style.backgroundColor='lightgreen';
+  }
+  box.style.textAlign="center";
+  return box;
+} 
+
+function createAdjazenzMatrix(adjMatrix,len){
   additionsView.innerHTML=null;
-  var adjmatrixContainer=document.createElement('div');
-  adjMatrix.id="adjazenzmatrixcontainer";
-  adjMatrix.classList.add("additionsElement");
+  var adjMatrixContainer =document.createElement('div');
+  adjMatrixContainer.id="adjazenzmatrixcontainer";
+  adjMatrixContainer.classList.add("additionsElement");
   var fr="1fr ";
   var frStr=`${fr.repeat(adjMatrix.lenght)}`;
-  adjMatrix.style.display="grid";
-
-  
+  adjMatrixContainer.style.display="grid";
+  adjMatrixContainer.style.gridTemplateColumns=frStr;
+  additionsView.appendChild(adjMatrixContainer);
+console.log("AdjmatrixLength:"+adjMatrix.lenght);
+  for(let i =0; i<adjMatrix.lenght;i++){
+    for(let j=0;j<adjMatrix[i].lenght;j++){
+      adjMatrixContainer.appendChild(getNewAdjmatrixBox(adjMatrix[i][j]));
+    }
+  }
 }
+
 
