@@ -239,9 +239,6 @@ additionSLBN.addEventListener('click', event =>{
 
 
 
-
-
-
 function switchView() {
   if (state === 'out') {
     cons.innerHTML = null;
@@ -274,7 +271,7 @@ function switchView() {
     cons.innerHTML=null; 
     cons.innerHTML='<div id="additionsView"></<div>';
     additionsView=document.getElementById('additionsView');
-    
+    setAdditions();
   }
 }
 
@@ -434,12 +431,6 @@ function back() {
 
 
 
-
-
-
-
-
-
 function displayInfo(vst) {
   var msg = "";
   switch (vst) {
@@ -455,14 +446,6 @@ function displayInfo(vst) {
   ipcRenderer.send('info', msg);
 
 }
-
-
-
-
-
-
-
-
 
 
 function arrayCreate() {
@@ -1364,4 +1347,26 @@ function closeAllWindows(){
   ipcRenderer.send('closeAllWindows','*')
 }
 
+
+
+function setAdditions(){
+  if (checkIfSelectedIS("Graph")) {
+    console.log("Binary tre object should be: "+getSelectedDatastructure());
+    var adjMatrix=getSelectedDatastructure().gettAdjazentMatrix();
+    console.log(adjMatrix);
+    createAdjazenzMatrix(adjMatrix);
+  }
+}
+
+function createAdjazenzMatrix(adjMatrix){
+  additionsView.innerHTML=null;
+  var adjmatrixContainer=document.createElement('div');
+  adjMatrix.id="adjazenzmatrixcontainer";
+  adjMatrix.classList.add("additionsElement");
+  var fr="1fr ";
+  var frStr=`${fr.repeat(adjMatrix.lenght)}`;
+  adjMatrix.style.display="grid";
+
+  
+}
 

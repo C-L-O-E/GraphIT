@@ -203,6 +203,11 @@ export default class Graph {
     this.container.innerHTML = null;
   }
 
+  gettAdjazentMatrix(){
+    var testMatrix=[[1,0,1,1],[1,0,0,0],[1,1,1,0],[1,0,1,0]];
+    return testMatrix;
+  }
+
   async tiefensuche() {
     const visited = new Set();
 

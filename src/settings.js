@@ -20,7 +20,6 @@ var colorMode = "dark";
 var updateNumber = 0;
 var textColor = "iceblue";
 
-// Getter-Funktionen
 export function getVersion() {
   return version;
 }
