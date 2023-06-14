@@ -1354,7 +1354,7 @@ function setAdditions(){
     console.log("Binary tre object should be: "+getSelectedDatastructure());
     var adjMatrix=getSelectedDatastructure().gettAdjazentMatrix();
     console.log(adjMatrix);
-    createAdjazenzMatrix(adjMatrix,adjMatrix.lenght);
+    createAdjazenzMatrix(getSelectedDatastructure());
   }
 }
 
@@ -1371,7 +1371,8 @@ function getNewAdjmatrixBox(val){
   return box;
 } 
 
-function createAdjazenzMatrix(adjMatrix,len){
+function createAdjazenzMatrix(graph){
+  var adjMatrix=graph.gettAdjazentMatrix();
   additionsView.innerHTML=null;
   var adjMatrixContainer =document.createElement('div');
   adjMatrixContainer.id="adjazenzmatrixcontainer";
