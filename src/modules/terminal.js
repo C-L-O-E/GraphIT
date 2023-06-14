@@ -69,12 +69,8 @@ var logsHistory = [];
 
 
 let output = '';
-
-
-
-
 var terminal = document.getElementById('terminal');
-
+var additionsView=null;
 
 export function saveToLocalFile() {
   if (projectFileExists == false) {
@@ -214,6 +210,7 @@ var term = document.getElementById('termLBN');
 var out = document.getElementById('ausgLBN');
 var controls = document.getElementById('controlLBN');
 var logs = document.getElementById('logsLBN');
+var additionSLBN=document.getElementById('additionsViewLBN');
 
 term.addEventListener('click', event => {
   state = 'term';
@@ -235,10 +232,10 @@ logs.addEventListener('click', event => {
   switchView();
 });
 
-
-
-
-
+additionSLBN.addEventListener('click', event =>{
+  state="additionsView";
+  switchView();
+})
 
 
 
@@ -273,6 +270,11 @@ function switchView() {
     logsHistory.forEach(element => {
       logs.appendChild(element);
     });
+  }else if(state==='additionsView'){
+    cons.innerHTML=null; 
+    cons.innerHTML='<div id="additionsView"></<div>';
+    additionsView=document.getElementById('additionsView');
+    
   }
 }
 
@@ -1080,7 +1082,6 @@ export function pars(command) {
       break;
     case "MLL-Random-Create":
       if (checkIfSelectedIS("Multi-Linked-List")) {
-        console.log("TEST");
         randomGenerateMLL(getSelectedDatastructure());
       }
       break;
