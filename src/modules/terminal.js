@@ -1358,33 +1358,89 @@ function setAdditions(){
   }
 }
 
-function getNewAdjmatrixBox(val){
-  var box =document.createElement('div');
-  box.innerText=val;
-  box.style.height='100px';
-  if(val==0){ 
-    box.style.backgroundColor='lightred';
-  }else{
-    box.style.backgroundColor='lightgreen';
-  }
-  box.style.textAlign="center";
-  return box;
-} 
+function getNewAdjmatrixBox(val) {
+  var box = document.createElement('div');
+  box.innerText = val;
+  box.style.height = '100px';
+  box.style.border = '1px solid black';
 
-function createAdjazenzMatrix(graph){
-  var adjMatrix=graph.gettAdjazentMatrix();
-  additionsView.innerHTML=null;
-  var adjMatrixContainer =document.createElement('div');
-  adjMatrixContainer.id="adjazenzmatrixcontainer";
+  if (val == 0) {
+    box.style.backgroundColor = 'lightcoral';
+  } else if (val == 1) {
+    box.style.backgroundColor = 'lightgreen';
+  }
+
+  box.style.textAlign = "center";
+  box.addEventListener('click', function() {
+    if (box.innerText === '0') {
+      box.style.backgroundColor = 'lightcoral';
+      box.innerText = '1';
+    } else {
+      box.style.backgroundColor = 'lightgreen';
+      box.innerText = '0';
+    }
+  });
+  
+  
+
+  box.addEventListener('mouseover', function() {
+    box.style.backgroundColor = 'lightblue';
+  });
+
+  box.addEventListener('mouseout', function() {
+    if (box.innerText == '0') {
+      box.style.backgroundColor = 'lightcoral';
+    } else {
+      box.style.backgroundColor = 'lightgreen';
+    }
+  });
+
+  return box;
+}
+
+
+
+function createAdjazenzMatrix(graph) {
+  var adjMatrix =[[1,1,1,1],[0,1,0,1],[1,0,0,1],[1,0,0,1]];
+  var nodeNames = ['A', 'B', 'C', 'D'];
+  additionsView.innerHTML = "";
+
+  var adjMatrixContainer = document.createElement('div');
+  adjMatrixContainer.id = "adjazenzmatrixcontainer";
   adjMatrixContainer.classList.add("additionsElement");
-  var fr="1fr ";
-  var frStr=`${fr.repeat(adjMatrix.lenght)}`;
-  adjMatrixContainer.style.display="grid";
-  adjMatrixContainer.style.gridTemplateColumns=frStr;
+  adjMatrixContainer.style.top="15%";
+  adjMatrixContainer.style.position="absolute";
+  adjMatrixContainer.style.left="0px";
+  adjMatrixContainer.style.width="90%";
+  adjMatrixContainer.style.height="85%";
+  adjMatrixContainer.style.overflowY="auto";
+  var fr = "1fr ";
+  var frStr = `${fr.repeat(adjMatrix.length)}`;
+  adjMatrixContainer.style.display = "grid";
+  adjMatrixContainer.style.gridTemplateColumns = frStr;
   additionsView.appendChild(adjMatrixContainer);
-console.log("AdjmatrixLength:"+adjMatrix.lenght);
-  for(let i =0; i<adjMatrix.lenght;i++){
-    for(let j=0;j<adjMatrix[i].lenght;j++){
+
+  var adjMatrixLabelBar=document.createElement('div');
+  adjMatrixLabelBar.style.width="90%";
+  adjMatrixLabelBar.style.height="5%";
+  adjMatrixLabelBar.style.top="8%";
+  adjMatrixLabelBar.style.position="absolute";
+  adjMatrixLabelBar.style.display="grid";
+  adjMatrixLabelBar.style.gridTemplateColumns = frStr;
+  for (let i = 0; i < adjMatrix.length; i++) {
+    var a=document.createElement('div');
+    a.style.textAlign="center";
+    a.style.color="white";
+    a.innerText=nodeNames[i];
+    adjMatrixLabelBar.appendChild(a);
+  }
+  
+  additionsView.appendChild(adjMatrixLabelBar);
+
+  console.log("AdjmatrixLength:" + adjMatrix.length);
+
+  for (let i = 0; i < adjMatrix.length; i++) {
+    for (let j = 0; j < adjMatrix[i].length; j++) {
       adjMatrixContainer.appendChild(getNewAdjmatrixBox(adjMatrix[i][j]));
     }
   }
